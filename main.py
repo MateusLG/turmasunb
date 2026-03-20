@@ -4,10 +4,12 @@ import os
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
+from starlette.middleware.trustedhost import TrustedHostMiddleware
 
 DATA_FILE = os.getenv("DATA_FILE", "data.json")
 
 app = FastAPI()
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 templates = Jinja2Templates(directory="templates")
 
 
