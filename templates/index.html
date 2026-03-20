@@ -49,10 +49,20 @@
       opacity: 0.95;
     }
 
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes logoPulse {
+      0%, 100% { opacity: 0.82; }
+      50%       { opacity: 1; }
+    }
+
     /* ── Hero ── */
     .hero {
       background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
-      padding: 3rem 1.5rem 4.5rem;
+      padding: 2.5rem 1.5rem 4.5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -66,18 +76,30 @@
       background: var(--bg);
       border-radius: 40px 40px 0 0;
     }
+    .hero-logo {
+      display: block;
+      margin: 0 auto 1.5rem;
+      width: 160px;
+      height: auto;
+      filter: grayscale(1) brightness(1.6) invert(1);
+      mix-blend-mode: screen;
+      animation: fadeUp 0.6s ease both, logoPulse 4s ease-in-out 1s infinite;
+    }
     .hero h1 {
       color: #fff;
       font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 700;
       margin-bottom: 0.5rem;
       letter-spacing: -0.02em;
+      animation: fadeUp 0.6s ease 0.1s both;
     }
     .hero p {
       color: rgba(255,255,255,0.65);
       font-size: 0.9rem;
       margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease 0.2s both;
     }
+    .search-wrap { animation: fadeUp 0.6s ease 0.3s both; }
 
     /* ── Search wrapper ── */
     .search-wrap {
@@ -267,6 +289,12 @@
   </nav>
 
   <div class="hero">
+    <img
+      class="hero-logo"
+      src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Webysther_20160322_-_Logo_UnB_%28sem_texto%29.svg"
+      alt="Logo da Universidade de Brasília"
+      width="160"
+    />
     <h1>Encontre sua turma</h1>
     <p>Busque por matéria, professor, código ou horário</p>
     <div class="search-wrap">
@@ -310,6 +338,8 @@
     <a href="https://github.com/MateusLG/turmasunb" target="_blank">GitHub</a>
     <span class="sep">|</span>
     <a href="/json">API JSON</a>
+    <span class="sep">|</span>
+    <span>Logo: <a href="https://commons.wikimedia.org/wiki/File:Webysther_20160322_-_Logo_UnB_(sem_texto).svg" target="_blank">Webysther via Wikimedia Commons</a> · domínio público</span>
   </footer>
 
   <template id="card-template">
