@@ -340,8 +340,6 @@
     <a href="https://github.com/MateusLG/turmasunb" target="_blank">GitHub</a>
     <span class="sep">|</span>
     <a href="/json">API JSON</a>
-    <span class="sep">|</span>
-    <span>Logo: <a href="https://commons.wikimedia.org/wiki/File:Webysther_20160322_-_Logo_UnB_(sem_texto).svg" target="_blank">Wikimedia Commons</a> · domínio público</span>
   </footer>
 
   <template id="card-template">
@@ -357,9 +355,9 @@
         </div>
       </div>
       <div class="card-actions">
-        <input type="text" class="link-input" placeholder="Link da turma (Meet, Teams…)" />
+        <input type="text" class="link-input" placeholder="Link da turma (Meet, Teams…)" maxlength="2048" />
         <button class="btn btn-save save-btn">Salvar</button>
-        <a class="btn btn-enter enter-btn hidden" target="_blank">Entrar</a>
+        <a class="btn btn-enter enter-btn hidden" target="_blank" rel="noopener noreferrer">Entrar</a>
       </div>
     </div>
   </template>
@@ -370,6 +368,11 @@
     async function loadTurmas() {
       const res = await fetch('/json');
       allTurmas = await res.json();
+    }
+
+    // fix 1 e 3: aceita apenas http/https para evitar javascript: e outros esquemas
+    function isValidLink(url) {
+      return url === '' || url.startsWith('http://') || url.startsWith('https://');
     }
 
     function normalize(str) {
@@ -399,7 +402,8 @@
 
       linkInput.addEventListener('input', () => {
         const val = linkInput.value.trim();
-        if (val) {
+        // fix 1: só seta href se for http/https — bloqueia javascript: e similares
+        if (val && isValidLink(val)) {
           enterBtn.href = val;
           enterBtn.classList.remove('hidden');
         } else {
@@ -409,6 +413,20 @@
 
       saveBtn.addEventListener('click', async () => {
         const link = linkInput.value.trim();
+
+        // fix 1 e 3: valida antes de enviar
+        if (!isValidLink(link)) {
+          saveBtn.textContent = 'Link inválido';
+          saveBtn.style.borderColor = '#e53e3e';
+          saveBtn.style.color = '#e53e3e';
+          setTimeout(() => {
+            saveBtn.textContent = 'Salvar';
+            saveBtn.style.borderColor = '';
+            saveBtn.style.color = '';
+          }, 2000);
+          return;
+        }
+
         const body = new URLSearchParams({ materia: item.materia, turma: item.turma, link });
         await fetch('/', { method: 'POST', body });
         item.link = link;
