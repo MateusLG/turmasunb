@@ -10,8 +10,9 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from fastapi.templating import Jinja2Templates
 
-DATA_FILE = os.getenv("DATA_FILE", "data.json")
+DATA_FILE    = os.getenv("DATA_FILE", "data.json")
 DATABASE_URL = os.getenv("DATABASE_URL")
+SEMESTER     = os.getenv("SEMESTER", "2026.1")
 
 # Limite de tamanho do campo link (fix 5)
 LINK_MAX_LEN = 2048
@@ -93,7 +94,7 @@ items: list[dict] = load_items()
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request, "semester": SEMESTER})
 
 
 @app.post("/")
@@ -108,15 +109,12 @@ async def update_link(
     if len(link) > LINK_MAX_LEN:
         return JSONResponse(status_code=400, content={"ok": False, "erro": "Link muito longo"})
 
-    # fix 3: validação de URL no backend (deve ser http/https ou vazio para limpar)
-    if link and not (link.startswith("http://") or link.startswith("https://")):
+    # Rejeita link vazio ou sem protocolo http/https
+    if not link or not (link.startswith("http://") or link.startswith("https://")):
         return JSONResponse(status_code=400, content={"ok": False, "erro": "Link inválido"})
 
     for item in items:
         if item["materia"] == materia and item["turma"] == turma:
-            # Não sobrescreve link existente com string vazia
-            if not link and item.get("link"):
-                return JSONResponse(status_code=400, content={"ok": False, "erro": "Não é possível apagar um link existente"})
             item["link"] = link
             if DATABASE_URL:
                 save_link_to_db(materia, turma, link)

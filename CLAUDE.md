@@ -8,6 +8,8 @@
 - Seguir as convenções de código descritas abaixo (Python tipado, FastAPI idiomático).
 - Sempre analisar o prompt, ver o que é pedido e ao encontrar as alterações a serem feitas, mostrar resumo ao usuário e pedir permissão para fazer as alterações/implementações.
 - **Toda alteração implementada deve ser registrada em `ALTERACOES.md`** imediatamente após a implementação, sem esperar solicitação do usuário.
+- **Toda nova feature ou correção deve ter ao menos um teste** em `tests/test_main.py` cobrindo o comportamento implementado.
+- **Sempre rodar todos os testes** (`python3 -m pytest tests/ -q` no venv) após qualquer alteração e confirmar que passam antes de commitar.
 
 ---
 
