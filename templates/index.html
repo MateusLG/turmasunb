@@ -4,243 +4,301 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Turmas UnB 2026.1</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --unb-blue: #003F72;
-      --unb-green: #00A859;
-      --unb-blue-light: #e8f0f8;
-      --bg: #F5F7FA;
+      --blue: #003F72;
+      --blue-mid: #005299;
+      --blue-light: #e8f0f8;
+      --green: #00A859;
+      --green-light: #e6f7ee;
+      --bg: #F0F2F5;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
     }
 
-    * { box-sizing: border-box; }
-
     body {
-      background-color: var(--bg);
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
     }
 
-    /* Navbar */
+    /* ── Navbar ── */
     nav {
-      background-color: var(--unb-blue);
-      padding: 0 1.5rem;
-      height: 52px;
+      background: var(--blue);
+      height: 54px;
       display: flex;
       align-items: center;
+      padding: 0 1.75rem;
     }
-    nav span {
+    nav .brand {
       color: #fff;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
-      letter-spacing: 0.01em;
+      letter-spacing: 0.02em;
+      opacity: 0.95;
     }
 
-    /* Main */
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      padding: 3rem 1.5rem 4.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 48px;
+      background: var(--bg);
+      border-radius: 40px 40px 0 0;
+    }
+    .hero h1 {
+      color: #fff;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ── Search wrapper ── */
+    .search-wrap {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .search-wrap svg.icon-search {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+    #search {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.75rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      transition: box-shadow 0.2s;
+    }
+    #search:focus {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 0 0 3px rgba(0,168,89,0.25);
+    }
+    #search::placeholder { color: #94a3b8; }
+
+    /* ── Main ── */
     main {
       flex: 1;
       max-width: 720px;
       width: 100%;
       margin: 0 auto;
-      padding: 3rem 1rem 2rem;
+      padding: 1.75rem 1rem 2rem;
     }
 
-    .search-header {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-    .search-header h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: #111;
-      margin-bottom: 0.25rem;
-    }
-    .search-header p {
-      font-size: 0.85rem;
-      color: #888;
+    /* ── Result count ── */
+    #result-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      display: none;
     }
 
-    #search {
-      display: block;
-      width: 100%;
-      padding: 0.65rem 1rem;
-      font-size: 0.95rem;
-      border: 1.5px solid #d1d5db;
-      border-radius: 8px;
-      background: #fff;
-      outline: none;
-      color: #111;
-      transition: border-color 0.15s, box-shadow 0.15s;
-      margin-bottom: 1.5rem;
-    }
-    #search:focus {
-      border-color: var(--unb-blue);
-      box-shadow: 0 0 0 3px rgba(0, 63, 114, 0.1);
-    }
-    #search::placeholder { color: #b0b0b0; }
-
-    /* Empty / no-results states */
+    /* ── States ── */
     .state-msg {
       text-align: center;
-      padding: 4rem 0;
-      color: #bbb;
-      font-size: 0.85rem;
+      padding: 3.5rem 0;
+      color: #cbd5e1;
     }
-    .state-msg svg {
-      display: block;
-      margin: 0 auto 0.75rem;
-      opacity: 0.35;
-    }
+    .state-msg svg { display: block; margin: 0 auto 1rem; }
+    .state-msg p { font-size: 0.85rem; color: #94a3b8; }
 
-    /* Cards */
+    /* ── Results ── */
     #results { display: flex; flex-direction: column; gap: 0.625rem; }
 
+    /* ── Card ── */
     .card {
-      background: #fff;
-      border-radius: 8px;
-      border: 1px solid #e5e7eb;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       border-left: 3px solid transparent;
-      padding: 0.9rem 1.1rem;
-      transition: border-left-color 0.2s;
+      padding: 1rem 1.1rem;
+      transition: box-shadow 0.18s, transform 0.18s, border-left-color 0.2s;
     }
-    .card.has-link {
-      border-left-color: var(--unb-green);
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transform: translateY(-1px);
     }
+    .card.has-link { border-left-color: var(--green); }
 
     .card-top {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: flex-start;
-      gap: 0.4rem;
-      margin-bottom: 0.6rem;
+      gap: 0.5rem;
+      margin-bottom: 0.7rem;
     }
     .card-info .materia {
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       font-weight: 600;
-      color: #111;
-      margin: 0 0 0.1rem;
+      color: var(--text);
+      margin-bottom: 0.15rem;
     }
     .card-info .professor {
-      font-size: 0.8rem;
-      color: #888;
-      margin: 0;
+      font-size: 0.78rem;
+      color: var(--text-muted);
     }
-    .card-badges {
-      display: flex;
-      gap: 0.35rem;
-      flex-wrap: wrap;
-    }
+    .card-badges { display: flex; gap: 0.35rem; flex-wrap: wrap; }
     .badge {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
+      font-weight: 500;
       padding: 0.2rem 0.55rem;
       border-radius: 999px;
-      background: #f1f3f6;
-      color: #555;
       white-space: nowrap;
     }
-
-    .card-actions {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
+    .badge-turma {
+      background: var(--blue-light);
+      color: var(--blue);
     }
+    .badge-horario {
+      background: var(--green-light);
+      color: #00703b;
+    }
+
+    .card-actions { display: flex; gap: 0.5rem; align-items: center; }
     .link-input {
       flex: 1;
-      padding: 0.4rem 0.65rem;
-      font-size: 0.8rem;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
-      outline: none;
-      color: #111;
-      background: #fafafa;
-      transition: border-color 0.15s;
       min-width: 0;
+      padding: 0.42rem 0.7rem;
+      font-size: 0.78rem;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #f8fafc;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
     }
     .link-input:focus {
-      border-color: var(--unb-blue);
+      border-color: var(--blue);
       background: #fff;
     }
-    .link-input::placeholder { color: #b8bec7; }
+    .link-input::placeholder { color: #b8c0cc; }
 
     .btn {
-      padding: 0.38rem 0.75rem;
-      font-size: 0.78rem;
-      font-weight: 500;
-      border-radius: 6px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 7px;
       cursor: pointer;
-      white-space: nowrap;
       border: 1.5px solid transparent;
-      transition: opacity 0.15s, background 0.15s;
+      white-space: nowrap;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
+      transition: opacity 0.15s, transform 0.1s;
     }
-    .btn:hover { opacity: 0.85; }
+    .btn:active { transform: scale(0.97); }
     .btn-save {
       background: transparent;
-      border-color: var(--unb-blue);
-      color: var(--unb-blue);
+      border-color: var(--blue);
+      color: var(--blue);
     }
+    .btn-save:hover { background: var(--blue-light); }
     .btn-enter {
-      background: var(--unb-green);
+      background: var(--green);
       color: #fff;
-      border-color: var(--unb-green);
+      border-color: var(--green);
     }
+    .btn-enter:hover { opacity: 0.88; }
 
-    /* Footer */
+    /* ── Footer ── */
     footer {
       background: #fff;
-      border-top: 1px solid #e5e7eb;
-      padding: 0.9rem 1.5rem;
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
       text-align: center;
-      font-size: 0.78rem;
-      color: #aaa;
+      font-size: 0.75rem;
+      color: #94a3b8;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.5rem 1.25rem;
+      align-items: center;
+      gap: 0.4rem 1rem;
     }
-    footer a {
-      color: #888;
-      text-decoration: none;
-    }
-    footer a:hover { color: var(--unb-blue); }
-    footer .sep { color: #ddd; }
+    footer a { color: #64748b; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--blue); }
+    footer .sep { color: #e2e8f0; }
+
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
   <nav>
-    <span>Turmas UnB 2026.1</span>
+    <span class="brand">Turmas UnB 2026.1</span>
   </nav>
 
-  <main>
-    <div class="search-header">
-      <h1>Encontre sua turma</h1>
-      <p>Busque por matéria, professor, código ou horário</p>
+  <div class="hero">
+    <h1>Encontre sua turma</h1>
+    <p>Busque por matéria, professor, código ou horário</p>
+    <div class="search-wrap">
+      <svg class="icon-search" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input
+        id="search"
+        type="text"
+        placeholder="Ex: Cálculo, Matemática Discreta, Sergio..."
+        autofocus
+      />
     </div>
+  </div>
 
-    <input
-      id="search"
-      type="text"
-      placeholder="Ex: Cálculo, Matemática Discreta, Sergio..."
-      autofocus
-    />
+  <main>
+    <div id="result-count"></div>
 
     <div id="empty-state" class="state-msg">
-      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-        <path d="M2 17l10 5 10-5"/>
-        <path d="M2 12l10 5 10-5"/>
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
       </svg>
-      Digite para buscar entre 6478 turmas da UnB
+      <p>Digite para buscar entre <strong>6.478 turmas</strong> da UnB</p>
     </div>
 
     <div id="no-results" class="state-msg hidden">
-      Nenhuma turma encontrada.
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        <line x1="8" y1="11" x2="14" y2="11"/>
+      </svg>
+      <p>Nenhuma turma encontrada.</p>
     </div>
 
     <div id="results"></div>
@@ -251,7 +309,7 @@
     <span class="sep">|</span>
     <a href="https://github.com/MateusLG/turmasunb" target="_blank">GitHub</a>
     <span class="sep">|</span>
-    <a href="/json">JSON</a>
+    <a href="/json">API JSON</a>
   </footer>
 
   <template id="card-template">
@@ -262,16 +320,12 @@
           <p class="professor"></p>
         </div>
         <div class="card-badges">
-          <span class="badge turma"></span>
-          <span class="badge horario"></span>
+          <span class="badge badge-turma turma"></span>
+          <span class="badge badge-horario horario"></span>
         </div>
       </div>
       <div class="card-actions">
-        <input
-          type="text"
-          class="link-input"
-          placeholder="Link da turma (Meet, Teams...)"
-        />
+        <input type="text" class="link-input" placeholder="Link da turma (Meet, Teams…)" />
         <button class="btn btn-save save-btn">Salvar</button>
         <a class="btn btn-enter enter-btn hidden" target="_blank">Entrar</a>
       </div>
@@ -339,11 +393,13 @@
       const emptyState = document.getElementById('empty-state');
       const noResults = document.getElementById('no-results');
       const results = document.getElementById('results');
+      const resultCount = document.getElementById('result-count');
 
       if (!query.trim()) {
         emptyState.classList.remove('hidden');
         noResults.classList.add('hidden');
         results.innerHTML = '';
+        resultCount.style.display = 'none';
         return;
       }
 
@@ -360,10 +416,16 @@
 
       if (filtered.length === 0) {
         noResults.classList.remove('hidden');
+        resultCount.style.display = 'none';
         return;
       }
 
       noResults.classList.add('hidden');
+      resultCount.style.display = 'block';
+      resultCount.textContent = filtered.length === 1
+        ? '1 turma encontrada'
+        : `${filtered.length.toLocaleString('pt-BR')} turmas encontradas`;
+
       filtered.forEach(item => results.appendChild(renderCard(item)));
     }
 
