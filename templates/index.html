@@ -84,6 +84,50 @@
       allTurmas = await res.json();
     }
 
+    // Converte o código de horário do SIGAA para texto legível
+    // Ex: "246M12" → "Seg, Qua, Sex 08:00–10:00"
+    function formatHorario(horario) {
+      if (!horario) return '';
+
+      var DIAS = { '2': 'Seg', '3': 'Ter', '4': 'Qua', '5': 'Qui', '6': 'Sex', '7': 'Sáb' };
+      // Índice i corresponde ao slot i (1-based), o valor é o horário de início
+      // O fim é o início do próximo slot (cada slot = 1 hora)
+      var INICIO = {
+        'M': ['', '08:00', '09:00', '10:00', '11:00', '12:00'],
+        'T': ['', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
+        'N': ['', '19:00', '20:00', '21:00', '22:00']
+      };
+      var FIM = {
+        'M': ['', '09:00', '10:00', '11:00', '12:00', '13:00'],
+        'T': ['', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'],
+        'N': ['', '20:00', '21:00', '22:00', '23:00']
+      };
+
+      // Extrai intervalo de datas opcional: (DD/MM/YYYY - DD/MM/YYYY)
+      var dateMatch = horario.match(/\(\d{2}\/\d{2}\/\d{4} - \d{2}\/\d{2}\/\d{4}\)/);
+      var dateStr = dateMatch ? ' ' + dateMatch[0] : '';
+      var base = horario.replace(/\(\d{2}\/\d{2}\/\d{4} - \d{2}\/\d{2}\/\d{4}\)/, '').trim();
+
+      var parts = [];
+      var blocks = base.split(/\s+/);
+      for (var i = 0; i < blocks.length; i++) {
+        var block = blocks[i];
+        var match = block.match(/^([2-7]+)([MTN])([1-6]+)$/);
+        if (!match) {
+          parts.push(block);
+          continue;
+        }
+        var dias = match[1].split('').map(function(d) { return DIAS[d] || d; }).join(', ');
+        var turno = match[2];
+        var slots = match[3].split('');
+        var inicio = INICIO[turno][parseInt(slots[0])];
+        var fim = FIM[turno][parseInt(slots[slots.length - 1])];
+        parts.push(dias + ' ' + inicio + '–' + fim);
+      }
+
+      return parts.join(' · ') + dateStr;
+    }
+
     function normalize(str) {
       return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
@@ -95,7 +139,9 @@
       card.querySelector('.materia').textContent = item.materia;
       card.querySelector('.professor').textContent = item.professor;
       card.querySelector('.turma').textContent = 'Turma ' + item.turma;
-      card.querySelector('.horario').textContent = item.horario;
+      const horarioBadge = card.querySelector('.horario');
+      horarioBadge.textContent = formatHorario(item.horario) || item.horario;
+      horarioBadge.title = item.horario;
 
       const linkInput = card.querySelector('.link-input');
       const enterBtn = card.querySelector('.enter-btn');
