@@ -1,5 +1,8 @@
 # Histórico de Alterações
 
+## [2026-03-20] Testes automatizados
+Adicionados 15 testes com pytest cobrindo GET /, GET /json e POST /. Inclui testes de validação de URL (javascript:, ftp:, sem protocolo, tamanho), ordenação dos dados, estrutura dos itens e persistência em memória. Dependências de dev em requirements-dev.txt.
+
 ## [2026-03-20] Correções de segurança (5 brechas)
 1. XSS: validação no frontend bloqueia esquemas javascript: antes de setar href.
 2. Tab-napping: adicionado rel="noopener noreferrer" no botão Entrar.
