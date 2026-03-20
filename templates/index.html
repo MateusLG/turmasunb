@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Turmas UnB 2026.1</title>
+  <title>TurmasUnB — 2026.1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -55,7 +55,7 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     @keyframes logoPulse {
-      0%, 100% { opacity: 0.82; }
+      0%, 100% { opacity: 0.8; }
       50%       { opacity: 1; }
     }
 
@@ -79,10 +79,6 @@
     .hero-logo {
       display: block;
       margin: 0 auto 1.5rem;
-      width: 160px;
-      height: auto;
-      filter: grayscale(1) brightness(1.6) invert(1);
-      mix-blend-mode: screen;
       animation: fadeUp 0.6s ease both, logoPulse 4s ease-in-out 1s infinite;
     }
     .hero h1 {
@@ -99,13 +95,13 @@
       margin-bottom: 2rem;
       animation: fadeUp 0.6s ease 0.2s both;
     }
-    .search-wrap { animation: fadeUp 0.6s ease 0.3s both; }
 
     /* ── Search wrapper ── */
     .search-wrap {
       position: relative;
       max-width: 600px;
       margin: 0 auto;
+      animation: fadeUp 0.6s ease 0.3s both;
     }
     .search-wrap svg.icon-search {
       position: absolute;
@@ -159,6 +155,8 @@
     }
     .state-msg svg { display: block; margin: 0 auto 1rem; }
     .state-msg p { font-size: 0.85rem; color: #94a3b8; }
+
+    .hidden { display: none !important; }
 
     /* ── Results ── */
     #results { display: flex; flex-direction: column; gap: 0.625rem; }
@@ -245,7 +243,7 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      transition: opacity 0.15s, transform 0.1s;
+      transition: opacity 0.15s, transform 0.1s, background 0.2s, color 0.2s;
     }
     .btn:active { transform: scale(0.97); }
     .btn-save {
@@ -254,6 +252,11 @@
       color: var(--blue);
     }
     .btn-save:hover { background: var(--blue-light); }
+    .btn-save.saved {
+      background: var(--green-light);
+      border-color: var(--green);
+      color: #00703b;
+    }
     .btn-enter {
       background: var(--green);
       color: #fff;
@@ -278,23 +281,22 @@
     footer a { color: #64748b; text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: var(--blue); }
     footer .sep { color: #e2e8f0; }
-
-    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
   <nav>
-    <span class="brand">Turmas UnB 2026.1</span>
+    <span class="brand">TurmasUnB 2026.1</span>
   </nav>
 
   <div class="hero">
-    <img
-      class="hero-logo"
-      src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Webysther_20160322_-_Logo_UnB_%28sem_texto%29.svg"
-      alt="Logo da Universidade de Brasília"
-      width="160"
-    />
+    <!-- Símbolo da UnB — paths reais (Wikimedia Commons, domínio público) -->
+    <svg class="hero-logo" width="120" height="60" viewBox="7 7 634 317" xmlns="http://www.w3.org/2000/svg" aria-label="Símbolo da Universidade de Brasília">
+      <path fill="white" opacity="0.95" d="m 543.63956,122.52025 c -31.99939,23.06828 -66.98325,43.06013 -104.68075,59.36796 -18.62882,8.05762 -38.70764,13.629 -59.85377,16.27428 -15.03676,1.87867 -30.34934,2.82421 -45.88061,2.82421 l 0,123.26981 308.17389,0 0,-272.32649 -97.75007,70.60017 -0.009,-0.01"/>
+      <path fill="white" opacity="0.95" d="m 105.18666,122.52025 c 32.00957,23.06828 66.98846,43.06013 104.69093,59.36796 18.63255,8.05762 38.70143,13.629 59.8575,16.27428 15.02681,1.87867 30.3394,2.82421 45.88061,2.82421 l 0,123.26981 -308.1838357,0 0,-272.32649 97.7499457,70.60017 0.005,-0.01"/>
+      <path fill="white" opacity="0.65" d="m 333.22443,7.27328 0,176.09972 c 14.78825,0 29.37894,-0.912 43.69132,-2.6838 l 0,0 c 19.4526,-2.43655 37.9112,-7.5569 55.04405,-14.96345 36.51712,-15.79343 70.37528,-35.14415 101.36575,-57.48929 l 0,0.005 108.07277,-78.05021 0,-22.91794 -308.17389,0"/>
+      <path fill="white" opacity="0.65" d="m 315.6157,7.27328 0,176.09972 c -14.80316,0 -29.3777,-0.912 -43.69132,-2.6838 l -0.005,0 c -19.45757,-2.43655 -37.9199,-7.5569 -55.05275,-14.96345 -36.50842,-15.79343 -70.36658,-35.14415 -101.36625,-57.48929 l 0,0.005 -108.0685457,-78.05021 0,-22.91794 308.1838357,0"/>
+    </svg>
     <h1>Encontre sua turma</h1>
     <p>Busque por matéria, professor, código ou horário</p>
     <div class="search-wrap">
@@ -339,7 +341,7 @@
     <span class="sep">|</span>
     <a href="/json">API JSON</a>
     <span class="sep">|</span>
-    <span>Logo: <a href="https://commons.wikimedia.org/wiki/File:Webysther_20160322_-_Logo_UnB_(sem_texto).svg" target="_blank">Webysther via Wikimedia Commons</a> · domínio público</span>
+    <span>Logo: <a href="https://commons.wikimedia.org/wiki/File:Webysther_20160322_-_Logo_UnB_(sem_texto).svg" target="_blank">Wikimedia Commons</a> · domínio público</span>
   </footer>
 
   <template id="card-template">
@@ -384,7 +386,8 @@
       card.querySelector('.horario').textContent = item.horario;
 
       const linkInput = card.querySelector('.link-input');
-      const enterBtn = card.querySelector('.enter-btn');
+      const enterBtn  = card.querySelector('.enter-btn');
+      const saveBtn   = card.querySelector('.save-btn');
 
       linkInput.value = item.link || '';
 
@@ -404,7 +407,7 @@
         }
       });
 
-      card.querySelector('.save-btn').addEventListener('click', async () => {
+      saveBtn.addEventListener('click', async () => {
         const link = linkInput.value.trim();
         const body = new URLSearchParams({ materia: item.materia, turma: item.turma, link });
         await fetch('/', { method: 'POST', body });
@@ -414,15 +417,21 @@
         } else {
           card.classList.remove('has-link');
         }
+        saveBtn.textContent = '✓ Salvo!';
+        saveBtn.classList.add('saved');
+        setTimeout(() => {
+          saveBtn.textContent = 'Salvar';
+          saveBtn.classList.remove('saved');
+        }, 2000);
       });
 
       return card;
     }
 
     function search(query) {
-      const emptyState = document.getElementById('empty-state');
-      const noResults = document.getElementById('no-results');
-      const results = document.getElementById('results');
+      const emptyState  = document.getElementById('empty-state');
+      const noResults   = document.getElementById('no-results');
+      const results     = document.getElementById('results');
       const resultCount = document.getElementById('result-count');
 
       if (!query.trim()) {
@@ -435,9 +444,9 @@
 
       const q = normalize(query);
       const filtered = allTurmas.filter(t =>
-        normalize(t.materia).includes(q) ||
+        normalize(t.materia).includes(q)   ||
         normalize(t.professor).includes(q) ||
-        normalize(t.turma).includes(q) ||
+        normalize(t.turma).includes(q)     ||
         normalize(t.horario).includes(q)
       );
 
