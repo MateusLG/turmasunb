@@ -8,6 +8,7 @@
   <meta property="og:description" content="Encontre o link do grupo da sua turma na UnB" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://turmasunb.com" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -65,7 +66,7 @@
 
     /* ── Hero ── */
     .hero {
-      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      background: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 100%);
       padding: 2.5rem 1.5rem 4.5rem;
       text-align: center;
       position: relative;
@@ -154,11 +155,58 @@
     /* ── States ── */
     .state-msg {
       text-align: center;
-      padding: 3.5rem 0;
+      padding: 2.5rem 0 3rem;
       color: #cbd5e1;
     }
     .state-msg svg { display: block; margin: 0 auto 1rem; }
     .state-msg p { font-size: 0.85rem; color: #94a3b8; }
+
+    /* ── Empty state: pills de sugestão ── */
+    #empty-state {
+      text-align: center;
+      padding: 2.5rem 0 3rem;
+    }
+    .suggestions-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #b0bec5;
+      margin-bottom: 0.85rem;
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.38rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      font-family: inherit;
+      background: #fff;
+      border: 1.5px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s, background 0.15s, transform 0.1s;
+    }
+    .pill:hover {
+      border-color: var(--blue);
+      color: var(--blue);
+      background: var(--blue-light);
+    }
+    .pill:active { transform: scale(0.96); }
+    .empty-count {
+      font-size: 0.8rem;
+      color: #94a3b8;
+    }
+    .empty-count strong { color: var(--text-muted); font-weight: 600; }
 
     .hidden { display: none !important; }
 
@@ -337,12 +385,21 @@
   <main>
     <div id="result-count"></div>
 
-    <div id="empty-state" class="state-msg">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-      </svg>
-      <p>Digite para buscar entre <strong id="total-count">…</strong> turmas da UnB</p>
+    <div id="empty-state">
+      <p class="suggestions-label">Sugestões de busca</p>
+      <div class="pills">
+        <button class="pill" data-q="Cálculo">Cálculo</button>
+        <button class="pill" data-q="Programação">Programação</button>
+        <button class="pill" data-q="Física">Física</button>
+        <button class="pill" data-q="Química">Química</button>
+        <button class="pill" data-q="Administração">Administração</button>
+        <button class="pill" data-q="Estatística">Estatística</button>
+        <button class="pill" data-q="Direito">Direito</button>
+        <button class="pill" data-q="Inglês">Inglês</button>
+        <button class="pill" data-q="Economia">Economia</button>
+        <button class="pill" data-q="Biologia">Biologia</button>
+      </div>
+      <p class="empty-count">ou busque entre <strong id="total-count">…</strong> turmas da UnB</p>
     </div>
 
     <div id="no-results" class="state-msg hidden">
@@ -556,6 +613,16 @@
     document.getElementById('search').addEventListener('input', e => {
       clearTimeout(debounceTimer);
       debounceTimer = setTimeout(() => search(e.target.value), 200);
+    });
+
+    document.querySelectorAll('.pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        const q = pill.dataset.q;
+        const input = document.getElementById('search');
+        input.value = q;
+        input.focus();
+        search(q);
+      });
     });
 
     loadTurmas();
