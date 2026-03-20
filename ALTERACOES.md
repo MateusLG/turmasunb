@@ -1,5 +1,8 @@
 # Histórico de Alterações
 
+## [2026-03-20] Reorganização da estrutura de arquivos
+Movido `scraper.py` e `extractor.js` para `scripts/`. Removidos `attached_assets/` e `replit.md` (lixo do Replit). Adicionado `.replit` ao `.gitignore`. Atualizado `CLAUDE.md` com os novos caminhos.
+
 ## [2026-03-20] Melhorias de UX, segurança e manutenção
 1. **Confirmação ao substituir link existente**: frontend exibe `confirm()` antes de sobrescrever.
 2. **Tratamento de erro no fetch**: frontend agora verifica `res.ok` e exibe mensagem de erro do backend em vez de mostrar "✓ Salvo!" incondicionalmente.
