@@ -7,136 +7,359 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'unb-blue':  '#003366',
-            'unb-green': '#006633',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-        },
-      },
-    }
-  </script>
   <style>
-    input:focus { outline: none; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #003F72;
+      --blue-mid: #005299;
+      --blue-light: #e8f0f8;
+      --green: #00A859;
+      --green-light: #e6f7ee;
+      --bg: #F0F2F5;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: var(--blue);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      padding: 0 1.75rem;
+    }
+    nav .brand {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      opacity: 0.95;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes logoPulse {
+      0%, 100% { opacity: 0.8; }
+      50%       { opacity: 1; }
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-mid) 100%);
+      padding: 2.5rem 1.5rem 4.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0; right: 0;
+      height: 48px;
+      background: var(--bg);
+      border-radius: 40px 40px 0 0;
+    }
+    .hero-logo {
+      display: block;
+      margin: 0 auto 1.5rem;
+      animation: fadeUp 0.6s ease both, logoPulse 4s ease-in-out 1s infinite;
+    }
+    .hero h1 {
+      color: #fff;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+    .hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.6s ease 0.2s both;
+    }
+
+    /* ── Search wrapper ── */
+    .search-wrap {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeUp 0.6s ease 0.3s both;
+    }
+    .search-wrap svg.icon-search {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      pointer-events: none;
+    }
+    #search {
+      width: 100%;
+      padding: 0.85rem 1rem 0.85rem 2.75rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      border: none;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+      transition: box-shadow 0.2s;
+    }
+    #search:focus {
+      box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 0 0 3px rgba(0,168,89,0.25);
+    }
+    #search::placeholder { color: #94a3b8; }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.75rem 1rem 2rem;
+    }
+
+    /* ── Result count ── */
+    #result-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+      display: none;
+    }
+
+    /* ── States ── */
+    .state-msg {
+      text-align: center;
+      padding: 3.5rem 0;
+      color: #cbd5e1;
+    }
+    .state-msg svg { display: block; margin: 0 auto 1rem; }
+    .state-msg p { font-size: 0.85rem; color: #94a3b8; }
+
+    .hidden { display: none !important; }
+
+    /* ── Results ── */
+    #results { display: flex; flex-direction: column; gap: 0.625rem; }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      border-left: 3px solid transparent;
+      padding: 1rem 1.1rem;
+      transition: box-shadow 0.18s, transform 0.18s, border-left-color 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+      transform: translateY(-1px);
+    }
+    .card.has-link { border-left-color: var(--green); }
+
+    .card-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.7rem;
+    }
+    .card-info .materia {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.15rem;
+    }
+    .card-info .professor {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+    .card-badges { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+    .badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .badge-turma {
+      background: var(--blue-light);
+      color: var(--blue);
+    }
+    .badge-horario {
+      background: var(--green-light);
+      color: #00703b;
+    }
+
+    .card-actions { display: flex; gap: 0.5rem; align-items: center; }
+    .link-input {
+      flex: 1;
+      min-width: 0;
+      padding: 0.42rem 0.7rem;
+      font-size: 0.78rem;
+      font-family: inherit;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      background: #f8fafc;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .link-input:focus {
+      border-color: var(--blue);
+      background: #fff;
+    }
+    .link-input::placeholder { color: #b8c0cc; }
+
+    .btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: 7px;
+      cursor: pointer;
+      border: 1.5px solid transparent;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      transition: opacity 0.15s, transform 0.1s, background 0.2s, color 0.2s;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn-save {
+      background: transparent;
+      border-color: var(--blue);
+      color: var(--blue);
+    }
+    .btn-save:hover { background: var(--blue-light); }
+    .btn-save.saved {
+      background: var(--green-light);
+      border-color: var(--green);
+      color: #00703b;
+    }
+    .btn-enter {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+    .btn-enter:hover { opacity: 0.88; }
+
+    /* ── Footer ── */
+    footer {
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem 1rem;
+    }
+    footer a { color: #64748b; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--blue); }
+    footer .sep { color: #e2e8f0; }
   </style>
 </head>
-<body class="bg-slate-50 min-h-screen font-sans text-slate-800 antialiased">
+<body>
 
-  <!-- Navbar -->
-  <header class="bg-unb-blue shadow-md">
-    <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <!-- Símbolo da UnB (paths reais — Wikimedia Commons, licença livre) -->
-        <!-- Eixo Monumental (horizontal, azul) × Eixo Rodoviário (vertical, verde) -->
-        <svg width="44" height="22" viewBox="7 7 634 317" xmlns="http://www.w3.org/2000/svg" aria-label="Símbolo da UnB">
-          <!-- Braço verde (Eixo Rodoviário) — metade direita -->
-          <path fill="white" opacity="0.95" d="m 543.63956,122.52025 c -31.99939,23.06828 -66.98325,43.06013 -104.68075,59.36796 -18.62882,8.05762 -38.70764,13.629 -59.85377,16.27428 -15.03676,1.87867 -30.34934,2.82421 -45.88061,2.82421 l 0,123.26981 308.17389,0 0,-272.32649 -97.75007,70.60017 -0.009,-0.01"/>
-          <!-- Braço verde (Eixo Rodoviário) — metade esquerda -->
-          <path fill="white" opacity="0.95" d="m 105.18666,122.52025 c 32.00957,23.06828 66.98846,43.06013 104.69093,59.36796 18.63255,8.05762 38.70143,13.629 59.8575,16.27428 15.02681,1.87867 30.3394,2.82421 45.88061,2.82421 l 0,123.26981 -308.1838357,0 0,-272.32649 97.7499457,70.60017 0.005,-0.01"/>
-          <!-- Braço azul (Eixo Monumental) — metade direita -->
-          <path fill="white" opacity="0.65" d="m 333.22443,7.27328 0,176.09972 c 14.78825,0 29.37894,-0.912 43.69132,-2.6838 l 0,0 c 19.4526,-2.43655 37.9112,-7.5569 55.04405,-14.96345 36.51712,-15.79343 70.37528,-35.14415 101.36575,-57.48929 l 0,0.005 108.07277,-78.05021 0,-22.91794 -308.17389,0"/>
-          <!-- Braço azul (Eixo Monumental) — metade esquerda -->
-          <path fill="white" opacity="0.65" d="m 315.6157,7.27328 0,176.09972 c -14.80316,0 -29.3777,-0.912 -43.69132,-2.6838 l -0.005,0 c -19.45757,-2.43655 -37.9199,-7.5569 -55.05275,-14.96345 -36.50842,-15.79343 -70.36658,-35.14415 -101.36625,-57.48929 l 0,0.005 -108.0685457,-78.05021 0,-22.91794 308.1838357,0"/>
-        </svg>
-        <div class="flex items-baseline gap-2">
-          <span class="text-white font-bold tracking-tight text-lg">TurmasUnB</span>
-          <span class="text-white/40 text-xs font-normal">2026.1</span>
-        </div>
-      </div>
-      <nav class="flex items-center gap-4 text-sm text-white/60">
-        <a href="https://github.com/MateusLG/turmasunb" target="_blank"
-           class="hover:text-white transition-colors duration-150">GitHub</a>
-        <span class="text-white/20">|</span>
-        <a href="/json" class="hover:text-white transition-colors duration-150">JSON</a>
-      </nav>
-    </div>
-  </header>
+  <nav>
+    <span class="brand">TurmasUnB 2026.1</span>
+  </nav>
 
-  <main class="max-w-4xl mx-auto px-4 py-12">
-
-    <!-- Cabeçalho -->
-    <div class="text-center mb-10">
-      <h1 class="text-2xl font-bold text-slate-800 mb-1">Encontre sua turma</h1>
-      <p class="text-slate-400 text-sm">Busque por matéria, professor, código ou horário</p>
-    </div>
-
-    <!-- Campo de busca -->
-    <div class="mb-8">
+  <div class="hero">
+    <!-- Símbolo da UnB — paths reais (Wikimedia Commons, domínio público) -->
+    <svg class="hero-logo" width="120" height="60" viewBox="7 7 634 317" xmlns="http://www.w3.org/2000/svg" aria-label="Símbolo da Universidade de Brasília">
+      <path fill="white" opacity="0.95" d="m 543.63956,122.52025 c -31.99939,23.06828 -66.98325,43.06013 -104.68075,59.36796 -18.62882,8.05762 -38.70764,13.629 -59.85377,16.27428 -15.03676,1.87867 -30.34934,2.82421 -45.88061,2.82421 l 0,123.26981 308.17389,0 0,-272.32649 -97.75007,70.60017 -0.009,-0.01"/>
+      <path fill="white" opacity="0.95" d="m 105.18666,122.52025 c 32.00957,23.06828 66.98846,43.06013 104.69093,59.36796 18.63255,8.05762 38.70143,13.629 59.8575,16.27428 15.02681,1.87867 30.3394,2.82421 45.88061,2.82421 l 0,123.26981 -308.1838357,0 0,-272.32649 97.7499457,70.60017 0.005,-0.01"/>
+      <path fill="white" opacity="0.65" d="m 333.22443,7.27328 0,176.09972 c 14.78825,0 29.37894,-0.912 43.69132,-2.6838 l 0,0 c 19.4526,-2.43655 37.9112,-7.5569 55.04405,-14.96345 36.51712,-15.79343 70.37528,-35.14415 101.36575,-57.48929 l 0,0.005 108.07277,-78.05021 0,-22.91794 -308.17389,0"/>
+      <path fill="white" opacity="0.65" d="m 315.6157,7.27328 0,176.09972 c -14.80316,0 -29.3777,-0.912 -43.69132,-2.6838 l -0.005,0 c -19.45757,-2.43655 -37.9199,-7.5569 -55.05275,-14.96345 -36.50842,-15.79343 -70.36658,-35.14415 -101.36625,-57.48929 l 0,0.005 -108.0685457,-78.05021 0,-22.91794 308.1838357,0"/>
+    </svg>
+    <h1>Encontre sua turma</h1>
+    <p>Busque por matéria, professor, código ou horário</p>
+    <div class="search-wrap">
+      <svg class="icon-search" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
       <input
         id="search"
         type="text"
         placeholder="Ex: Cálculo, Matemática Discreta, Sergio..."
-        class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 shadow-sm
-               focus:ring-2 focus:ring-unb-blue/25 focus:border-unb-blue
-               text-base placeholder-slate-300 transition duration-150"
         autofocus
       />
     </div>
+  </div>
 
-    <!-- Estado inicial vazio -->
-    <div id="empty-state" class="text-center py-20 text-slate-300 select-none">
-      <div class="text-5xl mb-4">🎓</div>
-      <p class="text-sm">Digite para buscar entre 6478 turmas da UnB</p>
+  <main>
+    <div id="result-count"></div>
+
+    <div id="empty-state" class="state-msg">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+      </svg>
+      <p>Digite para buscar entre <strong>6.478 turmas</strong> da UnB</p>
     </div>
 
-    <!-- Sem resultados -->
-    <div id="no-results" class="hidden text-center py-20 text-slate-400">
-      <p class="text-sm">Nenhuma turma encontrada.</p>
+    <div id="no-results" class="state-msg hidden">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        <line x1="8" y1="11" x2="14" y2="11"/>
+      </svg>
+      <p>Nenhuma turma encontrada.</p>
     </div>
 
-    <!-- Lista de resultados -->
-    <div id="results" class="flex flex-col gap-3"></div>
-
+    <div id="results"></div>
   </main>
 
-  <!-- Rodapé -->
-  <footer class="max-w-4xl mx-auto px-4 py-8 mt-4 border-t border-slate-100 text-center text-xs text-slate-300">
-    Dados do SIGAA · Universidade de Brasília · 2026.1 · Desenvolvido por <span class="text-slate-400">LG_Mateus</span>
+  <footer>
+    <span>Feito por <a href="https://github.com/MateusLG" target="_blank">LG_Mateus</a></span>
+    <span class="sep">|</span>
+    <a href="https://github.com/MateusLG/turmasunb" target="_blank">GitHub</a>
+    <span class="sep">|</span>
+    <a href="/json">API JSON</a>
+    <span class="sep">|</span>
+    <span>Logo: <a href="https://commons.wikimedia.org/wiki/File:Webysther_20160322_-_Logo_UnB_(sem_texto).svg" target="_blank">Wikimedia Commons</a> · domínio público</span>
   </footer>
 
-  <!-- Template de card -->
   <template id="card-template">
-    <div data-card class="bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow duration-200">
-      <div class="p-5">
-        <!-- Cabeçalho: matéria, professor e badges -->
-        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
-          <div class="flex-1 min-w-0">
-            <h2 class="font-semibold text-slate-800 text-sm leading-snug materia"></h2>
-            <p class="text-xs text-slate-400 mt-0.5 professor"></p>
-          </div>
-          <div class="flex gap-1.5 flex-shrink-0 flex-wrap">
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                         border border-unb-blue/30 text-unb-blue bg-unb-blue/5 turma"></span>
-            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
-                         border border-slate-200 text-slate-500 bg-slate-50 horario"></span>
-          </div>
+    <div class="card">
+      <div class="card-top">
+        <div class="card-info">
+          <p class="materia"></p>
+          <p class="professor"></p>
         </div>
-        <!-- Linha de ação: input + botões -->
-        <div class="flex gap-2">
-          <input
-            type="text"
-            class="flex-1 px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-700
-                   focus:ring-2 focus:ring-unb-blue/20 focus:border-unb-blue focus:bg-white
-                   transition duration-150 placeholder-slate-300 link-input"
-            placeholder="Link do grupo (WhatsApp, Telegram, Meet...)"
-          />
-          <button class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-100 text-slate-500
-                         hover:bg-slate-200 transition duration-150 whitespace-nowrap save-btn">
-            Salvar
-          </button>
-          <a class="hidden px-3 py-1.5 text-xs font-medium rounded-lg bg-unb-green text-white
-                    hover:opacity-90 transition duration-150 whitespace-nowrap enter-btn"
-             target="_blank">
-            Entrar →
-          </a>
+        <div class="card-badges">
+          <span class="badge badge-turma turma"></span>
+          <span class="badge badge-horario horario"></span>
         </div>
+      </div>
+      <div class="card-actions">
+        <input type="text" class="link-input" placeholder="Link da turma (Meet, Teams…)" />
+        <button class="btn btn-save save-btn">Salvar</button>
+        <a class="btn btn-enter enter-btn hidden" target="_blank">Entrar</a>
       </div>
     </div>
   </template>
@@ -149,65 +372,18 @@
       allTurmas = await res.json();
     }
 
-    // Converte o código de horário do SIGAA para texto legível
-    // Ex: "246M12" → "Seg, Qua, Sex 08:00–10:00"
-    function formatHorario(horario) {
-      if (!horario) return '';
-
-      var DIAS = { '2': 'Seg', '3': 'Ter', '4': 'Qua', '5': 'Qui', '6': 'Sex', '7': 'Sáb' };
-      // Índice i corresponde ao slot i (1-based), o valor é o horário de início
-      // O fim é o início do próximo slot (cada slot = 1 hora)
-      var INICIO = {
-        'M': ['', '08:00', '09:00', '10:00', '11:00', '12:00'],
-        'T': ['', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'],
-        'N': ['', '19:00', '20:00', '21:00', '22:00']
-      };
-      var FIM = {
-        'M': ['', '09:00', '10:00', '11:00', '12:00', '13:00'],
-        'T': ['', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00'],
-        'N': ['', '20:00', '21:00', '22:00', '23:00']
-      };
-
-      // Extrai intervalo de datas opcional: (DD/MM/YYYY - DD/MM/YYYY)
-      var dateMatch = horario.match(/\(\d{2}\/\d{2}\/\d{4} - \d{2}\/\d{2}\/\d{4}\)/);
-      var dateStr = dateMatch ? ' ' + dateMatch[0] : '';
-      var base = horario.replace(/\(\d{2}\/\d{2}\/\d{4} - \d{2}\/\d{2}\/\d{4}\)/, '').trim();
-
-      var parts = [];
-      var blocks = base.split(/\s+/);
-      for (var i = 0; i < blocks.length; i++) {
-        var block = blocks[i];
-        var match = block.match(/^([2-7]+)([MTN])([1-6]+)$/);
-        if (!match) {
-          parts.push(block);
-          continue;
-        }
-        var dias = match[1].split('').map(function(d) { return DIAS[d] || d; }).join(', ');
-        var turno = match[2];
-        var slots = match[3].split('');
-        var inicio = INICIO[turno][parseInt(slots[0])];
-        var fim = FIM[turno][parseInt(slots[slots.length - 1])];
-        parts.push(dias + ' ' + inicio + '–' + fim);
-      }
-
-      return parts.join(' · ') + dateStr;
-    }
-
     function normalize(str) {
       return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
     function renderCard(item) {
       const tmpl = document.getElementById('card-template').content.cloneNode(true);
-      const card = tmpl.querySelector('[data-card]');
+      const card = tmpl.querySelector('.card');
 
       card.querySelector('.materia').textContent = item.materia;
       card.querySelector('.professor').textContent = item.professor;
       card.querySelector('.turma').textContent = 'Turma ' + item.turma;
-
-      const horarioBadge = card.querySelector('.horario');
-      horarioBadge.textContent = formatHorario(item.horario) || item.horario;
-      horarioBadge.title = item.horario;
+      card.querySelector('.horario').textContent = item.horario;
 
       const linkInput = card.querySelector('.link-input');
       const enterBtn  = card.querySelector('.enter-btn');
@@ -218,9 +394,9 @@
       if (item.link) {
         enterBtn.href = item.link;
         enterBtn.classList.remove('hidden');
+        card.classList.add('has-link');
       }
 
-      /* Atualiza botão "Entrar" conforme o usuário digita */
       linkInput.addEventListener('input', () => {
         const val = linkInput.value.trim();
         if (val) {
@@ -231,21 +407,21 @@
         }
       });
 
-      /* Salva link e dá feedback visual */
       saveBtn.addEventListener('click', async () => {
         const link = linkInput.value.trim();
         const body = new URLSearchParams({ materia: item.materia, turma: item.turma, link });
         await fetch('/', { method: 'POST', body });
         item.link = link;
-
-        /* Feedback: "Salvo!" por 2 segundos */
-        saveBtn.textContent = 'Salvo!';
-        saveBtn.classList.add('bg-unb-green/10', 'text-unb-green');
-        saveBtn.classList.remove('bg-slate-100', 'text-slate-500');
+        if (link) {
+          card.classList.add('has-link');
+        } else {
+          card.classList.remove('has-link');
+        }
+        saveBtn.textContent = '✓ Salvo!';
+        saveBtn.classList.add('saved');
         setTimeout(() => {
           saveBtn.textContent = 'Salvar';
-          saveBtn.classList.remove('bg-unb-green/10', 'text-unb-green');
-          saveBtn.classList.add('bg-slate-100', 'text-slate-500');
+          saveBtn.classList.remove('saved');
         }, 2000);
       });
 
@@ -253,14 +429,16 @@
     }
 
     function search(query) {
-      const emptyState = document.getElementById('empty-state');
-      const noResults  = document.getElementById('no-results');
-      const results    = document.getElementById('results');
+      const emptyState  = document.getElementById('empty-state');
+      const noResults   = document.getElementById('no-results');
+      const results     = document.getElementById('results');
+      const resultCount = document.getElementById('result-count');
 
       if (!query.trim()) {
         emptyState.classList.remove('hidden');
         noResults.classList.add('hidden');
         results.innerHTML = '';
+        resultCount.style.display = 'none';
         return;
       }
 
@@ -277,10 +455,16 @@
 
       if (filtered.length === 0) {
         noResults.classList.remove('hidden');
+        resultCount.style.display = 'none';
         return;
       }
 
       noResults.classList.add('hidden');
+      resultCount.style.display = 'block';
+      resultCount.textContent = filtered.length === 1
+        ? '1 turma encontrada'
+        : `${filtered.length.toLocaleString('pt-BR')} turmas encontradas`;
+
       filtered.forEach(item => results.appendChild(renderCard(item)));
     }
 
