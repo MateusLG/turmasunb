@@ -1,77 +1,279 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Turmas UnB 2026.1</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --unb-blue: #003F72;
+      --unb-green: #00A859;
+      --unb-blue-light: #e8f0f8;
+      --bg: #F5F7FA;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background-color: var(--bg);
+      font-family: system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Navbar */
+    nav {
+      background-color: var(--unb-blue);
+      padding: 0 1.5rem;
+      height: 52px;
+      display: flex;
+      align-items: center;
+    }
+    nav span {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    /* Main */
+    main {
+      flex: 1;
+      max-width: 720px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1rem 2rem;
+    }
+
+    .search-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .search-header h1 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 0.25rem;
+    }
+    .search-header p {
+      font-size: 0.85rem;
+      color: #888;
+    }
+
+    #search {
+      display: block;
+      width: 100%;
+      padding: 0.65rem 1rem;
+      font-size: 0.95rem;
+      border: 1.5px solid #d1d5db;
+      border-radius: 8px;
+      background: #fff;
+      outline: none;
+      color: #111;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      margin-bottom: 1.5rem;
+    }
+    #search:focus {
+      border-color: var(--unb-blue);
+      box-shadow: 0 0 0 3px rgba(0, 63, 114, 0.1);
+    }
+    #search::placeholder { color: #b0b0b0; }
+
+    /* Empty / no-results states */
+    .state-msg {
+      text-align: center;
+      padding: 4rem 0;
+      color: #bbb;
+      font-size: 0.85rem;
+    }
+    .state-msg svg {
+      display: block;
+      margin: 0 auto 0.75rem;
+      opacity: 0.35;
+    }
+
+    /* Cards */
+    #results { display: flex; flex-direction: column; gap: 0.625rem; }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #e5e7eb;
+      border-left: 3px solid transparent;
+      padding: 0.9rem 1.1rem;
+      transition: border-left-color 0.2s;
+    }
+    .card.has-link {
+      border-left-color: var(--unb-green);
+    }
+
+    .card-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.4rem;
+      margin-bottom: 0.6rem;
+    }
+    .card-info .materia {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #111;
+      margin: 0 0 0.1rem;
+    }
+    .card-info .professor {
+      font-size: 0.8rem;
+      color: #888;
+      margin: 0;
+    }
+    .card-badges {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+    .badge {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      background: #f1f3f6;
+      color: #555;
+      white-space: nowrap;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .link-input {
+      flex: 1;
+      padding: 0.4rem 0.65rem;
+      font-size: 0.8rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      outline: none;
+      color: #111;
+      background: #fafafa;
+      transition: border-color 0.15s;
+      min-width: 0;
+    }
+    .link-input:focus {
+      border-color: var(--unb-blue);
+      background: #fff;
+    }
+    .link-input::placeholder { color: #b8bec7; }
+
+    .btn {
+      padding: 0.38rem 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      border: 1.5px solid transparent;
+      transition: opacity 0.15s, background 0.15s;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-save {
+      background: transparent;
+      border-color: var(--unb-blue);
+      color: var(--unb-blue);
+    }
+    .btn-enter {
+      background: var(--unb-green);
+      color: #fff;
+      border-color: var(--unb-green);
+    }
+
+    /* Footer */
+    footer {
+      background: #fff;
+      border-top: 1px solid #e5e7eb;
+      padding: 0.9rem 1.5rem;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #aaa;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem 1.25rem;
+    }
+    footer a {
+      color: #888;
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--unb-blue); }
+    footer .sep { color: #ddd; }
+  </style>
 </head>
-<body class="bg-base-200 min-h-screen">
+<body>
 
-  <div class="navbar bg-primary text-primary-content shadow-md px-6">
-    <div class="flex-1">
-      <span class="text-xl font-bold">Turmas UnB 2026.1</span>
-    </div>
-    <div class="flex gap-3 text-sm">
-      <a href="https://github.com/MateusLG/turmasunb" target="_blank" class="link link-hover opacity-80">GitHub</a>
-      <span class="opacity-40">|</span>
-      <a href="/json" class="link link-hover opacity-80">JSON</a>
-    </div>
-  </div>
+  <nav>
+    <span>Turmas UnB 2026.1</span>
+  </nav>
 
-  <main class="max-w-4xl mx-auto px-4 py-12">
-
-    <div class="text-center mb-8">
-      <h1 class="text-2xl font-bold mb-1">Encontre sua turma</h1>
-      <p class="text-base-content/50 text-sm">Busque por matéria, professor, código ou horário</p>
+  <main>
+    <div class="search-header">
+      <h1>Encontre sua turma</h1>
+      <p>Busque por matéria, professor, código ou horário</p>
     </div>
 
-    <div class="flex gap-2 mb-8">
-      <input
-        id="search"
-        type="text"
-        placeholder="Ex: Cálculo, Matemática Discreta, Sergio..."
-        class="input input-bordered flex-1 text-base"
-        autofocus
-      />
+    <input
+      id="search"
+      type="text"
+      placeholder="Ex: Cálculo, Matemática Discreta, Sergio..."
+      autofocus
+    />
+
+    <div id="empty-state" class="state-msg">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+        <path d="M2 17l10 5 10-5"/>
+        <path d="M2 12l10 5 10-5"/>
+      </svg>
+      Digite para buscar entre 6478 turmas da UnB
     </div>
 
-    <div id="empty-state" class="text-center py-16 text-base-content/30">
-      <p class="text-4xl mb-3">🎓</p>
-      <p class="text-sm">Digite para buscar entre 6478 turmas da UnB</p>
+    <div id="no-results" class="state-msg hidden">
+      Nenhuma turma encontrada.
     </div>
 
-    <div id="no-results" class="hidden text-center py-16 text-base-content/40">
-      <p class="text-sm">Nenhuma turma encontrada.</p>
-    </div>
-
-    <div id="results" class="flex flex-col gap-3"></div>
-
+    <div id="results"></div>
   </main>
 
+  <footer>
+    <span>Feito por <a href="https://github.com/MateusLG" target="_blank">LG_Mateus</a></span>
+    <span class="sep">|</span>
+    <a href="https://github.com/MateusLG/turmasunb" target="_blank">GitHub</a>
+    <span class="sep">|</span>
+    <a href="/json">JSON</a>
+  </footer>
+
   <template id="card-template">
-    <div class="card bg-base-100 shadow-sm">
-      <div class="card-body py-4 px-6">
-        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-          <div>
-            <h2 class="card-title text-base materia"></h2>
-            <p class="text-sm text-base-content/60 professor"></p>
-          </div>
-          <div class="flex gap-2 flex-wrap sm:text-right">
-            <span class="badge badge-outline turma"></span>
-            <span class="badge badge-outline horario"></span>
-          </div>
+    <div class="card">
+      <div class="card-top">
+        <div class="card-info">
+          <p class="materia"></p>
+          <p class="professor"></p>
         </div>
-        <div class="flex gap-2 mt-2">
-          <input
-            type="text"
-            class="input input-bordered input-sm flex-1 text-sm link-input"
-            placeholder="Link da turma (Meet, Teams...)"
-          />
-          <button class="btn btn-sm btn-success save-btn">Salvar</button>
-          <a class="btn btn-sm btn-outline enter-btn hidden" target="_blank">Entrar</a>
+        <div class="card-badges">
+          <span class="badge turma"></span>
+          <span class="badge horario"></span>
         </div>
+      </div>
+      <div class="card-actions">
+        <input
+          type="text"
+          class="link-input"
+          placeholder="Link da turma (Meet, Teams...)"
+        />
+        <button class="btn btn-save save-btn">Salvar</button>
+        <a class="btn btn-enter enter-btn hidden" target="_blank">Entrar</a>
       </div>
     </div>
   </template>
@@ -105,6 +307,7 @@
       if (item.link) {
         enterBtn.href = item.link;
         enterBtn.classList.remove('hidden');
+        card.classList.add('has-link');
       }
 
       linkInput.addEventListener('input', () => {
@@ -122,6 +325,11 @@
         const body = new URLSearchParams({ materia: item.materia, turma: item.turma, link });
         await fetch('/', { method: 'POST', body });
         item.link = link;
+        if (link) {
+          card.classList.add('has-link');
+        } else {
+          card.classList.remove('has-link');
+        }
       });
 
       return card;
