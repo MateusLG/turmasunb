@@ -1,5 +1,13 @@
 # Histórico de Alterações
 
+## [2026-03-20] Melhorias de UX, segurança e manutenção
+1. **Confirmação ao substituir link existente**: frontend exibe `confirm()` antes de sobrescrever.
+2. **Tratamento de erro no fetch**: frontend agora verifica `res.ok` e exibe mensagem de erro do backend em vez de mostrar "✓ Salvo!" incondicionalmente.
+3. **Paginação de resultados**: busca renderiza no máximo 30 cards por vez; botão "Ver mais N turmas" carrega o próximo lote.
+4. **Contador dinâmico de turmas**: total exibido no estado vazio é calculado do `/json` em vez de hardcoded.
+5. **Semestre configurável**: variável de ambiente `SEMESTER` (padrão `2026.1`) controla o título da página e a navbar. Sem mais hardcode.
+6. **Meta tags Open Graph**: adicionadas tags `og:title`, `og:description`, `og:type` e `og:url` para preview no WhatsApp/Telegram.
+
 ## [2026-03-20] Bloquear envio de link vazio
 POST / agora rejeita link vazio em qualquer situação (400). Frontend também bloqueia o botão Salvar se o campo estiver vazio. Evita registros sem link no banco e cliques acidentais.
 

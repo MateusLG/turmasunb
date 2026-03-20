@@ -10,8 +10,9 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from fastapi.templating import Jinja2Templates
 
-DATA_FILE = os.getenv("DATA_FILE", "data.json")
+DATA_FILE    = os.getenv("DATA_FILE", "data.json")
 DATABASE_URL = os.getenv("DATABASE_URL")
+SEMESTER     = os.getenv("SEMESTER", "2026.1")
 
 # Limite de tamanho do campo link (fix 5)
 LINK_MAX_LEN = 2048
@@ -93,7 +94,7 @@ items: list[dict] = load_items()
 
 @app.get("/", response_class=HTMLResponse)
 async def index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request, "semester": SEMESTER})
 
 
 @app.post("/")

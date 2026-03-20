@@ -3,7 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TurmasUnB — 2026.1</title>
+  <title>TurmasUnB — {{ semester }}</title>
+  <meta property="og:title" content="TurmasUnB" />
+  <meta property="og:description" content="Encontre o link do grupo da sua turma na UnB" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://turmasunb.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -281,12 +285,30 @@
     footer a { color: #64748b; text-decoration: none; transition: color 0.15s; }
     footer a:hover { color: var(--blue); }
     footer .sep { color: #e2e8f0; }
+
+    /* ── Ver mais ── */
+    .ver-mais-btn {
+      display: block;
+      width: 100%;
+      margin-top: 0.75rem;
+      padding: 0.6rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      font-family: inherit;
+      background: transparent;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .ver-mais-btn:hover { background: var(--blue-light); color: var(--blue); }
   </style>
 </head>
 <body>
 
   <nav>
-    <span class="brand">TurmasUnB 2026.1</span>
+    <span class="brand">TurmasUnB {{ semester }}</span>
   </nav>
 
   <div class="hero">
@@ -320,7 +342,7 @@
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
       </svg>
-      <p>Digite para buscar entre <strong>6.478 turmas</strong> da UnB</p>
+      <p>Digite para buscar entre <strong id="total-count">…</strong> turmas da UnB</p>
     </div>
 
     <div id="no-results" class="state-msg hidden">
@@ -368,6 +390,7 @@
     async function loadTurmas() {
       const res = await fetch('/json');
       allTurmas = await res.json();
+      document.getElementById('total-count').textContent = allTurmas.length.toLocaleString('pt-BR');
     }
 
     // fix 1 e 3: aceita apenas http/https para evitar javascript: e outros esquemas
@@ -414,7 +437,7 @@
       saveBtn.addEventListener('click', async () => {
         const link = linkInput.value.trim();
 
-        // fix 1 e 3: valida antes de enviar
+        // Valida antes de enviar
         if (!isValidLink(link)) {
           saveBtn.textContent = 'Link inválido';
           saveBtn.style.borderColor = '#e53e3e';
@@ -427,14 +450,29 @@
           return;
         }
 
-        const body = new URLSearchParams({ materia: item.materia, turma: item.turma, link });
-        await fetch('/', { method: 'POST', body });
-        item.link = link;
-        if (link) {
-          card.classList.add('has-link');
-        } else {
-          card.classList.remove('has-link');
+        // Confirmação ao substituir link existente
+        if (item.link && item.link !== link) {
+          if (!confirm('Esta turma já tem um link. Deseja substituir?')) return;
         }
+
+        const body = new URLSearchParams({ materia: item.materia, turma: item.turma, link });
+        const res = await fetch('/', { method: 'POST', body });
+        const data = await res.json();
+
+        if (!res.ok || !data.ok) {
+          saveBtn.textContent = data.erro || 'Erro ao salvar';
+          saveBtn.style.borderColor = '#e53e3e';
+          saveBtn.style.color = '#e53e3e';
+          setTimeout(() => {
+            saveBtn.textContent = 'Salvar';
+            saveBtn.style.borderColor = '';
+            saveBtn.style.color = '';
+          }, 2000);
+          return;
+        }
+
+        item.link = link;
+        card.classList.add('has-link');
         saveBtn.textContent = '✓ Salvo!';
         saveBtn.classList.add('saved');
         setTimeout(() => {
@@ -446,11 +484,35 @@
       return card;
     }
 
+    const PAGE_SIZE = 30;
+    let currentFiltered = [];
+    let shownCount = 0;
+
+    function appendVerMaisBtn() {
+      document.getElementById('ver-mais-btn')?.remove();
+      const remaining = currentFiltered.length - shownCount;
+      if (remaining <= 0) return;
+      const btn = document.createElement('button');
+      btn.id = 'ver-mais-btn';
+      btn.className = 'ver-mais-btn';
+      btn.textContent = `Ver mais ${remaining.toLocaleString('pt-BR')} turma${remaining !== 1 ? 's' : ''}`;
+      btn.addEventListener('click', () => {
+        const results = document.getElementById('results');
+        const batch = currentFiltered.slice(shownCount, shownCount + PAGE_SIZE);
+        batch.forEach(item => results.appendChild(renderCard(item)));
+        shownCount += batch.length;
+        appendVerMaisBtn();
+      });
+      document.getElementById('results').after(btn);
+    }
+
     function search(query) {
       const emptyState  = document.getElementById('empty-state');
       const noResults   = document.getElementById('no-results');
       const results     = document.getElementById('results');
       const resultCount = document.getElementById('result-count');
+
+      document.getElementById('ver-mais-btn')?.remove();
 
       if (!query.trim()) {
         emptyState.classList.remove('hidden');
@@ -461,7 +523,7 @@
       }
 
       const q = normalize(query);
-      const filtered = allTurmas.filter(t =>
+      currentFiltered = allTurmas.filter(t =>
         normalize(t.materia).includes(q)   ||
         normalize(t.professor).includes(q) ||
         normalize(t.turma).includes(q)     ||
@@ -470,8 +532,9 @@
 
       emptyState.classList.add('hidden');
       results.innerHTML = '';
+      shownCount = 0;
 
-      if (filtered.length === 0) {
+      if (currentFiltered.length === 0) {
         noResults.classList.remove('hidden');
         resultCount.style.display = 'none';
         return;
@@ -479,11 +542,14 @@
 
       noResults.classList.add('hidden');
       resultCount.style.display = 'block';
-      resultCount.textContent = filtered.length === 1
+      resultCount.textContent = currentFiltered.length === 1
         ? '1 turma encontrada'
-        : `${filtered.length.toLocaleString('pt-BR')} turmas encontradas`;
+        : `${currentFiltered.length.toLocaleString('pt-BR')} turmas encontradas`;
 
-      filtered.forEach(item => results.appendChild(renderCard(item)));
+      const batch = currentFiltered.slice(0, PAGE_SIZE);
+      batch.forEach(item => results.appendChild(renderCard(item)));
+      shownCount = batch.length;
+      appendVerMaisBtn();
     }
 
     let debounceTimer;

@@ -23,6 +23,13 @@ class TestGetIndex:
         assert "text/html" in resp.headers["content-type"]
         assert "TurmasUnB" in resp.text
 
+    def test_semestre_no_html(self):
+        # O semestre deve aparecer no título e na navbar
+        import os
+        semester = os.getenv("SEMESTER", "2026.1")
+        resp = client.get("/")
+        assert semester in resp.text
+
 
 # ── GET /json ─────────────────────────────────────────────────────────────────
 
