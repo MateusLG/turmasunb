@@ -20,65 +20,153 @@
     </div>
   </div>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
+  <main class="max-w-4xl mx-auto px-4 py-12">
 
-    <form action="/" method="get" class="flex gap-2 mb-8">
+    <div class="text-center mb-8">
+      <h1 class="text-2xl font-bold mb-1">Encontre sua turma</h1>
+      <p class="text-base-content/50 text-sm">Busque por matéria, professor, código ou horário</p>
+    </div>
+
+    <div class="flex gap-2 mb-8">
       <input
+        id="search"
         type="text"
-        name="q"
-        value="{{ q }}"
-        placeholder="Buscar por matéria, professor, horário..."
-        class="input input-bordered flex-1"
+        placeholder="Ex: Cálculo, Matemática Discreta, Sergio..."
+        class="input input-bordered flex-1 text-base"
         autofocus
       />
-      <button type="submit" class="btn btn-primary">Buscar</button>
-      {% if q %}
-      <a href="/" class="btn btn-ghost">Limpar</a>
-      {% endif %}
-    </form>
-
-    {% if not items %}
-    <div class="alert alert-warning">
-      <span>Nenhuma turma encontrada para "<strong>{{ q }}</strong>".</span>
     </div>
-    {% endif %}
 
-    <div class="flex flex-col gap-4">
-      {% for item in items %}
-      <div class="card bg-base-100 shadow-sm">
-        <div class="card-body py-4 px-6">
-          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-            <div>
-              <h2 class="card-title text-base">{{ item.materia }}</h2>
-              <p class="text-sm text-base-content/60">{{ item.professor }}</p>
-            </div>
-            <div class="flex gap-2 flex-wrap sm:text-right">
-              <span class="badge badge-outline">Turma {{ item.turma }}</span>
-              <span class="badge badge-outline">{{ item.horario }}</span>
-            </div>
-          </div>
-
-          <form action="/" method="post" class="flex gap-2 mt-2">
-            <input type="hidden" name="materia" value="{{ item.materia }}" />
-            <input type="hidden" name="turma" value="{{ item.turma }}" />
-            <input
-              type="text"
-              name="link"
-              value="{{ item.link }}"
-              placeholder="Link da turma (Meet, Teams...)"
-              class="input input-bordered input-sm flex-1 text-sm"
-            />
-            <button type="submit" class="btn btn-sm btn-success">Salvar</button>
-            {% if item.link %}
-            <a href="{{ item.link }}" target="_blank" class="btn btn-sm btn-outline">Entrar</a>
-            {% endif %}
-          </form>
-        </div>
-      </div>
-      {% endfor %}
+    <div id="empty-state" class="text-center py-16 text-base-content/30">
+      <p class="text-4xl mb-3">🎓</p>
+      <p class="text-sm">Digite para buscar entre 6478 turmas da UnB</p>
     </div>
+
+    <div id="no-results" class="hidden text-center py-16 text-base-content/40">
+      <p class="text-sm">Nenhuma turma encontrada.</p>
+    </div>
+
+    <div id="results" class="flex flex-col gap-3"></div>
 
   </main>
+
+  <template id="card-template">
+    <div class="card bg-base-100 shadow-sm">
+      <div class="card-body py-4 px-6">
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+          <div>
+            <h2 class="card-title text-base materia"></h2>
+            <p class="text-sm text-base-content/60 professor"></p>
+          </div>
+          <div class="flex gap-2 flex-wrap sm:text-right">
+            <span class="badge badge-outline turma"></span>
+            <span class="badge badge-outline horario"></span>
+          </div>
+        </div>
+        <div class="flex gap-2 mt-2">
+          <input
+            type="text"
+            class="input input-bordered input-sm flex-1 text-sm link-input"
+            placeholder="Link da turma (Meet, Teams...)"
+          />
+          <button class="btn btn-sm btn-success save-btn">Salvar</button>
+          <a class="btn btn-sm btn-outline enter-btn hidden" target="_blank">Entrar</a>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    let allTurmas = [];
+
+    async function loadTurmas() {
+      const res = await fetch('/json');
+      allTurmas = await res.json();
+    }
+
+    function normalize(str) {
+      return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function renderCard(item) {
+      const tmpl = document.getElementById('card-template').content.cloneNode(true);
+      const card = tmpl.querySelector('.card');
+
+      card.querySelector('.materia').textContent = item.materia;
+      card.querySelector('.professor').textContent = item.professor;
+      card.querySelector('.turma').textContent = 'Turma ' + item.turma;
+      card.querySelector('.horario').textContent = item.horario;
+
+      const linkInput = card.querySelector('.link-input');
+      const enterBtn = card.querySelector('.enter-btn');
+
+      linkInput.value = item.link || '';
+
+      if (item.link) {
+        enterBtn.href = item.link;
+        enterBtn.classList.remove('hidden');
+      }
+
+      linkInput.addEventListener('input', () => {
+        const val = linkInput.value.trim();
+        if (val) {
+          enterBtn.href = val;
+          enterBtn.classList.remove('hidden');
+        } else {
+          enterBtn.classList.add('hidden');
+        }
+      });
+
+      card.querySelector('.save-btn').addEventListener('click', async () => {
+        const link = linkInput.value.trim();
+        const body = new URLSearchParams({ materia: item.materia, turma: item.turma, link });
+        await fetch('/', { method: 'POST', body });
+        item.link = link;
+      });
+
+      return card;
+    }
+
+    function search(query) {
+      const emptyState = document.getElementById('empty-state');
+      const noResults = document.getElementById('no-results');
+      const results = document.getElementById('results');
+
+      if (!query.trim()) {
+        emptyState.classList.remove('hidden');
+        noResults.classList.add('hidden');
+        results.innerHTML = '';
+        return;
+      }
+
+      const q = normalize(query);
+      const filtered = allTurmas.filter(t =>
+        normalize(t.materia).includes(q) ||
+        normalize(t.professor).includes(q) ||
+        normalize(t.turma).includes(q) ||
+        normalize(t.horario).includes(q)
+      );
+
+      emptyState.classList.add('hidden');
+      results.innerHTML = '';
+
+      if (filtered.length === 0) {
+        noResults.classList.remove('hidden');
+        return;
+      }
+
+      noResults.classList.add('hidden');
+      filtered.forEach(item => results.appendChild(renderCard(item)));
+    }
+
+    let debounceTimer;
+    document.getElementById('search').addEventListener('input', e => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => search(e.target.value), 200);
+    });
+
+    loadTurmas();
+  </script>
 
 </body>
 </html>

@@ -1,10 +1,8 @@
 import json
 import os
-from typing import Optional
 
 from fastapi import FastAPI, Form, Request
-from fastapi.responses import HTMLResponse, JSONResponse, RedirectResponse
-from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 
 DATA_FILE = os.getenv("DATA_FILE", "data.json")
@@ -29,19 +27,8 @@ items: list[dict] = load_items()
 
 
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request, q: Optional[str] = None):
-    filtered = items
-    if q:
-        query = q.lower()
-        filtered = [
-            item for item in items
-            if query in item["materia"].lower()
-            or query in item["turma"].lower()
-            or query in item["professor"].lower()
-            or query in item["horario"].lower()
-            or query in item["link"].lower()
-        ]
-    return templates.TemplateResponse("index.html", {"request": request, "items": filtered, "q": q or ""})
+async def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @app.post("/")
@@ -55,7 +42,7 @@ async def update_link(
             item["link"] = link
             save_items(items)
             break
-    return RedirectResponse(url="/", status_code=302)
+    return JSONResponse(content={"ok": True})
 
 
 @app.get("/json")
