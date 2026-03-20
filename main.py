@@ -5,12 +5,22 @@ import psycopg2
 import psycopg2.extras
 from fastapi import FastAPI, Form, Request
 from fastapi.responses import HTMLResponse, JSONResponse
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 from fastapi.templating import Jinja2Templates
 
 DATA_FILE = os.getenv("DATA_FILE", "data.json")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+# Limite de tamanho do campo link (fix 5)
+LINK_MAX_LEN = 2048
+
+limiter = Limiter(key_func=get_remote_address)
 app = FastAPI()
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 templates = Jinja2Templates(directory="templates")
 
 
@@ -87,11 +97,21 @@ async def index(request: Request):
 
 
 @app.post("/")
+@limiter.limit("20/minute")  # fix 4: rate limiting por IP
 async def update_link(
+    request: Request,
     materia: str = Form(...),
     turma: str = Form(...),
     link: str = Form(...),
 ):
+    # fix 5: limite de tamanho
+    if len(link) > LINK_MAX_LEN:
+        return JSONResponse(status_code=400, content={"ok": False, "erro": "Link muito longo"})
+
+    # fix 3: validação de URL no backend (deve ser http/https ou vazio para limpar)
+    if link and not (link.startswith("http://") or link.startswith("https://")):
+        return JSONResponse(status_code=400, content={"ok": False, "erro": "Link inválido"})
+
     for item in items:
         if item["materia"] == materia and item["turma"] == turma:
             item["link"] = link

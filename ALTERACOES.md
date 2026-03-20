@@ -1,5 +1,12 @@
 # Histórico de Alterações
 
+## [2026-03-20] Correções de segurança (5 brechas)
+1. XSS: validação no frontend bloqueia esquemas javascript: antes de setar href.
+2. Tab-napping: adicionado rel="noopener noreferrer" no botão Entrar.
+3. Validação de URL no backend: POST / rejeita links que não começam com http/https.
+4. Rate limiting: slowapi limita POST / a 20 requisições/minuto por IP.
+5. Limite de tamanho: campo link limitado a 2048 caracteres no frontend (maxlength) e backend.
+
 ## [2026-03-20] Persistência de links no PostgreSQL
 Links salvos pelos usuários agora são armazenados no PostgreSQL (Railway) em vez do data.json. O banco é inicializado automaticamente na subida da aplicação. Sem DATABASE_URL definida, o comportamento cai de volta para o arquivo (desenvolvimento local). O data.json continua no git apenas com os dados de turmas (sem links).
 
