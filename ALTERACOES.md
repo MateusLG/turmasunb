@@ -1,5 +1,8 @@
 # Histórico de Alterações
 
+## [2026-03-20] Proteção contra sobrescrita de link com string vazia
+POST / agora retorna 400 se o usuário tentar salvar um link vazio em uma turma que já possui link cadastrado. Evita que cliques acidentais no botão de salvar apaguem links existentes.
+
 ## [2026-03-20] Testes automatizados
 Adicionados 15 testes com pytest cobrindo GET /, GET /json e POST /. Inclui testes de validação de URL (javascript:, ftp:, sem protocolo, tamanho), ordenação dos dados, estrutura dos itens e persistência em memória. Dependências de dev em requirements-dev.txt.
 
