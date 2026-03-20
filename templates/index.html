@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Turmas FGA 2026.1</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200 min-h-screen">
+
+  <div class="navbar bg-primary text-primary-content shadow-md px-6">
+    <div class="flex-1">
+      <span class="text-xl font-bold">Turmas FGA 2026.1</span>
+    </div>
+    <div class="flex gap-3 text-sm">
+      <a href="https://github.com/MateusLG/gruposfga" target="_blank" class="link link-hover opacity-80">GitHub</a>
+      <span class="opacity-40">|</span>
+      <a href="/json" class="link link-hover opacity-80">JSON</a>
+    </div>
+  </div>
+
+  <main class="max-w-4xl mx-auto px-4 py-8">
+
+    <form action="/" method="get" class="flex gap-2 mb-8">
+      <input
+        type="text"
+        name="q"
+        value="{{ q }}"
+        placeholder="Buscar por matéria, professor, horário..."
+        class="input input-bordered flex-1"
+        autofocus
+      />
+      <button type="submit" class="btn btn-primary">Buscar</button>
+      {% if q %}
+      <a href="/" class="btn btn-ghost">Limpar</a>
+      {% endif %}
+    </form>
+
+    {% if not items %}
+    <div class="alert alert-warning">
+      <span>Nenhuma turma encontrada para "<strong>{{ q }}</strong>".</span>
+    </div>
+    {% endif %}
+
+    <div class="flex flex-col gap-4">
+      {% for item in items %}
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body py-4 px-6">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
+            <div>
+              <h2 class="card-title text-base">{{ item.materia }}</h2>
+              <p class="text-sm text-base-content/60">{{ item.professor }}</p>
+            </div>
+            <div class="flex gap-2 flex-wrap sm:text-right">
+              <span class="badge badge-outline">Turma {{ item.turma }}</span>
+              <span class="badge badge-outline">{{ item.horario }}</span>
+            </div>
+          </div>
+
+          <form action="/" method="post" class="flex gap-2 mt-2">
+            <input type="hidden" name="materia" value="{{ item.materia }}" />
+            <input type="hidden" name="turma" value="{{ item.turma }}" />
+            <input
+              type="text"
+              name="link"
+              value="{{ item.link }}"
+              placeholder="Link da turma (Meet, Teams...)"
+              class="input input-bordered input-sm flex-1 text-sm"
+            />
+            <button type="submit" class="btn btn-sm btn-success">Salvar</button>
+            {% if item.link %}
+            <a href="{{ item.link }}" target="_blank" class="btn btn-sm btn-outline">Entrar</a>
+            {% endif %}
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </main>
+
+</body>
+</html>

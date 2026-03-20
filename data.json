@@ -1,0 +1,1668 @@
+[
+  {
+    "materia": "FCTE0004 - MATEMÁTICA PARA COMPETIÇÕES",
+    "turma": "01",
+    "professor": "EDSON ALVES DA COSTA JUNIOR (60h)",
+    "horario": "35T6 35N1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0003 - COMPILADORES 1",
+    "turma": "01",
+    "professor": "SERGIO ANTONIO ANDRADE DE FREITAS (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0003 - COMPILADORES 1",
+    "turma": "02",
+    "professor": "FABIO MACEDO MENDES (60h)",
+    "horario": "46T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0006 - FUNDAMENTOS DE EQUAÇÕES DIFERENCIAIS PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "RONNI GERALDO GOMES DE AMORIM (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0008 - SISTEMAS AEROESPACIAIS",
+    "turma": "01",
+    "professor": "RONNE TOLEDO (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0017 - PROJETOS DE CIRCUITOS INTEGRADOS 1",
+    "turma": "01",
+    "professor": "WELLINGTON AVELINO DO AMARAL (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0023 - DINÂMICA DOS MECANISMOS",
+    "turma": "01",
+    "professor": "RITA DE CASSIA SILVA (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0025 - SISTEMAS DE ENERGIA SOLAR E EÓLICA",
+    "turma": "01",
+    "professor": "JORGE ANDRES CORMANE ANGARITA (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0030 - ESTRUTURAS DE DADOS 2",
+    "turma": "01",
+    "professor": "GLAUCO VITOR PEDROSA (30h)\nJOHN LENON CARDOSO GARDENGHI (30h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0030 - ESTRUTURAS DE DADOS 2",
+    "turma": "02",
+    "professor": "MAURICIO SERRANO (60h)",
+    "horario": "26M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0030 - ESTRUTURAS DE DADOS 2",
+    "turma": "03",
+    "professor": "GLAUCO VITOR PEDROSA (30h)\nJOHN LENON CARDOSO GARDENGHI (30h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0034 - TÓPICOS ESPECIAIS EM MATEMÁTICA APLICADA",
+    "turma": "01",
+    "professor": "VINICIUS DE CARVALHO RISPOLI (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0034 - TÓPICOS ESPECIAIS EM MATEMÁTICA APLICADA",
+    "turma": "02",
+    "professor": "BRUNO LUIZ PEREIRA (30h)\nMANUEL NASCIMENTO DIAS BARCELOS JUNIOR (30h)",
+    "horario": "24T6 24N1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0037 - TÓPICOS ESPECIAIS EM ENGENHARIA AEROESPACIAL",
+    "turma": "01",
+    "professor": "WILLIAM REIS SILVA (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0037 - TÓPICOS ESPECIAIS EM ENGENHARIA AEROESPACIAL",
+    "turma": "02",
+    "professor": "FERNANDO MEREGE (60h)",
+    "horario": "26M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0038 - AERODINÂMICA DE SISTEMAS AEROESPACIAIS",
+    "turma": "01",
+    "professor": "OLEXIY SHYNKARENKO (75h)",
+    "horario": "35T45 6T4 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0039 - MECÂNICA DE ESTRUTURAS AEROESPACIAIS",
+    "turma": "01",
+    "professor": "ARTEM ANDRIANOV (75h)",
+    "horario": "2M5 35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0040 - SISTEMAS DE CONTROLE AUTOMOTIVO",
+    "turma": "01",
+    "professor": "RAFAEL RODRIGUES DA SILVA (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0041 - TÓPICOS ESPECIAIS EM JOGOS DIGITAIS",
+    "turma": "01",
+    "professor": "EDUARDO GABRIEL QUEIROZ PALMEIRA (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0043 - DINÂMICA DOS GASES PARA SISTEMAS AEROESPACIAIS",
+    "turma": "01",
+    "professor": "OLEXIY SHYNKARENKO (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0044 - PROJETO DE SISTEMAS DE CONTROLE",
+    "turma": "01",
+    "professor": "THIAGO FELIPPE KURUDEZ CORDEIRO (60h)",
+    "horario": "46M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0045 - MECÂNICA DO VÔO",
+    "turma": "01",
+    "professor": "POLLIANA CANDIDA OLIVEIRA MARTINS (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0047 - PROCESSOS PETROQUÍMICOS",
+    "turma": "01",
+    "professor": "ANDREIA ALVES COSTA LINDINGER (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0048 - MECÂNICA DO VOO ESPACIAL",
+    "turma": "01",
+    "professor": "WILLIAM REIS SILVA (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0050 - DINÂMICA DE ESTRUTURAS AEROESPACIAIS",
+    "turma": "01",
+    "professor": "SERGIO HENRIQUE DA SILVA CARNEIRO (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0055 - TECNOLOGIAS DE FABRICAÇÃO 1",
+    "turma": "01",
+    "professor": "RHANDER VIANA (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0056 - TECNOLOGIAS DE FABRICAÇÃO 2",
+    "turma": "01",
+    "professor": "EDISON GUSTAVO CUEVA GALARRAGA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0060 - SISTEMAS DE BANCO DE DADOS 2",
+    "turma": "01",
+    "professor": "VANDOR ROBERTO VILARDI RISSOLI (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0060 - SISTEMAS DE BANCO DE DADOS 2",
+    "turma": "02",
+    "professor": "VANDOR ROBERTO VILARDI RISSOLI (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0067 - TEORIA DE CIRCUITOS ELETRÔNICOS 1",
+    "turma": "01",
+    "professor": "LUIS FILOMENO DE JESUS FERNANDES (60h)",
+    "horario": "24M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0067 - TEORIA DE CIRCUITOS ELETRÔNICOS 1",
+    "turma": "02",
+    "professor": "EULER DE VILHENA GARCIA (60h)",
+    "horario": "35M12",
+    "link": ""
+  },
+  {
+    "materia": "FGA0067 - TEORIA DE CIRCUITOS ELETRÔNICOS 1",
+    "turma": "03",
+    "professor": "LUCIANO EMIDIO NEVES DA FONSECA (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0068 - TEORIA DE CIRCUITOS ELETRÔNICOS 2",
+    "turma": "01",
+    "professor": "GILMAR SILVA BESERRA (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0069 - PRÁTICA DE CIRCUITOS ELETRÔNICOS 1",
+    "turma": "01",
+    "professor": "CLAUDIA PATRICIA OCHOA DIAZ (30h)",
+    "horario": "5M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0069 - PRÁTICA DE CIRCUITOS ELETRÔNICOS 1",
+    "turma": "02",
+    "professor": "MARCUS VINICIUS CHAFFIM COSTA (30h)",
+    "horario": "3M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0069 - PRÁTICA DE CIRCUITOS ELETRÔNICOS 1",
+    "turma": "03",
+    "professor": "MARCUS VINICIUS CHAFFIM COSTA (30h)",
+    "horario": "5M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0070 - PRÁTICA DE CIRCUITOS ELETRÔNICOS 2",
+    "turma": "01",
+    "professor": "DIOGO DE OLIVEIRA COSTA (30h)",
+    "horario": "3T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "01",
+    "professor": "CLAUDIA PATRICIA OCHOA DIAZ (30h)",
+    "horario": "3M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "02",
+    "professor": "HENRIQUE MARRA TAIRA MENEGAZ (30h)",
+    "horario": "3T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "03",
+    "professor": "HENRIQUE MARRA TAIRA MENEGAZ (30h)",
+    "horario": "5M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "04",
+    "professor": "HENRIQUE MARRA TAIRA MENEGAZ (30h)",
+    "horario": "5M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "05",
+    "professor": "HENRIQUE MARRA TAIRA MENEGAZ (30h)",
+    "horario": "3M5 3T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "06",
+    "professor": "MARCELINO MONTEIRO DE ANDRADE (30h)",
+    "horario": "4M12",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "07",
+    "professor": "MARCELINO MONTEIRO DE ANDRADE (30h)",
+    "horario": "4M34",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "08",
+    "professor": "MARCELINO MONTEIRO DE ANDRADE (30h)",
+    "horario": "4T23",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "09",
+    "professor": "MARCELINO MONTEIRO DE ANDRADE (30h)",
+    "horario": "4T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "11",
+    "professor": "THIAGO LUIZ DE SOUZA GOMES (30h)",
+    "horario": "6M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0071 - PRÁTICA DE ELETRÔNICA DIGITAL 1",
+    "turma": "12",
+    "professor": "THIAGO LUIZ DE SOUZA GOMES (30h)",
+    "horario": "6M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0072 - PRÁTICA DE ELETRÔNICA DIGITAL 2",
+    "turma": "01",
+    "professor": "GILMAR SILVA BESERRA (30h)",
+    "horario": "2M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0072 - PRÁTICA DE ELETRÔNICA DIGITAL 2",
+    "turma": "02",
+    "professor": "GILMAR SILVA BESERRA (30h)",
+    "horario": "4M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0073 - TEORIA DE ELETRÔNICA DIGITAL 1",
+    "turma": "01",
+    "professor": "RENATO VILELA LOPES (60h)",
+    "horario": "46M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0073 - TEORIA DE ELETRÔNICA DIGITAL 1",
+    "turma": "02",
+    "professor": "RENATO VILELA LOPES (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0074 - TEORIA DE ELETRÔNICA DIGITAL 2",
+    "turma": "01",
+    "professor": "DANIEL MAURICIO MUNOZ ARBOLEDA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0075 - LABORATÓRIO DE MATERIAIS DE CONSTRUÇÃO",
+    "turma": "01",
+    "professor": "EMMANUEL PACHECO ROCHA LIMA (15h)",
+    "horario": "2T4 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0075 - LABORATÓRIO DE MATERIAIS DE CONSTRUÇÃO",
+    "turma": "02",
+    "professor": "EMMANUEL PACHECO ROCHA LIMA (15h)",
+    "horario": "3M4 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0075 - LABORATÓRIO DE MATERIAIS DE CONSTRUÇÃO",
+    "turma": "03",
+    "professor": "EMMANUEL PACHECO ROCHA LIMA (15h)",
+    "horario": "3M3 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0075 - LABORATÓRIO DE MATERIAIS DE CONSTRUÇÃO",
+    "turma": "04",
+    "professor": "EMMANUEL PACHECO ROCHA LIMA (15h)",
+    "horario": "4M5 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0075 - LABORATÓRIO DE MATERIAIS DE CONSTRUÇÃO",
+    "turma": "08",
+    "professor": "EMMANUEL PACHECO ROCHA LIMA (15h)",
+    "horario": "4T4 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0075 - LABORATÓRIO DE MATERIAIS DE CONSTRUÇÃO",
+    "turma": "09",
+    "professor": "RODRIGO ARBEY MUNOZ MENESES (15h)",
+    "horario": "5M3 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0076 - EQUIPAMENTOS TERMOFLUIDOS AUTOMOTIVOS",
+    "turma": "01",
+    "professor": "ALESSANDRO BORGES DE SOUSA OLIVEIRA (30h)\nFABIO ALFAIA DA CUNHA (30h)",
+    "horario": "46M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0077 - INTRODUÇÃO AO DESGASTE",
+    "turma": "01",
+    "professor": "EDISON GUSTAVO CUEVA GALARRAGA (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0078 - TEORIA DE MATERIAIS DE CONSTRUÇÃO",
+    "turma": "01",
+    "professor": "EMMANUEL PACHECO ROCHA LIMA (45h)",
+    "horario": "2T23 4T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0078 - TEORIA DE MATERIAIS DE CONSTRUÇÃO",
+    "turma": "02",
+    "professor": "RODRIGO ARBEY MUNOZ MENESES (45h)",
+    "horario": "3T23 5T2 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0083 - APRENDIZADO DE MÁQUINA",
+    "turma": "01",
+    "professor": "SERGIO ANTONIO ANDRADE DE FREITAS (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0085 - MATEMÁTICA DISCRETA 1",
+    "turma": "01",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "24M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0085 - MATEMÁTICA DISCRETA 1",
+    "turma": "02",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0085 - MATEMÁTICA DISCRETA 1",
+    "turma": "03",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0086 - TEORIA DE ELETRICIDADE APLICADA",
+    "turma": "01",
+    "professor": "JORGE ANDRES CORMANE ANGARITA (60h)",
+    "horario": "24M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0086 - TEORIA DE ELETRICIDADE APLICADA",
+    "turma": "02",
+    "professor": "FLAVIO HENRIQUE JUSTINIANO RIBEIRO DA SILVA (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0087 - LABORATÓRIO DE ELETRICIDADE APLICADA",
+    "turma": "01",
+    "professor": "LOANA NUNES VELASCO (30h)",
+    "horario": "2T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0087 - LABORATÓRIO DE ELETRICIDADE APLICADA",
+    "turma": "02",
+    "professor": "LOANA NUNES VELASCO (30h)",
+    "horario": "4T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0087 - LABORATÓRIO DE ELETRICIDADE APLICADA",
+    "turma": "03",
+    "professor": "RUDI HENRI VAN ELS (30h)",
+    "horario": "3T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0087 - LABORATÓRIO DE ELETRICIDADE APLICADA",
+    "turma": "04",
+    "professor": "RUDI HENRI VAN ELS (30h)",
+    "horario": "3T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0087 - LABORATÓRIO DE ELETRICIDADE APLICADA",
+    "turma": "05",
+    "professor": "JORGE ANDRES CORMANE ANGARITA (30h)",
+    "horario": "2M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0088 - TEORIA DE SISTEMAS DE CONVERSÃO DE ENERGIA",
+    "turma": "01",
+    "professor": "FLAVIO HENRIQUE JUSTINIANO RIBEIRO DA SILVA (60h)",
+    "horario": "46M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0089 - LABORATÓRIO DE SISTEMAS DE CONVERSÃO DE ENERGIA",
+    "turma": "01",
+    "professor": "RUDI HENRI VAN ELS (30h)",
+    "horario": "4T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0090 - ONDULATÓRIA E FÍSICA TÉRMICA PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "EBERTH DE ALMEIDA CORREA (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0091 - MÁQUINAS DE FLUIDO",
+    "turma": "01",
+    "professor": "JHON NERO VAZ GOULART (90h)",
+    "horario": "24M12 4T2 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0092 - PRINCÍPIOS DE COMUNICAÇÃO PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "DANIEL COSTA ARAUJO (75h)",
+    "horario": "3M125 5M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0093 - PRINCÍPIOS DE CONTROLE",
+    "turma": "01",
+    "professor": "ROBERTO DE SOUZA BAPTISTA (75h)",
+    "horario": "3T145 5T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0093 - PRINCÍPIOS DE CONTROLE",
+    "turma": "02",
+    "professor": "THIAGO FELIPPE KURUDEZ CORDEIRO (75h)",
+    "horario": "46T23 5T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0098 - PRÁTICA DE CIRCUITOS ELETRÔNICOS 3",
+    "turma": "01",
+    "professor": "DIOGO DE OLIVEIRA COSTA (30h)",
+    "horario": "5T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0099 - TEORIA DE CIRCUITOS ELETRÔNICOS 3",
+    "turma": "01",
+    "professor": "WELLINGTON AVELINO DO AMARAL (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0100 - PRÁTICA DE FÍSICA DOS DISPOSITIVOS ELETRÔNICOS",
+    "turma": "02",
+    "professor": "GERARDO ANTONIO IDROBO PIZO (30h)",
+    "horario": "3M5 3T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0100 - PRÁTICA DE FÍSICA DOS DISPOSITIVOS ELETRÔNICOS",
+    "turma": "03",
+    "professor": "GERARDO ANTONIO IDROBO PIZO (30h)",
+    "horario": "6T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0101 - TEORIA DE FÍSICA DOS DISPOSITIVOS ELETRÔNICOS",
+    "turma": "01",
+    "professor": "MARCUS VINICIUS BATISTUTA (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0102 - SINAIS E SISTEMAS PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "LUIS FILOMENO DE JESUS FERNANDES (90h)",
+    "horario": "356T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0102 - SINAIS E SISTEMAS PARA ENGENHARIA",
+    "turma": "02",
+    "professor": "LUCIANO EMIDIO NEVES DA FONSECA (90h)",
+    "horario": "246M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0104 - QUÍMICA ORGÂNICA APLICADA À ENGENHARIA",
+    "turma": "01",
+    "professor": "JULIANA PETROCCHI RODRIGUES (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0105 - TÓPICOS ESPECIAIS 2 EM ENGENHARIA AEROESPACIAL",
+    "turma": "01",
+    "professor": "LUI TXAI CALVOSO HABL (60h)",
+    "horario": "24M5 24T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0105 - TÓPICOS ESPECIAIS 2 EM ENGENHARIA AEROESPACIAL",
+    "turma": "02",
+    "professor": "ARTUR ELIAS DE MORAIS BERTOLDI (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0105 - TÓPICOS ESPECIAIS 2 EM ENGENHARIA AEROESPACIAL",
+    "turma": "03",
+    "professor": "ANDRE LUIS RODRIGUES ARAUJO (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0106 - TÓPICOS ESPECIAIS 3 EM ENGENHARIA AEROESPACIAL",
+    "turma": "01",
+    "professor": "ARTUR ELIAS DE MORAIS BERTOLDI (60h)",
+    "horario": "35M5 35T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0106 - TÓPICOS ESPECIAIS 3 EM ENGENHARIA AEROESPACIAL",
+    "turma": "02",
+    "professor": "DIOGO DE OLIVEIRA COSTA (60h)",
+    "horario": "35M5 35T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0107 - LABORATÓRIO DE ONDULATÓRIA E FÍSICA TÉRMICA PARA A ENGENHARIA",
+    "turma": "01",
+    "professor": "EBERTH DE ALMEIDA CORREA (30h)",
+    "horario": "5M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0108 - MATEMÁTICA DISCRETA 2",
+    "turma": "02",
+    "professor": "LINDOMAR BOMFIM DE CARVALHO DE JESUS (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0109 - FUNDAMENTOS DE SISTEMAS EMBARCADOS",
+    "turma": "01",
+    "professor": "RENATO CORAL SAMPAIO (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0109 - FUNDAMENTOS DE SISTEMAS EMBARCADOS",
+    "turma": "02",
+    "professor": "RENATO CORAL SAMPAIO (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0109 - FUNDAMENTOS DE SISTEMAS EMBARCADOS",
+    "turma": "03",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "46M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0109 - FUNDAMENTOS DE SISTEMAS EMBARCADOS",
+    "turma": "04",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0109 - FUNDAMENTOS DE SISTEMAS EMBARCADOS",
+    "turma": "05",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "46T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0119 - TEORIA DE ELETROMAGNETISMO",
+    "turma": "01",
+    "professor": "DANIEL COSTA ARAUJO (60h)",
+    "horario": "26M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0120 - PRÁTICA DE ELETROMAGNETISMO",
+    "turma": "01",
+    "professor": "GERARDO ANTONIO IDROBO PIZO (30h)",
+    "horario": "6T23",
+    "link": ""
+  },
+  {
+    "materia": "FGA0120 - PRÁTICA DE ELETROMAGNETISMO",
+    "turma": "02",
+    "professor": "GERARDO ANTONIO IDROBO PIZO (30h)",
+    "horario": "3T45",
+    "link": ""
+  },
+  {
+    "materia": "FGA0121 - TÓPICOS ESPECIAIS 4 EM ENGENHARIA AEROESPACIAL",
+    "turma": "01",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "3M5 2T45 3T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0121 - TÓPICOS ESPECIAIS 4 EM ENGENHARIA AEROESPACIAL",
+    "turma": "02",
+    "professor": "RONNE TOLEDO (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0124 - PROJETO DE ALGORITMOS",
+    "turma": "01",
+    "professor": "MAURICIO SERRANO (60h)",
+    "horario": "26M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0132 - INSTRUMENTAÇÃO ELETRÔNICA PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "CLAUDIA PATRICIA OCHOA DIAZ (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0133 - ENGENHARIA ECONÔMICA",
+    "turma": "01",
+    "professor": "PAULA MEYER SOARES (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0133 - ENGENHARIA ECONÔMICA",
+    "turma": "02",
+    "professor": "GLAUCENY CIRNE DE MEDEIROS (60h)",
+    "horario": "46T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0134 - TÓPICOS ESPECIAIS DE ENGENHARIA DE SOFTWARE",
+    "turma": "01",
+    "professor": "CARLA SILVA ROCHA AGUIAR (30h)\nISAQUE ALVES DE LIMA (30h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0134 - TÓPICOS ESPECIAIS DE ENGENHARIA DE SOFTWARE",
+    "turma": "02",
+    "professor": "LINDOMAR BOMFIM DE CARVALHO DE JESUS (60h)",
+    "horario": "24M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0137 - SISTEMAS DE BANCO DE DADOS 1",
+    "turma": "01",
+    "professor": "GLAUCO VITOR PEDROSA (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0141 - GESTÃO AMBIENTAL NO SETOR ENERGÉTICO",
+    "turma": "01",
+    "professor": "MARIA VITORIA DUARTE FERRARI (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0142 - FUNDAMENTOS DE ARQUITETURA DE COMPUTADORES",
+    "turma": "01",
+    "professor": "TIAGO ALVES DA FONSECA (60h)",
+    "horario": "26M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0142 - FUNDAMENTOS DE ARQUITETURA DE COMPUTADORES",
+    "turma": "02",
+    "professor": "TIAGO ALVES DA FONSECA (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0146 - ESTRUTURAS DE DADOS 1",
+    "turma": "01",
+    "professor": "FABRICIO ATAIDES BRAZ (30h)\nNILTON CORREIA DA SILVA (30h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0146 - ESTRUTURAS DE DADOS 1",
+    "turma": "02",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0146 - ESTRUTURAS DE DADOS 1",
+    "turma": "03",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0146 - ESTRUTURAS DE DADOS 1",
+    "turma": "04",
+    "professor": "A DEFINIR DOCENTE",
+    "horario": "35T6 35N1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0148 - ENGENHARIA DE SEGURANÇA DO TRABALHO",
+    "turma": "01",
+    "professor": "MARIA ALZIRA DE ARAUJO NUNES (30h)",
+    "horario": "2M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0148 - ENGENHARIA DE SEGURANÇA DO TRABALHO",
+    "turma": "02",
+    "professor": "MARIA ALZIRA DE ARAUJO NUNES (30h)",
+    "horario": "2M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0152 - ERGONOMIA DO PRODUTO",
+    "turma": "01",
+    "professor": "MATEUS RODRIGUES MIRANDA (60h)",
+    "horario": "46M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0154 - MECANICA DOS SÓLIDOS 1 PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "GLAUCENY CIRNE DE MEDEIROS (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0154 - MECANICA DOS SÓLIDOS 1 PARA ENGENHARIA",
+    "turma": "02",
+    "professor": "SUZANA MOREIRA AVILA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0154 - MECANICA DOS SÓLIDOS 1 PARA ENGENHARIA",
+    "turma": "03",
+    "professor": "SERGIO HENRIQUE DA SILVA CARNEIRO (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0155 - INTRODUÇÃO AO DESIGN E CONCEPÇÃO DE VEÍCULOS",
+    "turma": "01",
+    "professor": "ENEIDA GONZALEZ VALDES (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0156 - COMBUSTÍVEIS E BIOCOMBUSTÍVEIS",
+    "turma": "01",
+    "professor": "ROSEANY DE VASCONCELOS VIEIRA LOPES (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0157 - PROBABILIDADE E ESTATÍSTICA APLICADO A ENGENHARIA",
+    "turma": "01",
+    "professor": "MARILIA MIRANDA FORTE GOMES (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0157 - PROBABILIDADE E ESTATÍSTICA APLICADO A ENGENHARIA",
+    "turma": "02",
+    "professor": "MARILIA MIRANDA FORTE GOMES (60h)",
+    "horario": "46M5 46T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0158 - ORIENTAÇÃO A OBJETOS",
+    "turma": "01",
+    "professor": "ANDRE LUIZ PERON MARTINS LANNA (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0158 - ORIENTAÇÃO A OBJETOS",
+    "turma": "03",
+    "professor": "HENRIQUE GOMES DE MOURA (60h)",
+    "horario": "35M5 35T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0160 - MÉTODOS NUMÉRICOS PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "RODRIGO ANDRES MIRANDA CERDA (60h)",
+    "horario": "24M5 24T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0160 - MÉTODOS NUMÉRICOS PARA ENGENHARIA",
+    "turma": "02",
+    "professor": "RODRIGO ANDRES MIRANDA CERDA (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0163 - INTRODUÇÃO À ENGENHARIA",
+    "turma": "01",
+    "professor": "LUI TXAI CALVOSO HABL (30h)",
+    "horario": "4T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0163 - INTRODUÇÃO À ENGENHARIA",
+    "turma": "02",
+    "professor": "ROBERTO DE SOUZA BAPTISTA (30h)",
+    "horario": "3M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0163 - INTRODUÇÃO À ENGENHARIA",
+    "turma": "03",
+    "professor": "RICARDO RAMOS FRAGELLI (30h)",
+    "horario": "2T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0164 - HUMANIDADES E CIDADANIA",
+    "turma": "01",
+    "professor": "SANDRA MARIA FALEIROS LIMA (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0164 - HUMANIDADES E CIDADANIA",
+    "turma": "02",
+    "professor": "SANDRA MARIA FALEIROS LIMA (60h)",
+    "horario": "46M5 46T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0164 - HUMANIDADES E CIDADANIA",
+    "turma": "03",
+    "professor": "VANESSA MARIA DE CASTRO (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0164 - HUMANIDADES E CIDADANIA",
+    "turma": "04",
+    "professor": "VANESSA MARIA DE CASTRO (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0167 - SISTEMAS AUTOMOTIVOS",
+    "turma": "01",
+    "professor": "SALEH BARBOSA KHALIL (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0168 - DESENHO INDUSTRIAL ASSISTIDO POR COMPUTADOR",
+    "turma": "01",
+    "professor": "ENEIDA GONZALEZ VALDES (90h)",
+    "horario": "246M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0168 - DESENHO INDUSTRIAL ASSISTIDO POR COMPUTADOR",
+    "turma": "02",
+    "professor": "ANDRE LUIS RODRIGUES ARAUJO (90h)",
+    "horario": "246M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0168 - DESENHO INDUSTRIAL ASSISTIDO POR COMPUTADOR",
+    "turma": "03",
+    "professor": "HIMILSYS HERNANDEZ GONZALEZ (90h)",
+    "horario": "235M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0168 - DESENHO INDUSTRIAL ASSISTIDO POR COMPUTADOR",
+    "turma": "04",
+    "professor": "SALEH BARBOSA KHALIL (90h)",
+    "horario": "235M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0168 - DESENHO INDUSTRIAL ASSISTIDO POR COMPUTADOR",
+    "turma": "05",
+    "professor": "MATEUS RODRIGUES MIRANDA (90h)",
+    "horario": "356T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0169 - FONTES DE ENERGIA E TECNOLOGIAS DE CONVERSÃO",
+    "turma": "01",
+    "professor": "AUGUSTO CESAR DE MENDONCA BRASIL (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0170 - FUNDAMENTOS DE SISTEMAS OPERACIONAIS",
+    "turma": "02",
+    "professor": "DANIEL SUNDFELD LIMA (60h)",
+    "horario": "46M5 46T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0173 - INTERAÇÃO HUMANO COMPUTADOR",
+    "turma": "01",
+    "professor": "SERGIO ANTONIO ANDRADE DE FREITAS (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0173 - INTERAÇÃO HUMANO COMPUTADOR",
+    "turma": "02",
+    "professor": "REJANE MARIA DA COSTA FIGUEIREDO (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0173 - INTERAÇÃO HUMANO COMPUTADOR",
+    "turma": "03",
+    "professor": "ANDRE BARROS DE SALES (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0174 - DESENVOLVIMENTO SUSTENTÁVEL",
+    "turma": "01",
+    "professor": "JULIANA DALBONI ROCHA (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0175 - ENGENHARIA DE PETRÓLEO E GÁS",
+    "turma": "01",
+    "professor": "FELIPE CHAGAS STORTI (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0179 - MECANICA DOS SÓLIDOS 2 PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "MAURA ANGELICA MILFONT SHZU (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0188 - MÉTODOS EXPERIMENTAIS PARA ENGENHARIA",
+    "turma": "01",
+    "professor": "RODRIGO ARBEY MUNOZ MENESES (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0190 - PROJETO DE ELEMENTOS AUTOMOTIVOS",
+    "turma": "01",
+    "professor": "RITA DE CASSIA SILVA (60h)\nALESSANDRO BORGES DE SOUSA OLIVEIRA (30h)",
+    "horario": "246M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0191 - MATERIAIS COMPOSTOS E PLÁSTICOS",
+    "turma": "01",
+    "professor": "SANDRA MARIA DA LUZ (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0194 - ARQUITETURA DE MOTORES DE COMBUSTÃO INTERNA",
+    "turma": "01",
+    "professor": "FABIO CORDEIRO DE LISBOA (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0198 - PROJETO COM CIRCUITOS RECONFIGURAVEIS",
+    "turma": "01",
+    "professor": "DANIEL MAURICIO MUNOZ ARBOLEDA (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0204 - DINÂMICA DOS FLUÍDOS",
+    "turma": "01",
+    "professor": "RAFAEL CASTILHO FARIA MENDES (15h)\nLUCIANO GONCALVES NOLETO (60h)",
+    "horario": "26M34 4M3 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0204 - DINÂMICA DOS FLUÍDOS",
+    "turma": "02",
+    "professor": "RAFAEL CASTILHO FARIA MENDES (15h)\nLUCIANO GONCALVES NOLETO (60h)",
+    "horario": "26M34 4M4 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0208 - ARQUITETURA E DESENHO DE SOFTWARE",
+    "turma": "01",
+    "professor": "MILENE SERRANO (60h)",
+    "horario": "26M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0208 - ARQUITETURA E DESENHO DE SOFTWARE",
+    "turma": "02",
+    "professor": "MILENE SERRANO (60h)",
+    "horario": "26M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0210 - PARADIGMAS DE PROGRAMAÇÃO",
+    "turma": "01",
+    "professor": "EDSON ALVES DA COSTA JUNIOR (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0210 - PARADIGMAS DE PROGRAMAÇÃO",
+    "turma": "02",
+    "professor": "FABIO MACEDO MENDES (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0211 - FUNDAMENTOS DE REDES DE COMPUTADORES",
+    "turma": "01",
+    "professor": "FERNANDO WILLIAM CRUZ (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0214 - TÓPICOS ESPECIAIS EM ENGENHARIA AUTOMOTIVA",
+    "turma": "02",
+    "professor": "SANDRA MARIA DA LUZ (60h)",
+    "horario": "6M1234 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0214 - TÓPICOS ESPECIAIS EM ENGENHARIA AUTOMOTIVA",
+    "turma": "03",
+    "professor": "RHANDER VIANA (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0219 - PROCESSAMENTO DE SINAIS",
+    "turma": "01",
+    "professor": "CRISTIANO JACQUES MIOSSO RODRIGUES MENDES (60h)",
+    "horario": "46M12",
+    "link": ""
+  },
+  {
+    "materia": "FGA0221 - INTELIGÊNCIA ARTIFICIAL",
+    "turma": "01",
+    "professor": "FABIANO ARAUJO SOARES (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0222 - INSTRUMENTAÇÃO BIOMÉDICA 1",
+    "turma": "01",
+    "professor": "EULER DE VILHENA GARCIA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0226 - ELETRÔNICA VEICULAR",
+    "turma": "01",
+    "professor": "EVANDRO LEONARDO SILVA TEIXEIRA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0228 - PROJETO DE SISTEMAS AUTOMOTIVOS",
+    "turma": "01",
+    "professor": "CARLA TATIANA MOTA ANFLOR (60h)",
+    "horario": "24M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0229 - ANÁLISE ESTRUTURAL MÉTODO DOS ELEMENTOS FINITOS",
+    "turma": "01",
+    "professor": "MAURA ANGELICA MILFONT SHZU (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0230 - DINÂMICA DE VEÍCULOS",
+    "turma": "01",
+    "professor": "SUZANA MOREIRA AVILA (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0232 - INTEGRAÇÃO E TESTES",
+    "turma": "01",
+    "professor": "HENRIQUE GOMES DE MOURA (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0233 - SENSORES E TRANSDUTORES",
+    "turma": "01",
+    "professor": "ALESSANDRO BORGES DE SOUSA OLIVEIRA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0235 - TÓPICOS ESPECIAIS 1 EM ENGENHARIA DE ENERGIA",
+    "turma": "01",
+    "professor": "RUDI HENRI VAN ELS (60h)",
+    "horario": "24N12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0236 - BIORREFINARIAS",
+    "turma": "01",
+    "professor": "MARIA DEL PILAR HIDALGO FALLA (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0242 - TÉCNICAS DE PROGRAMAÇÃO EM PLATAFORMAS EMERGENTES",
+    "turma": "01",
+    "professor": "ANDRE LUIZ PERON MARTINS LANNA (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0242 - TÉCNICAS DE PROGRAMAÇÃO EM PLATAFORMAS EMERGENTES",
+    "turma": "02",
+    "professor": "THIAGO LUIZ DE SOUZA GOMES (60h)",
+    "horario": "24M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0244 - PROGRAMAÇÃO PARA SISTEMAS PARALELOS E DISTRIBUÍDOS",
+    "turma": "01",
+    "professor": "DANIEL SUNDFELD LIMA (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0244 - PROGRAMAÇÃO PARA SISTEMAS PARALELOS E DISTRIBUÍDOS",
+    "turma": "02",
+    "professor": "FERNANDO WILLIAM CRUZ (60h)",
+    "horario": "24M5 24T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0252 - SISTEMAS HIDROELÉTRICOS",
+    "turma": "01",
+    "professor": "RUDI HENRI VAN ELS (15h)\nLUCIANO GONCALVES NOLETO (60h)",
+    "horario": "46M12 2T4 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0254 - CIÊNCIAS AEROESPACIAIS",
+    "turma": "01",
+    "professor": "GABRIELA CUNHA POSSA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0254 - CIÊNCIAS AEROESPACIAIS",
+    "turma": "02",
+    "professor": "GABRIELA CUNHA POSSA (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0261 - TÓPICOS ESPECIAIS EM ELETRONICA",
+    "turma": "01",
+    "professor": "CRISTIANO JACQUES MIOSSO RODRIGUES MENDES (60h)",
+    "horario": "46T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0261 - TÓPICOS ESPECIAIS EM ELETRONICA",
+    "turma": "02",
+    "professor": "FABIANO ARAUJO SOARES (60h)",
+    "horario": "35T6 35N1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0261 - TÓPICOS ESPECIAIS EM ELETRONICA",
+    "turma": "03",
+    "professor": "GUILLERMO ALVAREZ BESTARD (60h)",
+    "horario": "24T6 24N1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0261 - TÓPICOS ESPECIAIS EM ELETRONICA",
+    "turma": "04",
+    "professor": "MARCUS VINICIUS BATISTUTA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0261 - TÓPICOS ESPECIAIS EM ELETRONICA",
+    "turma": "05",
+    "professor": "HENRIQUE GOMES DE MOURA (60h)",
+    "horario": "6M5 4T23 6T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0261 - TÓPICOS ESPECIAIS EM ELETRONICA",
+    "turma": "06",
+    "professor": "MARCUS VINICIUS CHAFFIM COSTA (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0261 - TÓPICOS ESPECIAIS EM ELETRONICA",
+    "turma": "07",
+    "professor": "SEBASTIEN ROLAND MARIE JOSEPH RONDINEAU (60h)",
+    "horario": "46M5 46T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0262 - TRANSMISSÃO E DISTRIBUIÇÃO DE ENERGIA ELÉTRICA",
+    "turma": "01",
+    "professor": "LOANA NUNES VELASCO (75h)",
+    "horario": "2M34 4M345 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0265 - ECONOMIA DE ENERGIA",
+    "turma": "01",
+    "professor": "PAULA MEYER SOARES (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0266 - ACÚSTICA E VIBRAÇÕES VEICULARES",
+    "turma": "01",
+    "professor": "MARIA ALZIRA DE ARAUJO NUNES (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0267 - PROJETO DE ESTRUTURAS DE VEICULOS",
+    "turma": "01",
+    "professor": "HENRIQUE GOMES DE MOURA (60h)",
+    "horario": "24M5 24T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0270 - SISTEMAS HIDRÁULICOS E PNEUMÁTICOS",
+    "turma": "01",
+    "professor": "BRUNO LUIZ PEREIRA (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0273 - MELHORIA DE PROCESSOS DE SOFTWARE",
+    "turma": "01",
+    "professor": "CRISTIANE SOARES RAMOS (60h)",
+    "horario": "24M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0274 - PRODUTIVIDADE E PROFISSIONALISMO EM ENGENHARIA DE SOFTWARE",
+    "turma": "01",
+    "professor": "WANDER CLEBER MARIA PEREIRA DA SILVA (30h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0280 - PROJETO DE CIRCUITOS ELETRÔNICOS INTEGRADOS 2",
+    "turma": "01",
+    "professor": "SANDRO AUGUSTO PAVLIK HADDAD (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0282 - FUNDAMENTOS DO PROJETO DE AERONAVES",
+    "turma": "01",
+    "professor": "POLLIANA CANDIDA OLIVEIRA MARTINS (60h)",
+    "horario": "46M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0284 - ENGENHARIA DE MANUTENÇÃO",
+    "turma": "01",
+    "professor": "FABIO CORDEIRO DE LISBOA (60h)",
+    "horario": "46T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0285 - INTRODUÇÃO À MECÂNICA DA FRATURA",
+    "turma": "01",
+    "professor": "CARLA TATIANA MOTA ANFLOR (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0286 - FUNDAMENTOS DO MÉTODO DOS ELEMENTOS FINITOS",
+    "turma": "01",
+    "professor": "MANUEL NASCIMENTO DIAS BARCELOS JUNIOR (60h)",
+    "horario": "6M345 6T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0291 - MECÂNICA DE ESTRUTURAS AERONÁUTICAS",
+    "turma": "01",
+    "professor": "ARTEM ANDRIANOV (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0301 - INSTALAÇÕES ELÉTRICAS EM SISTEMAS DE ENERGIA",
+    "turma": "01",
+    "professor": "ALEX REIS (60h)",
+    "horario": "46M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0302 - ENGENHARIA E AMBIENTE",
+    "turma": "01",
+    "professor": "MARIA VITORIA DUARTE FERRARI (60h)",
+    "horario": "46M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0302 - ENGENHARIA E AMBIENTE",
+    "turma": "02",
+    "professor": "AUGUSTO CESAR DE MENDONCA BRASIL (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0302 - ENGENHARIA E AMBIENTE",
+    "turma": "03",
+    "professor": "JULIANA DALBONI ROCHA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0303 - PROJETO INTEGRADOR DE ENGENHARIA 1",
+    "turma": "01",
+    "professor": "DIOGO CAETANO GARCIA (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0303 - PROJETO INTEGRADOR DE ENGENHARIA 1",
+    "turma": "02",
+    "professor": "JULIANA PETROCCHI RODRIGUES (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0303 - PROJETO INTEGRADOR DE ENGENHARIA 1",
+    "turma": "03",
+    "professor": "HILMER RODRIGUES NERI (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0303 - PROJETO INTEGRADOR DE ENGENHARIA 1",
+    "turma": "04",
+    "professor": "LUI TXAI CALVOSO HABL (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0303 - PROJETO INTEGRADOR DE ENGENHARIA 1",
+    "turma": "05",
+    "professor": "BRUNO LUIZ PEREIRA (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0304 - PROJETO INTEGRADOR DE ENGENHARIA 2",
+    "turma": "01",
+    "professor": "SANDRO AUGUSTO PAVLIK HADDAD (90h)",
+    "horario": "4T45 6T2345 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0304 - PROJETO INTEGRADOR DE ENGENHARIA 2",
+    "turma": "02",
+    "professor": "RICARDO MATOS CHAIM (90h)",
+    "horario": "4T45 6T2345 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0304 - PROJETO INTEGRADOR DE ENGENHARIA 2",
+    "turma": "03",
+    "professor": "ALEX REIS (90h)",
+    "horario": "4T45 6T2345 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0304 - PROJETO INTEGRADOR DE ENGENHARIA 2",
+    "turma": "04",
+    "professor": "RAFAEL CASTILHO FARIA MENDES (90h)",
+    "horario": "4T45 6T2345 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0304 - PROJETO INTEGRADOR DE ENGENHARIA 2",
+    "turma": "05",
+    "professor": "RHANDER VIANA (30h)\nEVANDRO LEONARDO SILVA TEIXEIRA (60h)",
+    "horario": "4T45 6T2345 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0307 - GESTÃO DA PRODUÇÃO E QUALIDADE",
+    "turma": "01",
+    "professor": "MARIO DE OLIVEIRA ANDRADE (60h)",
+    "horario": "35T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0307 - GESTÃO DA PRODUÇÃO E QUALIDADE",
+    "turma": "02",
+    "professor": "REJANE MARIA DA COSTA FIGUEIREDO (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0308 - ELETRÔNICA EMBARCADA",
+    "turma": "01",
+    "professor": "GUILLERMO ALVAREZ BESTARD (90h)",
+    "horario": "246T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0309 - SISTEMAS OPERACIONAIS EMBARCADOS",
+    "turma": "01",
+    "professor": "DIOGO CAETANO GARCIA (90h)",
+    "horario": "246T23",
+    "link": ""
+  },
+  {
+    "materia": "FGA0310 - PROJETO EXTENSIONISTA EM ENGENHARIA ELETRÔNICA 1",
+    "turma": "01",
+    "professor": "ROBERTO DE SOUZA BAPTISTA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0312 - MÉTODOS DE DESENVOLVIMENTO DE SOFTWARE",
+    "turma": "01",
+    "professor": "RICARDO AJAX DIAS KOSLOSKI (60h)",
+    "horario": "7M1234 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0312 - MÉTODOS DE DESENVOLVIMENTO DE SOFTWARE",
+    "turma": "02",
+    "professor": "CARLA SILVA ROCHA AGUIAR (60h)",
+    "horario": "24M5 24T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0312 - MÉTODOS DE DESENVOLVIMENTO DE SOFTWARE",
+    "turma": "03",
+    "professor": "RICARDO AJAX DIAS KOSLOSKI (60h)",
+    "horario": "35T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0313 - REQUISITOS DE SOFTWARE",
+    "turma": "01",
+    "professor": "GEORGE MARSICANO CORREA (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0313 - REQUISITOS DE SOFTWARE",
+    "turma": "02",
+    "professor": "GEORGE MARSICANO CORREA (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0314 - TESTES DE SOFTWARE",
+    "turma": "01",
+    "professor": "ELAINE VENSON (60h)",
+    "horario": "35M12 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0314 - TESTES DE SOFTWARE",
+    "turma": "02",
+    "professor": "ELAINE VENSON (60h)",
+    "horario": "35M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0315 - QUALIDADE DE SOFTWARE 1",
+    "turma": "01",
+    "professor": "CRISTIANE SOARES RAMOS (60h)",
+    "horario": "24M34 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0315 - QUALIDADE DE SOFTWARE 1",
+    "turma": "02",
+    "professor": "CRISTIANE SOARES RAMOS (60h)",
+    "horario": "24T23 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0316 - ENGENHARIA DE PRODUTO DE SOFTWARE",
+    "turma": "01",
+    "professor": "RICARDO MATOS CHAIM (60h)",
+    "horario": "46M5 46T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0316 - ENGENHARIA DE PRODUTO DE SOFTWARE",
+    "turma": "02",
+    "professor": "HILMER RODRIGUES NERI (60h)",
+    "horario": "2M345 2T1 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  },
+  {
+    "materia": "FGA0317 - GERÊNCIA DE CONFIGURAÇÃO E EVOLUÇÃO DE SOFTWARE",
+    "turma": "01",
+    "professor": "CARLA SILVA ROCHA AGUIAR (60h)",
+    "horario": "24T45 (16/03/2026 - 18/07/2026)",
+    "link": ""
+  }
+]
