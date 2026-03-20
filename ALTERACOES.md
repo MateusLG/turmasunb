@@ -1,5 +1,8 @@
 # Histórico de Alterações
 
+## [2026-03-20] Persistência de links no PostgreSQL
+Links salvos pelos usuários agora são armazenados no PostgreSQL (Railway) em vez do data.json. O banco é inicializado automaticamente na subida da aplicação. Sem DATABASE_URL definida, o comportamento cai de volta para o arquivo (desenvolvimento local). O data.json continua no git apenas com os dados de turmas (sem links).
+
 ## [2026-03-20] Criação do Visual.md com identidade visual da UnB
 Pesquisado e documentado o sistema de identidade visual oficial da UnB: cores institucionais (Azul #003366 e Verde #006633), símbolo criado por Aloísio Magalhães em 1963, tipografias UnB Pro e UnB Office, história da instituição e diretrizes para aplicação no frontend do TurmasUnB.
 
