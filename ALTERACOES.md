@@ -3,6 +3,12 @@
 ## [2026-03-20] Criação do Visual.md com identidade visual da UnB
 Pesquisado e documentado o sistema de identidade visual oficial da UnB: cores institucionais (Azul #003366 e Verde #006633), símbolo criado por Aloísio Magalhães em 1963, tipografias UnB Pro e UnB Office, história da instituição e diretrizes para aplicação no frontend do TurmasUnB.
 
+## [2026-03-20] Símbolo da UnB e crédito do autor no frontend
+Adicionado SVG do símbolo da UnB (dois elementos curvos cruzados representando o Eixo Monumental e o Eixo Rodoviário) na navbar ao lado do nome do site. Adicionada menção "Desenvolvido por LG_Mateus" no rodapé.
+
+## [2026-03-20] Redesign do frontend com identidade visual da UnB
+Substituído o tema padrão DaisyUI por design próprio com cores oficiais da UnB (Azul #003366, Verde #006633) e fonte Inter. Navbar, cards e inputs redesenhados com Tailwind puro. Adicionado feedback visual "Salvo!" ao salvar links, botão "Entrar →" em verde UnB, rodapé institucional e seletor `[data-card]` para evitar conflito com classes DaisyUI. Funcionalidade preservada integralmente (formatHorario, busca, debounce).
+
 ## [2026-03-20] Tradução de horários SIGAA para formato legível
 Adicionada função `formatHorario()` no frontend que converte o código de horário do SIGAA (ex: `246M12`) para texto legível (ex: `Seg, Qua, Sex 08:00–10:00`). Suporta múltiplos blocos separados por `·`, intervalos de datas opcionais e todos os turnos (M/T/N). O valor original é mantido como tooltip no badge. A busca continua funcionando contra o valor bruto.
 

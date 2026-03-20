@@ -1,76 +1,141 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Turmas UnB 2026.1</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@4/dist/full.min.css" rel="stylesheet" />
+  <title>TurmasUnB — 2026.1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'unb-blue':  '#003366',
+            'unb-green': '#006633',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    input:focus { outline: none; }
+  </style>
 </head>
-<body class="bg-base-200 min-h-screen">
+<body class="bg-slate-50 min-h-screen font-sans text-slate-800 antialiased">
 
-  <div class="navbar bg-primary text-primary-content shadow-md px-6">
-    <div class="flex-1">
-      <span class="text-xl font-bold">Turmas UnB 2026.1</span>
+  <!-- Navbar -->
+  <header class="bg-unb-blue shadow-md">
+    <div class="max-w-4xl mx-auto px-4 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <!-- Símbolo da UnB (paths reais — Wikimedia Commons, licença livre) -->
+        <!-- Eixo Monumental (horizontal, azul) × Eixo Rodoviário (vertical, verde) -->
+        <svg width="44" height="22" viewBox="7 7 634 317" xmlns="http://www.w3.org/2000/svg" aria-label="Símbolo da UnB">
+          <!-- Braço verde (Eixo Rodoviário) — metade direita -->
+          <path fill="white" opacity="0.95" d="m 543.63956,122.52025 c -31.99939,23.06828 -66.98325,43.06013 -104.68075,59.36796 -18.62882,8.05762 -38.70764,13.629 -59.85377,16.27428 -15.03676,1.87867 -30.34934,2.82421 -45.88061,2.82421 l 0,123.26981 308.17389,0 0,-272.32649 -97.75007,70.60017 -0.009,-0.01"/>
+          <!-- Braço verde (Eixo Rodoviário) — metade esquerda -->
+          <path fill="white" opacity="0.95" d="m 105.18666,122.52025 c 32.00957,23.06828 66.98846,43.06013 104.69093,59.36796 18.63255,8.05762 38.70143,13.629 59.8575,16.27428 15.02681,1.87867 30.3394,2.82421 45.88061,2.82421 l 0,123.26981 -308.1838357,0 0,-272.32649 97.7499457,70.60017 0.005,-0.01"/>
+          <!-- Braço azul (Eixo Monumental) — metade direita -->
+          <path fill="white" opacity="0.65" d="m 333.22443,7.27328 0,176.09972 c 14.78825,0 29.37894,-0.912 43.69132,-2.6838 l 0,0 c 19.4526,-2.43655 37.9112,-7.5569 55.04405,-14.96345 36.51712,-15.79343 70.37528,-35.14415 101.36575,-57.48929 l 0,0.005 108.07277,-78.05021 0,-22.91794 -308.17389,0"/>
+          <!-- Braço azul (Eixo Monumental) — metade esquerda -->
+          <path fill="white" opacity="0.65" d="m 315.6157,7.27328 0,176.09972 c -14.80316,0 -29.3777,-0.912 -43.69132,-2.6838 l -0.005,0 c -19.45757,-2.43655 -37.9199,-7.5569 -55.05275,-14.96345 -36.50842,-15.79343 -70.36658,-35.14415 -101.36625,-57.48929 l 0,0.005 -108.0685457,-78.05021 0,-22.91794 308.1838357,0"/>
+        </svg>
+        <div class="flex items-baseline gap-2">
+          <span class="text-white font-bold tracking-tight text-lg">TurmasUnB</span>
+          <span class="text-white/40 text-xs font-normal">2026.1</span>
+        </div>
+      </div>
+      <nav class="flex items-center gap-4 text-sm text-white/60">
+        <a href="https://github.com/MateusLG/turmasunb" target="_blank"
+           class="hover:text-white transition-colors duration-150">GitHub</a>
+        <span class="text-white/20">|</span>
+        <a href="/json" class="hover:text-white transition-colors duration-150">JSON</a>
+      </nav>
     </div>
-    <div class="flex gap-3 text-sm">
-      <a href="https://github.com/MateusLG/turmasunb" target="_blank" class="link link-hover opacity-80">GitHub</a>
-      <span class="opacity-40">|</span>
-      <a href="/json" class="link link-hover opacity-80">JSON</a>
-    </div>
-  </div>
+  </header>
 
   <main class="max-w-4xl mx-auto px-4 py-12">
 
-    <div class="text-center mb-8">
-      <h1 class="text-2xl font-bold mb-1">Encontre sua turma</h1>
-      <p class="text-base-content/50 text-sm">Busque por matéria, professor, código ou horário</p>
+    <!-- Cabeçalho -->
+    <div class="text-center mb-10">
+      <h1 class="text-2xl font-bold text-slate-800 mb-1">Encontre sua turma</h1>
+      <p class="text-slate-400 text-sm">Busque por matéria, professor, código ou horário</p>
     </div>
 
-    <div class="flex gap-2 mb-8">
+    <!-- Campo de busca -->
+    <div class="mb-8">
       <input
         id="search"
         type="text"
         placeholder="Ex: Cálculo, Matemática Discreta, Sergio..."
-        class="input input-bordered flex-1 text-base"
+        class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 shadow-sm
+               focus:ring-2 focus:ring-unb-blue/25 focus:border-unb-blue
+               text-base placeholder-slate-300 transition duration-150"
         autofocus
       />
     </div>
 
-    <div id="empty-state" class="text-center py-16 text-base-content/30">
-      <p class="text-4xl mb-3">🎓</p>
+    <!-- Estado inicial vazio -->
+    <div id="empty-state" class="text-center py-20 text-slate-300 select-none">
+      <div class="text-5xl mb-4">🎓</div>
       <p class="text-sm">Digite para buscar entre 6478 turmas da UnB</p>
     </div>
 
-    <div id="no-results" class="hidden text-center py-16 text-base-content/40">
+    <!-- Sem resultados -->
+    <div id="no-results" class="hidden text-center py-20 text-slate-400">
       <p class="text-sm">Nenhuma turma encontrada.</p>
     </div>
 
+    <!-- Lista de resultados -->
     <div id="results" class="flex flex-col gap-3"></div>
 
   </main>
 
+  <!-- Rodapé -->
+  <footer class="max-w-4xl mx-auto px-4 py-8 mt-4 border-t border-slate-100 text-center text-xs text-slate-300">
+    Dados do SIGAA · Universidade de Brasília · 2026.1 · Desenvolvido por <span class="text-slate-400">LG_Mateus</span>
+  </footer>
+
+  <!-- Template de card -->
   <template id="card-template">
-    <div class="card bg-base-100 shadow-sm">
-      <div class="card-body py-4 px-6">
-        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1">
-          <div>
-            <h2 class="card-title text-base materia"></h2>
-            <p class="text-sm text-base-content/60 professor"></p>
+    <div data-card class="bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow duration-200">
+      <div class="p-5">
+        <!-- Cabeçalho: matéria, professor e badges -->
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-4">
+          <div class="flex-1 min-w-0">
+            <h2 class="font-semibold text-slate-800 text-sm leading-snug materia"></h2>
+            <p class="text-xs text-slate-400 mt-0.5 professor"></p>
           </div>
-          <div class="flex gap-2 flex-wrap sm:text-right">
-            <span class="badge badge-outline turma"></span>
-            <span class="badge badge-outline horario"></span>
+          <div class="flex gap-1.5 flex-shrink-0 flex-wrap">
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                         border border-unb-blue/30 text-unb-blue bg-unb-blue/5 turma"></span>
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium
+                         border border-slate-200 text-slate-500 bg-slate-50 horario"></span>
           </div>
         </div>
-        <div class="flex gap-2 mt-2">
+        <!-- Linha de ação: input + botões -->
+        <div class="flex gap-2">
           <input
             type="text"
-            class="input input-bordered input-sm flex-1 text-sm link-input"
-            placeholder="Link da turma (Meet, Teams...)"
+            class="flex-1 px-3 py-1.5 text-sm rounded-lg border border-slate-200 bg-slate-50 text-slate-700
+                   focus:ring-2 focus:ring-unb-blue/20 focus:border-unb-blue focus:bg-white
+                   transition duration-150 placeholder-slate-300 link-input"
+            placeholder="Link do grupo (WhatsApp, Telegram, Meet...)"
           />
-          <button class="btn btn-sm btn-success save-btn">Salvar</button>
-          <a class="btn btn-sm btn-outline enter-btn hidden" target="_blank">Entrar</a>
+          <button class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-100 text-slate-500
+                         hover:bg-slate-200 transition duration-150 whitespace-nowrap save-btn">
+            Salvar
+          </button>
+          <a class="hidden px-3 py-1.5 text-xs font-medium rounded-lg bg-unb-green text-white
+                    hover:opacity-90 transition duration-150 whitespace-nowrap enter-btn"
+             target="_blank">
+            Entrar →
+          </a>
         </div>
       </div>
     </div>
@@ -134,17 +199,19 @@
 
     function renderCard(item) {
       const tmpl = document.getElementById('card-template').content.cloneNode(true);
-      const card = tmpl.querySelector('.card');
+      const card = tmpl.querySelector('[data-card]');
 
       card.querySelector('.materia').textContent = item.materia;
       card.querySelector('.professor').textContent = item.professor;
       card.querySelector('.turma').textContent = 'Turma ' + item.turma;
+
       const horarioBadge = card.querySelector('.horario');
       horarioBadge.textContent = formatHorario(item.horario) || item.horario;
       horarioBadge.title = item.horario;
 
       const linkInput = card.querySelector('.link-input');
-      const enterBtn = card.querySelector('.enter-btn');
+      const enterBtn  = card.querySelector('.enter-btn');
+      const saveBtn   = card.querySelector('.save-btn');
 
       linkInput.value = item.link || '';
 
@@ -153,6 +220,7 @@
         enterBtn.classList.remove('hidden');
       }
 
+      /* Atualiza botão "Entrar" conforme o usuário digita */
       linkInput.addEventListener('input', () => {
         const val = linkInput.value.trim();
         if (val) {
@@ -163,11 +231,22 @@
         }
       });
 
-      card.querySelector('.save-btn').addEventListener('click', async () => {
+      /* Salva link e dá feedback visual */
+      saveBtn.addEventListener('click', async () => {
         const link = linkInput.value.trim();
         const body = new URLSearchParams({ materia: item.materia, turma: item.turma, link });
         await fetch('/', { method: 'POST', body });
         item.link = link;
+
+        /* Feedback: "Salvo!" por 2 segundos */
+        saveBtn.textContent = 'Salvo!';
+        saveBtn.classList.add('bg-unb-green/10', 'text-unb-green');
+        saveBtn.classList.remove('bg-slate-100', 'text-slate-500');
+        setTimeout(() => {
+          saveBtn.textContent = 'Salvar';
+          saveBtn.classList.remove('bg-unb-green/10', 'text-unb-green');
+          saveBtn.classList.add('bg-slate-100', 'text-slate-500');
+        }, 2000);
       });
 
       return card;
@@ -175,8 +254,8 @@
 
     function search(query) {
       const emptyState = document.getElementById('empty-state');
-      const noResults = document.getElementById('no-results');
-      const results = document.getElementById('results');
+      const noResults  = document.getElementById('no-results');
+      const results    = document.getElementById('results');
 
       if (!query.trim()) {
         emptyState.classList.remove('hidden');
@@ -187,9 +266,9 @@
 
       const q = normalize(query);
       const filtered = allTurmas.filter(t =>
-        normalize(t.materia).includes(q) ||
+        normalize(t.materia).includes(q)   ||
         normalize(t.professor).includes(q) ||
-        normalize(t.turma).includes(q) ||
+        normalize(t.turma).includes(q)     ||
         normalize(t.horario).includes(q)
       );
 
