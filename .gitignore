@@ -1,5 +1,33 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 .env
+*.egg-info/
+dist/
+build/
+
+# Ambientes virtuais
 venv/
 .venv/
+
+# Testes e cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Playwright
+playwright-report/
+test-results/
+
+# IDEs
+.vscode/
+.idea/
+
+# Claude Code
+.claude/
+
+# SO
+.DS_Store
+Thumbs.db
