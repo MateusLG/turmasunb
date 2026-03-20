@@ -66,43 +66,14 @@ class TestPostLink:
         assert resp.status_code == 200
         assert resp.json()["ok"] is True
 
-    def test_link_vazio_em_turma_sem_link(self):
-        # Link vazio é permitido quando a turma ainda não tem link
+    def test_rejeita_link_vazio(self):
+        # Link vazio nunca é permitido
         resp = client.post("/", data={
             "materia": "QUALQUER", "turma": "01",
             "link": "",
         })
-        assert resp.status_code == 200
-        assert resp.json()["ok"] is True
-
-    def test_link_vazio_nao_sobrescreve_link_existente(self):
-        # Não deve apagar um link já cadastrado com string vazia
-        turmas = client.get("/json").json()
-        turma = turmas[0]
-
-        # Salva um link válido
-        client.post("/", data={
-            "materia": turma["materia"],
-            "turma": turma["turma"],
-            "link": "https://example.com/nao-apagar",
-        })
-
-        # Tenta sobrescrever com vazio — deve rejeitar
-        resp = client.post("/", data={
-            "materia": turma["materia"],
-            "turma": turma["turma"],
-            "link": "",
-        })
         assert resp.status_code == 400
         assert resp.json()["ok"] is False
-
-        # Confirma que o link original foi preservado
-        turmas_atualizadas = client.get("/json").json()
-        correspondente = next(
-            t for t in turmas_atualizadas
-            if t["materia"] == turma["materia"] and t["turma"] == turma["turma"]
-        )
-        assert correspondente["link"] == "https://example.com/nao-apagar"
 
     def test_rejeita_javascript(self):
         resp = client.post("/", data={

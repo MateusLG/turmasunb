@@ -372,7 +372,7 @@
 
     // fix 1 e 3: aceita apenas http/https para evitar javascript: e outros esquemas
     function isValidLink(url) {
-      return url === '' || url.startsWith('http://') || url.startsWith('https://');
+      return url.startsWith('http://') || url.startsWith('https://');
     }
 
     function normalize(str) {

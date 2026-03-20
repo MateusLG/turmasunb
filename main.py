@@ -108,15 +108,12 @@ async def update_link(
     if len(link) > LINK_MAX_LEN:
         return JSONResponse(status_code=400, content={"ok": False, "erro": "Link muito longo"})
 
-    # fix 3: validação de URL no backend (deve ser http/https ou vazio para limpar)
-    if link and not (link.startswith("http://") or link.startswith("https://")):
+    # Rejeita link vazio ou sem protocolo http/https
+    if not link or not (link.startswith("http://") or link.startswith("https://")):
         return JSONResponse(status_code=400, content={"ok": False, "erro": "Link inválido"})
 
     for item in items:
         if item["materia"] == materia and item["turma"] == turma:
-            # Não sobrescreve link existente com string vazia
-            if not link and item.get("link"):
-                return JSONResponse(status_code=400, content={"ok": False, "erro": "Não é possível apagar um link existente"})
             item["link"] = link
             if DATABASE_URL:
                 save_link_to_db(materia, turma, link)

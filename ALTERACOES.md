@@ -1,5 +1,8 @@
 # Histórico de Alterações
 
+## [2026-03-20] Bloquear envio de link vazio
+POST / agora rejeita link vazio em qualquer situação (400). Frontend também bloqueia o botão Salvar se o campo estiver vazio. Evita registros sem link no banco e cliques acidentais.
+
 ## [2026-03-20] Proteção contra sobrescrita de link com string vazia
 POST / agora retorna 400 se o usuário tentar salvar um link vazio em uma turma que já possui link cadastrado. Evita que cliques acidentais no botão de salvar apaguem links existentes.
 
