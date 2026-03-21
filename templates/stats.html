@@ -368,49 +368,6 @@
       {% endif %}
     </div>
 
-    <!-- Professores -->
-    <div class="card">
-      <div class="card-header">
-        <h2>Professores com mais turmas</h2>
-      </div>
-      {% if top_professores %}
-      {% set max_prof = top_professores[0].total %}
-      <ul class="prof-list">
-        {% for prof in top_professores %}
-        <li class="prof-item{% if prof.a_definir is defined and prof.a_definir %} a-definir{% endif %}">
-          <span class="prof-rank {% if not (prof.a_definir is defined and prof.a_definir) and loop.index <= 3 %}top{% endif %}">
-            {%- if prof.a_definir is defined and prof.a_definir %}—{% else %}{{ loop.index }}{% endif -%}
-          </span>
-          <span class="prof-nome" title="{{ prof.nome }}">{{ prof.nome }}</span>
-          <div class="prof-bar-wrap">
-            <div class="prof-bar" style="width: {{ (prof.total / max_prof * 100)|round|int }}%"></div>
-          </div>
-          <span class="prof-cnt">{{ prof.total }} turma{{ 's' if prof.total != 1 else '' }}</span>
-        </li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p class="empty">Sem dados disponíveis.</p>
-      {% endif %}
-    </div>
-
-    <!-- Plataformas -->
-    {% if plataformas %}
-    <div class="card">
-      <div class="card-header">
-        <h2>Distribuição por plataforma</h2>
-      </div>
-      <div class="plat-grid">
-        {% for p in plataformas %}
-        <div class="plat-card">
-          <div class="plat-dot" style="background: {{ p.cor }};"></div>
-          <span class="plat-label">{{ p.label }}</span>
-          <span class="plat-total">· {{ p.total }}</span>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
 
   </main>
 
