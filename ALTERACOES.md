@@ -1,5 +1,14 @@
 # Histórico de Alterações
 
+## [2026-03-20] Redesign de /stats e nova rota /sobre
+/stats reformulado com 3 cards: links cadastrados com ícone por plataforma (WhatsApp, Telegram, Meet, Teams, Discord), top 10 professores com mais turmas e distribuição por plataforma. Nova rota /sobre com história do projeto (origem no gruposfga do Guilherme Puida), stack técnico, créditos e CTA para contribuição. Link /sobre adicionado no footer de todas as páginas. conftest.py adicionado para isolar testes do banco de dados local.
+
+## [2026-03-20] Página de stats (/stats)
+Nova rota GET /stats com template próprio. Exibe: cards de resumo (total de turmas, com link, sem link, % cobertura), barra de progresso geral, top 10 unidades por total de turmas (com indicador de links preenchidos em verde — ativado após re-run do scraper), top 10 matérias com mais turmas e gráfico de barras por dia da semana (parseado do campo horario). Link "Stats" adicionado no footer de index.html. 4 testes adicionados.
+
+## [2026-03-20] Campo unidade no scraper e backend
+O scraper agora salva o nome da unidade/departamento em cada turma (`"unidade": "DEPARTAMENTO DE MATEMÁTICA"`). `parse_turmas` e `scrape_unidade` recebem o `label` do departamento já disponível no loop principal. `load_items` no backend adiciona `setdefault("unidade", "")` para compatibilidade com o `data.json` atual (gerado antes dessa mudança). A busca no frontend também passa a filtrar por `unidade`. Requer re-execução do scraper para popular o campo nos dados.
+
 ## [2026-03-20] Reorganização da estrutura de arquivos
 Movido `scraper.py` e `extractor.js` para `scripts/`. Removidos `attached_assets/` e `replit.md` (lixo do Replit). Adicionado `.replit` ao `.gitignore`. Atualizado `CLAUDE.md` com os novos caminhos.
 

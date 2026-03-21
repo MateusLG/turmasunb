@@ -31,6 +31,37 @@ class TestGetIndex:
         assert semester in resp.text
 
 
+# ── GET /stats ────────────────────────────────────────────────────────────────
+
+class TestGetStats:
+    def test_retorna_200(self):
+        assert client.get("/stats").status_code == 200
+
+    def test_retorna_html(self):
+        resp = client.get("/stats")
+        assert "text/html" in resp.headers["content-type"]
+
+    def test_contem_cards(self):
+        resp = client.get("/stats")
+        assert "Links cadastrados" in resp.text
+        assert "Professores com mais turmas" in resp.text
+        assert "Onde os grupos são criados" in resp.text
+
+
+class TestGetSobre:
+    def test_retorna_200(self):
+        assert client.get("/sobre").status_code == 200
+
+    def test_retorna_html(self):
+        resp = client.get("/sobre")
+        assert "text/html" in resp.headers["content-type"]
+
+    def test_contem_conteudo(self):
+        resp = client.get("/sobre")
+        assert "gruposfga" in resp.text
+        assert "LG_Mateus" in resp.text
+
+
 # ── GET /json ─────────────────────────────────────────────────────────────────
 
 class TestGetJson:
@@ -45,7 +76,7 @@ class TestGetJson:
 
     def test_estrutura_dos_itens(self):
         item = client.get("/json").json()[0]
-        for campo in ("materia", "turma", "professor", "horario", "link"):
+        for campo in ("materia", "turma", "professor", "horario", "unidade", "link"):
             assert campo in item, f"Campo ausente: {campo}"
 
     def test_ordenado_por_materia_e_turma(self):

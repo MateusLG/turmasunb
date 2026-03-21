@@ -24,7 +24,7 @@ async def get_unidades(page) -> list[tuple[str, str]]:
     return unidades
 
 
-async def parse_turmas(page) -> list[dict]:
+async def parse_turmas(page, unidade: str) -> list[dict]:
     turmas = []
     rows = await page.query_selector_all("#turmasAbertas tbody tr")
     materia_atual = ""
@@ -44,12 +44,13 @@ async def parse_turmas(page) -> list[dict]:
                         "turma": turma,
                         "professor": professor,
                         "horario": horario,
+                        "unidade": unidade,
                         "link": "",
                     })
     return turmas
 
 
-async def scrape_unidade(page, unidade_value: str, ano: str, periodo: str) -> list[dict]:
+async def scrape_unidade(page, unidade_value: str, unidade_label: str, ano: str, periodo: str) -> list[dict]:
     await page.goto(SIGAA_URL, wait_until="networkidle")
 
     await page.select_option("select#formTurma\\:inputNivel", value="G")
@@ -60,7 +61,7 @@ async def scrape_unidade(page, unidade_value: str, ano: str, periodo: str) -> li
     await page.click("input[value='Buscar']")
     await page.wait_for_load_state("networkidle")
 
-    return await parse_turmas(page)
+    return await parse_turmas(page, unidade_label)
 
 
 async def main(periodo_label: str, output: str):
@@ -87,7 +88,7 @@ async def main(periodo_label: str, output: str):
         for i, (value, label) in enumerate(unidades, 1):
             print(f"[{i}/{len(unidades)}] {label}...", end=" ", flush=True)
             try:
-                turmas = await scrape_unidade(page, value, ano, periodo)
+                turmas = await scrape_unidade(page, value, label, ano, periodo)
                 novas = 0
                 for t in turmas:
                     key = (t["materia"], t["turma"])
