@@ -186,6 +186,7 @@ async def stats_page(request: Request):
     return templates.TemplateResponse("stats.html", {
         "request": request,
         "semester": SEMESTER,
+        "total_turmas": len(items),
         "links_cadastrados": links_cadastrados,
         "top_professores": top_professores,
         "plataformas": plataformas,

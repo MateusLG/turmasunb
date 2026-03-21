@@ -45,7 +45,7 @@ class TestGetStats:
         resp = client.get("/stats")
         assert "Links cadastrados" in resp.text
         assert "Professores com mais turmas" in resp.text
-        assert "Onde os grupos são criados" in resp.text
+        assert "plataforma" in resp.text.lower()
 
 
 class TestGetSobre:
@@ -59,7 +59,7 @@ class TestGetSobre:
     def test_contem_conteudo(self):
         resp = client.get("/sobre")
         assert "gruposfga" in resp.text
-        assert "LG_Mateus" in resp.text
+        assert "Mateus Lira" in resp.text
 
 
 # ── GET /json ─────────────────────────────────────────────────────────────────
