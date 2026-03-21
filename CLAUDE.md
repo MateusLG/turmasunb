@@ -3,7 +3,6 @@
 ## Regras de Trabalho
 
 - **Sempre trabalhar na branch `dev`.** Nunca commitar direto na `main`. O usuário faz merge quando quiser.
-- Ao identificar bugs ou melhorias, adicionar ao `sugestoes.md` e aguardar comando explícito para implementar.
 - Comentários no código sempre em português (Brasil).
 - Seguir as convenções de código descritas abaixo (Python tipado, FastAPI idiomático).
 - Sempre analisar o prompt, ver o que é pedido e ao encontrar as alterações a serem feitas, mostrar resumo ao usuário e pedir permissão para fazer as alterações/implementações.
@@ -25,8 +24,9 @@ Plataforma web para consulta e gerenciamento de links de turmas da Universidade 
 ```
 turmasunb/
 ├── main.py                  — servidor FastAPI (rotas, leitura e edição de links)
-├── scraper.py               — coleta turmas do SIGAA para todas as unidades da UnB
-├── extractor.js             — script legado de console para extração manual no SIGAA
+├── scripts/
+│   ├── scraper.py           — coleta turmas do SIGAA para todas as unidades da UnB
+│   └── extractor.js         — script legado de console para extração manual no SIGAA
 ├── data.json                — dados das turmas (versionado no git, ~1.3MB)
 ├── requirements.txt         — dependências do servidor web
 ├── requirements-scraper.txt — dependências do scraper (playwright, httpx, bs4, lxml)
@@ -34,7 +34,6 @@ turmasunb/
 ├── .python-version          — Python 3.12
 ├── CLAUDE.md                — este arquivo
 ├── ALTERACOES.md            — histórico de alterações implementadas
-├── sugestoes.md             — sugestões e melhorias pendentes
 └── templates/
     └── index.html           — template Jinja2 com Tailwind + DaisyUI
 ```
@@ -91,7 +90,7 @@ Retorna o array completo de turmas em JSON, ordenado por `materia + turma`.
 - **6478 turmas** do semestre 2026.1
 - Estrutura de cada turma: `{ materia, turma, professor, horario, link }`
 - O campo `link` começa vazio e é editável pelo usuário na interface
-- **Atualizar dados:** `python scraper.py --periodo 2026.1 --output data.json`
+- **Atualizar dados:** `python scripts/scraper.py --periodo 2026.1 --output data.json`
 - O scraper preserva links já existentes ao re-executar (merge inteligente por `materia + turma`)
 - O `data.json` gerado é commitado no repositório — o scraper roda só localmente
 
@@ -100,9 +99,9 @@ Retorna o array completo de turmas em JSON, ordenado por `materia + turma`.
 ## Arquivos Principais — Notas Importantes
 
 - **`main.py`** — Carrega `data.json` na inicialização, ordena por `materia + turma`. Rota POST atualiza link em memória e persiste em disco. Sem autenticação (MVP).
-- **`scraper.py`** — Usa Playwright (Chromium headless) para iterar sobre os 211 departamentos do SIGAA. Deduplica por `(materia, turma)`. Preserva links ao sobrescrever arquivo existente.
+- **`scripts/scraper.py`** — Usa Playwright (Chromium headless) para iterar sobre os 211 departamentos do SIGAA. Deduplica por `(materia, turma)`. Preserva links ao sobrescrever arquivo existente.
 - **`templates/index.html`** — SPA leve: busca client-side com debounce de 200ms, normalização de diacríticos, filtro por matéria/turma/professor/horário. Salva links via `fetch` (POST).
-- **`extractor.js`** — Script de console para extração manual. Não é executado pelo servidor; apenas para uso pontual no navegador.
+- **`scripts/extractor.js`** — Script de console para extração manual. Não é executado pelo servidor; apenas para uso pontual no navegador.
 
 ---
 
@@ -148,17 +147,6 @@ Toda alteração vai para `ALTERACOES.md` no formato:
 Descrição em 2–4 linhas do que mudou e por quê.
 Pendências apenas quando há ação externa necessária (ex: configuração no Railway).
 ```
-
----
-
-## Workflow de Sugestões
-
-Ao identificar erros, bugs ou melhorias:
-
-1. Adicionar ao `sugestoes.md` com: título, descrição, impacto, solução proposta, arquivos afetados.
-2. Avisar o usuário.
-3. Aguardar comando explícito para implementar.
-4. Após implementar: remover do `sugestoes.md` e registrar em `ALTERACOES.md`.
 
 ---
 

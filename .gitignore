@@ -28,6 +28,9 @@ test-results/
 # Claude Code
 .claude/
 
+# Replit
+.replit
+
 # SO
 .DS_Store
 Thumbs.db
