@@ -52,16 +52,12 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.6rem;
       text-decoration: none;
       flex-shrink: 0;
     }
     .nav-logo { display: block; }
-    .brand-text { display: flex; flex-direction: column; }
-    .brand-name { color: #fff; font-size: 0.88rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.01em; }
-    .brand-meta { color: rgba(255,255,255,0.38); font-size: 0.63rem; line-height: 1.2; }
-    .brand-meta a { color: inherit; text-decoration: none; }
-    .brand-meta a:hover { color: rgba(255,255,255,0.65); }
+    .brand-name { color: #fff; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.01em; }
     .nav-links { display: flex; align-items: center; gap: 0.15rem; }
     .nav-link {
       color: rgba(255,255,255,0.6);
@@ -338,6 +334,16 @@
     }
     .btn-enter:hover { opacity: 0.88; }
 
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 0.73rem;
+      color: #94a3b8;
+    }
+    footer a { color: #64748b; text-decoration: none; font-weight: 500; }
+    footer a:hover { color: var(--blue); }
+
     /* ── Ver mais ── */
     .ver-mais-btn {
       display: block;
@@ -367,10 +373,7 @@
         <path fill="white" opacity="0.65" d="m 333.22443,7.27328 0,176.09972 c 14.78825,0 29.37894,-0.912 43.69132,-2.6838 l 0,0 c 19.4526,-2.43655 37.9112,-7.5569 55.04405,-14.96345 36.51712,-15.79343 70.37528,-35.14415 101.36575,-57.48929 l 0,0.005 108.07277,-78.05021 0,-22.91794 -308.17389,0"/>
         <path fill="white" opacity="0.65" d="m 315.6157,7.27328 0,176.09972 c -14.80316,0 -29.3777,-0.912 -43.69132,-2.6838 l -0.005,0 c -19.45757,-2.43655 -37.9199,-7.5569 -55.05275,-14.96345 -36.50842,-15.79343 -70.36658,-35.14415 -101.36625,-57.48929 l 0,0.005 -108.0685457,-78.05021 0,-22.91794 308.1838357,0"/>
       </svg>
-      <div class="brand-text">
-        <span class="brand-name">TurmasUnB</span>
-        <span class="brand-meta">{{ semester }} · <a href="https://github.com/MateusLG" target="_blank" rel="noopener noreferrer">LG_Mateus</a></span>
-      </div>
+      <span class="brand-name">TurmasUnB</span>
     </a>
     <div class="nav-links">
       <a href="/stats" class="nav-link">Stats</a>
@@ -434,6 +437,10 @@
     <div id="results"></div>
   </main>
 
+  <footer>
+    Feito por — <a href="https://www.linkedin.com/in/lgmateus/" target="_blank" rel="noopener noreferrer">Mateus Lira</a>
+  </footer>
+
   <template id="card-template">
     <div class="card">
       <div class="card-top">
@@ -457,10 +464,22 @@
   <script>
     let allTurmas = [];
 
+    function animateCount(el, target, duration = 1600) {
+      const start = performance.now();
+      function step(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(ease * target).toLocaleString('pt-BR');
+        if (t < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
     async function loadTurmas() {
       const res = await fetch('/json');
       allTurmas = await res.json();
-      document.getElementById('total-count').textContent = allTurmas.length.toLocaleString('pt-BR');
+      const el = document.getElementById('total-count');
+      animateCount(el, allTurmas.length);
     }
 
     // fix 1 e 3: aceita apenas http/https para evitar javascript: e outros esquemas
