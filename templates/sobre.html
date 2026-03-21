@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TurmasUnB — Sobre</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #003F72;
+      --blue-mid: #005299;
+      --blue-light: #e8f0f8;
+      --green: #00A859;
+      --green-light: #e6f7ee;
+      --bg: #F0F2F5;
+      --card-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 12px;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Navbar ── */
+    nav {
+      background: var(--blue);
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1.75rem;
+    }
+    nav .brand {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+    nav .nav-link {
+      color: rgba(255,255,255,0.7);
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    nav .nav-link:hover { color: #fff; }
+
+    /* ── Header ── */
+    .page-header {
+      background: linear-gradient(180deg, var(--blue) 0%, var(--blue-mid) 100%);
+      padding: 2.5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      bottom: -2px; left: 0; right: 0;
+      height: 40px;
+      background: var(--bg);
+      border-radius: 40px 40px 0 0;
+    }
+    .page-header h1 {
+      color: #fff;
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+    .page-header p { color: rgba(255,255,255,0.6); font-size: 0.88rem; }
+
+    /* ── Main ── */
+    main {
+      flex: 1;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.75rem 1rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+    }
+    .card h2 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 0.6rem;
+    }
+    .card p:last-child { margin-bottom: 0; }
+    .card a {
+      color: var(--blue);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .card a:hover { text-decoration: underline; }
+
+    /* ── Stack list ── */
+    .stack-list {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .stack-item {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .stack-pill {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 999px;
+      background: var(--blue-light);
+      color: var(--blue);
+      white-space: nowrap;
+      flex-shrink: 0;
+      min-width: 90px;
+      text-align: center;
+    }
+    .stack-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Crédito ── */
+    .credito {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      margin-top: 0.75rem;
+    }
+    .credito-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .credito-info p { font-size: 0.78rem; margin: 0; }
+    .credito-info .nome { font-weight: 600; color: var(--text); margin-bottom: 0.15rem; }
+    .credito-info .desc { color: var(--text-muted); }
+
+    /* ── CTA ── */
+    .cta-card {
+      background: var(--blue);
+      border-radius: var(--radius);
+      padding: 1.4rem 1.5rem;
+      text-align: center;
+    }
+    .cta-card h2 {
+      color: #fff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .cta-card p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.82rem;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 0.55rem 1.25rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .cta-btn:hover { opacity: 0.88; }
+
+    /* ── Footer ── */
+    footer {
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #94a3b8;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.4rem 1rem;
+    }
+    footer a { color: #64748b; text-decoration: none; transition: color 0.15s; }
+    footer a:hover { color: var(--blue); }
+    footer .sep { color: #e2e8f0; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="brand">TurmasUnB {{ semester }}</a>
+    <a href="/" class="nav-link">← Voltar à busca</a>
+  </nav>
+
+  <div class="page-header">
+    <h1>Sobre o TurmasUnB</h1>
+    <p>Como surgiu, como funciona e quem fez</p>
+  </div>
+
+  <main>
+
+    <!-- Origem -->
+    <div class="card">
+      <h2>Como surgiu</h2>
+      <p>
+        O TurmasUnB nasceu de uma necessidade real: o
+        <a href="https://github.com/guilherme-puida/gruposfga" target="_blank" rel="noopener noreferrer">gruposfga</a>,
+        projeto criado pelo Guilherme Puida para centralizar os links de grupos de turmas da Faculdade do Gama (FGA),
+        saiu do ar quando o Guilherme se formou.
+      </p>
+      <p>
+        A ideia era boa demais para morrer. Então expandi o conceito para cobrir toda a UnB — todas as 210 unidades,
+        mais de 6.400 turmas — e abri para qualquer aluno contribuir com o link do grupo da sua turma.
+      </p>
+    </div>
+
+    <!-- Como funciona -->
+    <div class="card">
+      <h2>Como funciona</h2>
+      <p>
+        Os dados das turmas são extraídos diretamente do SIGAA a cada semestre usando um scraper automático.
+        Cada turma começa sem link — qualquer pessoa pode entrar no site e adicionar o link do grupo
+        (WhatsApp, Telegram, Discord, Meet ou qualquer outro).
+      </p>
+      <p>
+        Não tem cadastro, não tem login. A ideia é ser simples e rápido: buscou a matéria, encontrou a turma,
+        entrou no grupo.
+      </p>
+    </div>
+
+    <!-- Stack -->
+    <div class="card">
+      <h2>Como foi feito</h2>
+      <p>Projeto open source, feito com tecnologias simples e sem fricção:</p>
+      <div class="stack-list">
+        <div class="stack-item">
+          <span class="stack-pill">Python 3.12</span>
+          <span class="stack-desc">linguagem principal do backend e do scraper</span>
+        </div>
+        <div class="stack-item">
+          <span class="stack-pill">FastAPI</span>
+          <span class="stack-desc">framework web que serve as rotas e a API JSON</span>
+        </div>
+        <div class="stack-item">
+          <span class="stack-pill">Jinja2</span>
+          <span class="stack-desc">renderização dos templates HTML no servidor</span>
+        </div>
+        <div class="stack-item">
+          <span class="stack-pill">Tailwind CSS</span>
+          <span class="stack-desc">estilização do frontend via CDN, sem build step</span>
+        </div>
+        <div class="stack-item">
+          <span class="stack-pill">Playwright</span>
+          <span class="stack-desc">scraper headless que coleta as turmas do SIGAA</span>
+        </div>
+        <div class="stack-item">
+          <span class="stack-pill">PostgreSQL</span>
+          <span class="stack-desc">banco de dados que armazena os links cadastrados</span>
+        </div>
+        <div class="stack-item">
+          <span class="stack-pill">Railway</span>
+          <span class="stack-desc">hospedagem do servidor e do banco de dados</span>
+        </div>
+        <div class="stack-item">
+          <span class="stack-pill">Cloudflare</span>
+          <span class="stack-desc">DNS e domínio turmasunb.com</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quem fez -->
+    <div class="card">
+      <h2>Quem fez</h2>
+      <p>
+        Me chamo Mateus Lira Gomes. Entrei na UnB em 2024.1 para cursar Engenharia de Software
+        no campus da FCTE (a antiga FGA). Em 2025.2 surgiu uma oportunidade de emprego e me transferi
+        para o IESB, onde curso Engenharia de Computação.
+      </p>
+      <p>
+        Sim — sou o criador e mantenedor de um projeto para uma universidade da qual não faço mais parte.
+        Mas a necessidade continua real, então o projeto continua.
+      </p>
+      <div class="credito">
+        <div class="credito-avatar">M</div>
+        <div class="credito-info">
+          <p class="nome">Mateus Lira Gomes</p>
+          <p class="desc">Criador do TurmasUnB · <a href="https://github.com/MateusLG" target="_blank" rel="noopener noreferrer">github.com/MateusLG</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Créditos -->
+    <div class="card">
+      <h2>Créditos</h2>
+      <p>
+        O projeto também contou com a ajuda do Pedro, meu amigo desde a escola, que entrou na UnB
+        comigo em 2024.1 e segue lá até hoje. Crédito ao Guilherme Puida pela ideia original do gruposfga,
+        que foi a semente de tudo isso.
+      </p>
+      <div class="credito">
+        <div class="credito-avatar">P</div>
+        <div class="credito-info">
+          <p class="nome">Pedro</p>
+          <p class="desc">Co-criador · amigo desde a escola, estudante de Eng. de Software na UnB</p>
+        </div>
+      </div>
+      <div class="credito" style="margin-top: 0.5rem;">
+        <div class="credito-avatar">G</div>
+        <div class="credito-info">
+          <p class="nome">Guilherme Puida</p>
+          <p class="desc">Criador do gruposfga (ideia original) · <a href="https://github.com/guilherme-puida/gruposfga" target="_blank" rel="noopener noreferrer">github.com/guilherme-puida</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-card">
+      <h2>Quer contribuir?</h2>
+      <p>Adicione o link do grupo da sua turma.<br>Leva 10 segundos e ajuda todos os colegas.</p>
+      <a href="/" class="cta-btn">Buscar minha turma</a>
+    </div>
+
+  </main>
+
+  <footer>
+    <span>Feito por <a href="https://github.com/MateusLG" target="_blank">LG_Mateus</a></span>
+    <span class="sep">|</span>
+    <a href="https://github.com/MateusLG/turmasunb" target="_blank">GitHub</a>
+    <span class="sep">|</span>
+    <a href="/json">API JSON</a>
+    <span class="sep">|</span>
+    <a href="/stats">Stats</a>
+    <span class="sep">|</span>
+    <a href="/sobre">Sobre</a>
+  </footer>
+
+</body>
+</html>

@@ -1,5 +1,9 @@
 import json
 import os
+from collections import Counter
+
+from dotenv import load_dotenv
+load_dotenv()
 
 import psycopg2
 import psycopg2.extras
@@ -23,6 +27,24 @@ app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 templates = Jinja2Templates(directory="templates")
+
+
+# --- Helpers ---
+
+def detect_platform(link: str) -> str:
+    """Detecta a plataforma a partir da URL do link."""
+    l = link.lower()
+    if "chat.whatsapp.com" in l:
+        return "whatsapp"
+    if "t.me" in l or "telegram.me" in l:
+        return "telegram"
+    if "meet.google.com" in l:
+        return "meet"
+    if "teams.microsoft.com" in l or "teams.live.com" in l:
+        return "teams"
+    if "discord.gg" in l or "discord.com" in l:
+        return "discord"
+    return "outro"
 
 
 # --- Banco de dados ---
@@ -74,6 +96,10 @@ def load_items() -> list[dict]:
         items = json.load(f)
     items.sort(key=lambda x: (x["materia"], x["turma"]))
 
+    # compatibilidade com data.json gerado antes do campo unidade existir
+    for item in items:
+        item.setdefault("unidade", "")
+
     if DATABASE_URL:
         links = load_links_from_db()
         for item in items:
@@ -120,6 +146,55 @@ async def update_link(
                 save_link_to_db(materia, turma, link)
             break
     return JSONResponse(content={"ok": True})
+
+
+@app.get("/stats", response_class=HTMLResponse)
+async def stats_page(request: Request):
+    # Links cadastrados com info de plataforma
+    links_cadastrados = [
+        {**i, "plataforma": detect_platform(i["link"])}
+        for i in items if i.get("link")
+    ]
+
+    # Top 10 professores por número de turmas (A DEFINIR DOCENTE vai ao fim)
+    prof_cnt = Counter(i["professor"] for i in items if i.get("professor"))
+    a_definir_cnt = prof_cnt.pop("A DEFINIR DOCENTE", 0)
+    top_professores = [
+        {"nome": prof, "total": cnt}
+        for prof, cnt in prof_cnt.most_common(10)
+    ]
+    if a_definir_cnt:
+        top_professores.append({"nome": "A DEFINIR DOCENTE", "total": a_definir_cnt, "a_definir": True})
+
+    # Contagem por plataforma
+    plataforma_info = {
+        "whatsapp": {"label": "WhatsApp",  "cor": "#25D366"},
+        "telegram":  {"label": "Telegram",  "cor": "#229ED9"},
+        "meet":      {"label": "Google Meet","cor": "#00897B"},
+        "teams":     {"label": "Teams",     "cor": "#6264A7"},
+        "discord":   {"label": "Discord",   "cor": "#5865F2"},
+        "outro":     {"label": "Outro",     "cor": "#94a3b8"},
+    }
+    plat_cnt = Counter(l["plataforma"] for l in links_cadastrados)
+    plataformas = [
+        {**plataforma_info[p], "slug": p, "total": plat_cnt.get(p, 0)}
+        for p in plataforma_info
+        if plat_cnt.get(p, 0) > 0
+    ]
+    plataformas.sort(key=lambda x: x["total"], reverse=True)
+
+    return templates.TemplateResponse("stats.html", {
+        "request": request,
+        "semester": SEMESTER,
+        "links_cadastrados": links_cadastrados,
+        "top_professores": top_professores,
+        "plataformas": plataformas,
+    })
+
+
+@app.get("/sobre", response_class=HTMLResponse)
+async def sobre(request: Request):
+    return templates.TemplateResponse("sobre.html", {"request": request, "semester": SEMESTER})
 
 
 @app.get("/favicon.svg", include_in_schema=False)
