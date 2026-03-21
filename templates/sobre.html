@@ -177,6 +177,9 @@
       border-radius: var(--radius);
       padding: 1.75rem 1.5rem;
       text-align: center;
+      align-self: center;
+      width: 100%;
+      max-width: 420px;
     }
     .cta-card h2 {
       color: #fff;
@@ -251,41 +254,21 @@
     </div>
 
     <div class="card">
-      <h2>Como funciona</h2>
-      <p>
-        Os dados das turmas vêm diretamente do SIGAA. A cada semestre um scraper coleta todas as turmas
-        ofertadas e publica aqui. Cada turma começa sem link — qualquer aluno pode entrar no site e adicionar o
-        grupo da sua turma (WhatsApp, Telegram, Discord ou qualquer outro).
-      </p>
-      <p>
-        Sem cadastro, sem login. Buscou a matéria, achou a turma, entrou no grupo.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Stack</h2>
-      <p>Projeto open source, sem frameworks pesados ou infraestrutura complicada:</p>
-      <div class="tech-list">
-        <span class="tech-pill">Python 3.12</span>
-        <span class="tech-pill">FastAPI</span>
-        <span class="tech-pill">Jinja2</span>
-        <span class="tech-pill">CSS Vanilla</span>
-        <span class="tech-pill">Playwright</span>
-        <span class="tech-pill">PostgreSQL</span>
-        <span class="tech-pill">Railway</span>
-        <span class="tech-pill">Cloudflare</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Quem fez</h2>
+      <h2>Como funciona e quem fez</h2>
       <p>
         Me chamo Mateus Lira Gomes. Entrei na UnB em 2024.1 para cursar Engenharia de Software na FCTE (antiga FGA).
         Em 2025.2 surgiu uma oportunidade de emprego e me transferi para o IESB, onde curso Engenharia de Computação.
+        Sou, portanto, o criador e mantenedor de um projeto para uma universidade da qual não faço mais parte —
+        mas enquanto a necessidade existir, o TurmasUnB continua.
       </p>
       <p>
-        Sou o criador e mantenedor de um projeto para uma universidade da qual não faço mais parte —
-        mas enquanto a necessidade existir, o TurmasUnB continua.
+        Os dados vêm diretamente do SIGAA: a cada semestre um scraper coleta todas as turmas ofertadas e publica aqui.
+        Cada turma começa sem link — qualquer aluno pode adicionar o grupo da sua turma (WhatsApp, Telegram, Discord ou qualquer outro).
+        Sem cadastro, sem login. Buscou a matéria, achou a turma, entrou no grupo.
+      </p>
+      <p>
+        O Pedro, meu amigo desde a escola que entrou na UnB comigo em 2024.1, também ajudou no começo do projeto.
+        E crédito ao Guilherme Puida pela ideia original do gruposfga, que foi a semente de tudo isso.
       </p>
       <div class="credito">
         <div class="credito-avatar">M</div>
@@ -294,26 +277,18 @@
           <span class="credito-desc"><a href="https://www.linkedin.com/in/lgmateus/" target="_blank" rel="noopener noreferrer">linkedin.com/in/lgmateus</a> · <a href="https://github.com/MateusLG" target="_blank" rel="noopener noreferrer">github.com/MateusLG</a></span>
         </div>
       </div>
-    </div>
-
-    <div class="card">
-      <h2>Créditos</h2>
-      <p>
-        Crédito ao Guilherme Puida pela ideia original do gruposfga, que foi a semente de tudo isso.
-        O Pedro, meu amigo desde a escola que entrou na UnB comigo em 2024.1, também ajudou no começo.
-      </p>
-      <div class="credito">
-        <div class="credito-avatar">G</div>
-        <div class="credito-info">
-          <span class="credito-nome">Guilherme Puida</span>
-          <span class="credito-desc">Criador do gruposfga · <a href="https://github.com/guilherme-puida/gruposfga" target="_blank" rel="noopener noreferrer">github.com/guilherme-puida</a></span>
-        </div>
-      </div>
       <div class="credito" style="margin-top: 0.5rem;">
         <div class="credito-avatar">P</div>
         <div class="credito-info">
           <span class="credito-nome">Pedro</span>
-          <span class="credito-desc">Ajudou no início · estudante de Eng. de Software na UnB</span>
+          <span class="credito-desc">Co-criador · estudante de Eng. de Software na UnB</span>
+        </div>
+      </div>
+      <div class="credito" style="margin-top: 0.5rem;">
+        <div class="credito-avatar">G</div>
+        <div class="credito-info">
+          <span class="credito-nome">Guilherme Puida</span>
+          <span class="credito-desc">Criador do gruposfga · <a href="https://github.com/guilherme-puida/gruposfga" target="_blank" rel="noopener noreferrer">github.com/guilherme-puida</a></span>
         </div>
       </div>
     </div>

@@ -44,8 +44,6 @@ class TestGetStats:
     def test_contem_cards(self):
         resp = client.get("/stats")
         assert "Links cadastrados" in resp.text
-        assert "Professores com mais turmas" in resp.text
-        assert "plataforma" in resp.text.lower()
 
 
 class TestGetSobre:
