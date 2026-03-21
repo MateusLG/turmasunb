@@ -3,7 +3,6 @@
 ## Regras de Trabalho
 
 - **Sempre trabalhar na branch `dev`.** Nunca commitar direto na `main`. O usuário faz merge quando quiser.
-- Ao identificar bugs ou melhorias, adicionar ao `sugestoes.md` e aguardar comando explícito para implementar.
 - Comentários no código sempre em português (Brasil).
 - Seguir as convenções de código descritas abaixo (Python tipado, FastAPI idiomático).
 - Sempre analisar o prompt, ver o que é pedido e ao encontrar as alterações a serem feitas, mostrar resumo ao usuário e pedir permissão para fazer as alterações/implementações.
@@ -35,7 +34,6 @@ turmasunb/
 ├── .python-version          — Python 3.12
 ├── CLAUDE.md                — este arquivo
 ├── ALTERACOES.md            — histórico de alterações implementadas
-├── sugestoes.md             — sugestões e melhorias pendentes
 └── templates/
     └── index.html           — template Jinja2 com Tailwind + DaisyUI
 ```
@@ -149,17 +147,6 @@ Toda alteração vai para `ALTERACOES.md` no formato:
 Descrição em 2–4 linhas do que mudou e por quê.
 Pendências apenas quando há ação externa necessária (ex: configuração no Railway).
 ```
-
----
-
-## Workflow de Sugestões
-
-Ao identificar erros, bugs ou melhorias:
-
-1. Adicionar ao `sugestoes.md` com: título, descrição, impacto, solução proposta, arquivos afetados.
-2. Avisar o usuário.
-3. Aguardar comando explícito para implementar.
-4. Após implementar: remover do `sugestoes.md` e registrar em `ALTERACOES.md`.
 
 ---
 

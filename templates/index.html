@@ -419,6 +419,10 @@
     <a href="https://github.com/MateusLG/turmasunb" target="_blank">GitHub</a>
     <span class="sep">|</span>
     <a href="/json">API JSON</a>
+    <span class="sep">|</span>
+    <a href="/stats">Stats</a>
+    <span class="sep">|</span>
+    <a href="/sobre">Sobre</a>
   </footer>
 
   <template id="card-template">
@@ -584,7 +588,8 @@
         normalize(t.materia).includes(q)   ||
         normalize(t.professor).includes(q) ||
         normalize(t.turma).includes(q)     ||
-        normalize(t.horario).includes(q)
+        normalize(t.horario).includes(q)   ||
+        normalize(t.unidade || '').includes(q)
       );
 
       emptyState.classList.add('hidden');
