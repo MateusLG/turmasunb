@@ -31,18 +31,18 @@ class TestGetIndex:
         assert semester in resp.text
 
 
-# ── GET /stats ────────────────────────────────────────────────────────────────
+# ── GET /status ────────────────────────────────────────────────────────────────
 
-class TestGetStats:
+class TestGetStatus:
     def test_retorna_200(self):
-        assert client.get("/stats").status_code == 200
+        assert client.get("/status").status_code == 200
 
     def test_retorna_html(self):
-        resp = client.get("/stats")
+        resp = client.get("/status")
         assert "text/html" in resp.headers["content-type"]
 
     def test_contem_cards(self):
-        resp = client.get("/stats")
+        resp = client.get("/status")
         assert "Links cadastrados" in resp.text
 
 
