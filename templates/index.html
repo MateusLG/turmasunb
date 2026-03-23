@@ -352,6 +352,58 @@
     footer a { color: #64748b; text-decoration: none; font-weight: 500; }
     footer a:hover { color: var(--blue); }
 
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      /* Hero mais compacto */
+      .hero {
+        padding: 1.75rem 1rem 3.5rem;
+      }
+      .hero-logo {
+        width: 90px;
+        height: 45px;
+        margin-bottom: 1rem;
+      }
+      .hero h1 {
+        font-size: 1.5rem;
+      }
+      .hero p {
+        font-size: 0.82rem;
+        margin-bottom: 1.5rem;
+      }
+
+      /* Card: empilha badges abaixo do nome */
+      .card-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .card-info {
+        width: 100%;
+      }
+      .card-info .materia {
+        font-size: 0.875rem;
+        word-break: normal;
+        overflow-wrap: break-word;
+      }
+      .card-badges {
+        flex-wrap: wrap;
+        gap: 0.3rem;
+      }
+
+      /* Ações: input ocupa linha inteira, botões ficam na linha de baixo */
+      .card-actions {
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+      .card-actions .link-input {
+        flex-basis: 100%;
+      }
+      .card-actions .btn {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+
     /* ── Ver mais ── */
     .ver-mais-btn {
       display: block;
