@@ -148,8 +148,8 @@ async def update_link(
     return JSONResponse(content={"ok": True})
 
 
-@app.get("/stats", response_class=HTMLResponse)
-async def stats_page(request: Request):
+@app.get("/status", response_class=HTMLResponse)
+async def status_page(request: Request):
     # Links cadastrados com info de plataforma
     links_cadastrados = [
         {**i, "plataforma": detect_platform(i["link"])}
@@ -183,7 +183,7 @@ async def stats_page(request: Request):
     ]
     plataformas.sort(key=lambda x: x["total"], reverse=True)
 
-    return templates.TemplateResponse("stats.html", {
+    return templates.TemplateResponse("status.html", {
         "request": request,
         "semester": SEMESTER,
         "total_turmas": len(items),
