@@ -131,22 +131,20 @@
     /* ── Pessoas ── */
     .pessoas {
       display: flex;
+      flex-direction: column;
       gap: 0.75rem;
-      flex-wrap: wrap;
     }
 
     /* ── Pessoa card ── */
     .pessoa-card {
-      flex: 1 1 180px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.5rem 1.25rem 1.25rem;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       align-items: center;
-      text-align: center;
-      gap: 0.6rem;
+      gap: 1rem;
       transition: box-shadow 0.22s, transform 0.22s, border-color 0.22s;
       cursor: default;
     }
@@ -161,12 +159,24 @@
       object-fit: cover;
       border: 3px solid var(--border);
       transition: border-color 0.22s;
+      flex-shrink: 0;
+    }
+    .pessoa-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      flex: 1;
     }
     .pessoa-card:hover .pessoa-avatar { border-color: var(--blue-light); }
     .pessoa-nome {
       font-size: 0.88rem;
       font-weight: 700;
       color: var(--text);
+    }
+    .pessoa-cargo {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.5;
     }
     .pessoa-desc {
       font-size: 0.75rem;
@@ -176,10 +186,9 @@
     }
     .pessoa-links {
       display: flex;
+      flex-direction: column;
       gap: 0.4rem;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 0.25rem;
+      flex-shrink: 0;
     }
     .pessoa-btn {
       font-size: 0.71rem;
@@ -268,10 +277,20 @@
     <div class="card-origem">
       <h2>Como surgiu</h2>
       <p>
-        O <a href="https://github.com/guilherme-puida/gruposfga" target="_blank" rel="noopener noreferrer">gruposfga</a>
-        nasceu na FGA com o Guilherme Puida para centralizar os links dos grupos de turmas.
-        Quando ele se formou, o projeto saiu do ar. A ideia era boa demais para morrer —
-        expandimos para toda a UnB, com mais de 6.400 turmas de 211 unidades.
+        Todo semestre, a mesma dúvida: onde fica o grupo da turma? O link some no e-mail,
+        ninguém lembra quem criou, e o professor não sabe. Era um problema real e recorrente
+        para quem estuda na UnB.
+      </p>
+      <p style="margin-top: 0.75rem;">
+        Na FGA, o Guilherme Puida tinha resolvido isso com o
+        <a href="https://github.com/guilherme-puida/gruposfga" target="_blank" rel="noopener noreferrer">TurmasFGA</a>
+        — uma página simples para centralizar os links dos grupos de turmas. Ajudou muita gente.
+        Quando ele se formou, o projeto saiu do ar.
+      </p>
+      <p style="margin-top: 0.75rem;">
+        A ideia era boa demais para morrer. Retomamos o conceito, expandimos para todas as
+        211 unidades da UnB e chamamos de TurmasUnB — mais de 6.400 turmas em um só lugar,
+        com a mesma simplicidade de antes.
       </p>
     </div>
 
@@ -279,8 +298,11 @@
 
       <div class="pessoa-card">
         <img class="pessoa-avatar" src="https://avatars.githubusercontent.com/u/92527443?s=400&u=89562f37413b433124b5dfd06d74f763b867eb46&v=4" alt="Mateus Lira" />
-        <span class="pessoa-nome">Mateus Lira</span>
-        <span class="pessoa-desc">Desenvolvedor de Software</span>
+        <div class="pessoa-info">
+          <span class="pessoa-nome">Mateus Lira</span>
+          <span class="pessoa-cargo">Criador & Desenvolvedor</span>
+          <span class="pessoa-desc">Desenvolvedor de Software</span>
+        </div>
         <div class="pessoa-links">
           <a class="pessoa-btn" href="https://www.linkedin.com/in/lgmateus/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a class="pessoa-btn" href="https://github.com/mateuslg" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
@@ -289,8 +311,11 @@
 
       <div class="pessoa-card">
         <img class="pessoa-avatar" src="https://avatars.githubusercontent.com/u/214181005?v=4" alt="Pedro Gomes" />
-        <span class="pessoa-nome">Pedro Gomes</span>
-        <span class="pessoa-desc">Estudante de Engenharia de Software — UnB</span>
+        <div class="pessoa-info">
+          <span class="pessoa-nome">Pedro Gomes</span>
+          <span class="pessoa-cargo">Desenvolvedor</span>
+          <span class="pessoa-desc">Estudante da UnB</span>
+        </div>
         <div class="pessoa-links">
           <a class="pessoa-btn" href="https://github.com/PedroGomes-phgr" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
         </div>
@@ -298,8 +323,11 @@
 
       <div class="pessoa-card">
         <img class="pessoa-avatar" src="https://avatars.githubusercontent.com/u/70032505?v=4" alt="Guilherme Puida" />
-        <span class="pessoa-nome">Guilherme Puida</span>
-        <span class="pessoa-desc">Criador do antigo Turmas-FGA</span>
+        <div class="pessoa-info">
+          <span class="pessoa-nome">Guilherme Puida</span>
+          <span class="pessoa-cargo">Créditos</span>
+          <span class="pessoa-desc">Criador do antigo Turmas-FGA</span>
+        </div>
         <div class="pessoa-links">
           <a class="pessoa-btn" href="https://www.linkedin.com/in/guilherme-puida/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           <a class="pessoa-btn" href="https://github.com/guilherme-puida" target="_blank" rel="noopener noreferrer">GitHub ↗</a>

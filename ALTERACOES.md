@@ -1,5 +1,17 @@
 # Histórico de Alterações
 
+## [2026-03-23] Reescrita do texto "Como surgiu" na página /sobre
+Texto expandido para contar a história do projeto em 3 parágrafos: o problema recorrente de achar grupos de turma, a solução anterior (TurmasFGA do Guilherme Puida, com link para o repositório), e o surgimento do TurmasUnB como evolução para toda a UnB.
+
+## [2026-03-23] Botões de redes sociais à direita nos cards e correção de descrição
+Botões de redes sociais movidos para fora do `.pessoa-info`, tornando-se terceiro item do card (à direita). `.pessoa-info` recebeu `flex: 1` para empurrar os botões. `.pessoa-card` passou a `align-items: center`. Descrição do Pedro alterada de "Engenheiro de Software" para "Estudante da UnB".
+
+## [2026-03-23] Layout horizontal nos cards de pessoa (/sobre)
+Cards de pessoa alterados de layout vertical centralizado para horizontal: avatar à esquerda (72×72, `flex-shrink: 0`) e conteúdo textual (nome, cargo, descrição, links) agrupado em `.pessoa-info` à direita. Links alinhados à esquerda. Container `.pessoas` empilha os cards em coluna para cada card ocupar a largura total.
+
+## [2026-03-23] Adicionar cargos nos cards da página /sobre
+Adicionado badge `.pessoa-cargo` em cada card de pessoa: Mateus (Criador & Desenvolvedor), Pedro (Desenvolvedor) e Guilherme (Créditos). Badge exibido entre o nome e a descrição. Descrição do Pedro simplificada para "Engenheiro de Software".
+
 ## [2026-03-23] Redesign completo da página /sobre
 Página simplificada: seção "Como surgiu" reescrita em 2 frases diretas; seção "Como funciona e quem fez" removida. Três cards interativos lado a lado (foto, nome, descrição, botões de link) com animação de elevação no hover substituem os antigos cartões de crédito inline.
 
