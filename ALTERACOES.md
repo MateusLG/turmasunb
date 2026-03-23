@@ -1,5 +1,17 @@
 # Histórico de Alterações
 
+## [2026-03-23] Redesign completo da página /sobre
+Página simplificada: seção "Como surgiu" reescrita em 2 frases diretas; seção "Como funciona e quem fez" removida. Três cards interativos lado a lado (foto, nome, descrição, botões de link) com animação de elevação no hover substituem os antigos cartões de crédito inline.
+
+## [2026-03-23] Redesign dos cartões de crédito na página /sobre
+Cartões de Mateus, Pedro e Guilherme atualizados com foto real (GitHub Avatars), nome, descrição e botão de link individual (Mateus → LinkedIn, Pedro → GitHub, Guilherme → GitHub). Removidas as iniciais e os links inline de texto.
+
+## [2026-03-23] Renomear aba Stats para Status
+Rota `/stats` renomeada para `/status` em todo o projeto: `main.py` (rota e função), `templates/status.html` (renomeado de `stats.html`), links na navbar de `index.html`, `sobre.html` e `status.html`, e testes em `test_main.py`. Arquivo `stats.html` removido.
+
+## [2026-03-23] Correção de responsividade (issue #1)
+Corrigidos dois problemas reportados em viewport mobile: (1) texto de matéria/professor não quebrava linha corretamente em cards — adicionado `min-width: 0; flex: 1` no `.card-info` e `overflow-wrap: break-word` nos campos de texto; (2) navbar com `height` fixo de 56px extravasava em telas estreitas — trocado por `min-height` com `flex-wrap: wrap` para acomodar os links em múltiplas linhas. Adicionado também `flex-wrap: wrap` nas ações do card.
+
 ## [2026-03-20] Redesign de /stats e nova rota /sobre
 /stats reformulado com 3 cards: links cadastrados com ícone por plataforma (WhatsApp, Telegram, Meet, Teams, Discord), top 10 professores com mais turmas e distribuição por plataforma. Nova rota /sobre com história do projeto (origem no gruposfga do Guilherme Puida), stack técnico, créditos e CTA para contribuição. Link /sobre adicionado no footer de todas as páginas. conftest.py adicionado para isolar testes do banco de dados local.
 
