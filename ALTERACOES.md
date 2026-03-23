@@ -1,5 +1,8 @@
 # Histórico de Alterações
 
+## [2026-03-23] Correção do layout mobile dos cards de turma
+No mobile, o nome da matéria ficava espremido porque os badges (turma e horário) ocupavam a coluna direita do card. Adicionadas media queries para telas ≤600px: o `.card-top` empilha verticalmente (badges abaixo do nome/professor), e as ações do card têm o input em linha inteira com os botões abaixo lado a lado.
+
 ## [2026-03-23] Reescrita do texto "Como surgiu" na página /sobre
 Texto expandido para contar a história do projeto em 3 parágrafos: o problema recorrente de achar grupos de turma, a solução anterior (TurmasFGA do Guilherme Puida, com link para o repositório), e o surgimento do TurmasUnB como evolução para toda a UnB.
 
