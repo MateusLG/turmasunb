@@ -170,3 +170,116 @@ class TestPostLink:
             if t["materia"] == turma["materia"] and t["turma"] == turma["turma"]
         )
         assert correspondente["link"] == "https://example.com/teste"
+
+
+# ── Backup ────────────────────────────────────────────────────────────────────
+
+import main as _main  # noqa: E402
+
+
+class TestBackup:
+    """Testes dos endpoints /backup/links.json e /backup/restore.
+    Rodamos sem DATABASE_URL (conftest.py garante isso), então operações
+    que dependem do banco retornam 503 mesmo com token correto."""
+
+    def _set_token(self, valor):
+        """Auxiliar: altera BACKUP_TOKEN no módulo e retorna o valor original."""
+        original = _main.BACKUP_TOKEN
+        _main.BACKUP_TOKEN = valor
+        return original
+
+    # --- Sem BACKUP_TOKEN configurado ---
+
+    def test_export_sem_backup_token_retorna_503(self):
+        original = self._set_token(None)
+        try:
+            resp = client.get("/backup/links.json",
+                              headers={"Authorization": "Bearer qualquer"})
+            assert resp.status_code == 503
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_restore_sem_backup_token_retorna_503(self):
+        original = self._set_token(None)
+        try:
+            resp = client.post("/backup/restore",
+                               json=[],
+                               headers={"Authorization": "Bearer qualquer"})
+            assert resp.status_code == 503
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    # --- Com BACKUP_TOKEN configurado, autenticação errada ---
+
+    def test_export_sem_header_retorna_401(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.get("/backup/links.json")
+            assert resp.status_code == 401
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_export_token_errado_retorna_401(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.get("/backup/links.json",
+                              headers={"Authorization": "Bearer errado"})
+            assert resp.status_code == 401
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_restore_token_errado_retorna_401(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.post("/backup/restore",
+                               json=[],
+                               headers={"Authorization": "Bearer errado"})
+            assert resp.status_code == 401
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    # --- Com token correto, sem banco (DATABASE_URL ausente nos testes) ---
+
+    def test_export_token_correto_sem_db_retorna_503(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.get("/backup/links.json",
+                              headers={"Authorization": "Bearer token-secreto"})
+            assert resp.status_code == 503
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    # --- Restore: validação de payload ---
+
+    def test_restore_json_invalido_retorna_400(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.post("/backup/restore",
+                               content=b"isso nao eh json",
+                               headers={
+                                   "Authorization": "Bearer token-secreto",
+                                   "Content-Type": "application/json",
+                               })
+            assert resp.status_code == 400
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_restore_objeto_em_vez_de_lista_retorna_400(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.post("/backup/restore",
+                               json={"materia": "X", "turma": "1", "link": "https://x.com"},
+                               headers={"Authorization": "Bearer token-secreto"})
+            assert resp.status_code == 400
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_restore_entrada_sem_campos_obrigatorios_retorna_400(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.post("/backup/restore",
+                               json=[{"materia": "X"}],  # faltam turma e link
+                               headers={"Authorization": "Bearer token-secreto"})
+            assert resp.status_code == 400
+        finally:
+            _main.BACKUP_TOKEN = original

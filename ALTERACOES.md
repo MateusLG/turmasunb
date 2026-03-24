@@ -1,5 +1,9 @@
 # Histórico de Alterações
 
+## [2026-03-24] Sistema de backup dos links (PostgreSQL)
+Adicionados dois endpoints protegidos por token (`BACKUP_TOKEN` env var) para exportar e restaurar os links do banco PostgreSQL: `GET /backup/links.json` retorna todos os links como arquivo JSON para download; `POST /backup/restore` recebe esse mesmo JSON e faz upsert de cada entrada no banco, recarregando `items` em memória. Sem novas dependências. 9 testes adicionados cobrindo autenticação, ausência de banco e validação de payload.
+Pendência: definir `BACKUP_TOKEN` nas variáveis de ambiente do Railway.
+
 ## [2026-03-23] Correção do layout mobile dos cards de turma
 No mobile, o nome da matéria ficava espremido porque os badges (turma e horário) ocupavam a coluna direita do card. Adicionadas media queries para telas ≤600px: o `.card-top` empilha verticalmente (badges abaixo do nome/professor), e as ações do card têm o input em linha inteira com os botões abaixo lado a lado.
 
