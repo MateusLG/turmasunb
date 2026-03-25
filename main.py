@@ -54,15 +54,16 @@ def salvar_backup_volume() -> Path | None:
 
 
 async def _loop_backup_automatico() -> None:
-    """Task em background: executa backup periódico no Railway Volume."""
+    """Task em background: executa backup periódico no Railway Volume.
+    O primeiro backup ocorre imediatamente ao subir o servidor."""
     while True:
-        await asyncio.sleep(BACKUP_INTERVAL_HOURS * 3600)
         try:
             arquivo = salvar_backup_volume()
             if arquivo:
                 print(f"[backup] Snapshot salvo em {arquivo}")
         except Exception as e:
             print(f"[backup] Erro ao salvar snapshot: {e}")
+        await asyncio.sleep(BACKUP_INTERVAL_HOURS * 3600)
 
 
 @asynccontextmanager
