@@ -354,3 +354,36 @@ class TestBackupVolume:
 
         restantes = sorted(tmp_path.glob("backup_links_*.json"))
         assert len(restantes) == 3
+
+
+# ── Loop de backup automático ─────────────────────────────────────────────────
+
+class TestLoopBackupAutomatico:
+    """Verifica que o backup ocorre antes do sleep no loop automático."""
+
+    def test_backup_antes_do_sleep(self, monkeypatch, tmp_path):
+        import asyncio
+        chamadas: list[str] = []
+
+        # Registra a ordem das chamadas
+        def mock_salvar():
+            chamadas.append("backup")
+            return None
+
+        async def mock_sleep(_segundos: float) -> None:
+            chamadas.append("sleep")
+            raise asyncio.CancelledError  # encerra o loop após um ciclo
+
+        monkeypatch.setattr(_main, "salvar_backup_volume", mock_salvar)
+        monkeypatch.setattr(asyncio, "sleep", mock_sleep)
+
+        async def rodar():
+            try:
+                await _main._loop_backup_automatico()
+            except asyncio.CancelledError:
+                pass
+
+        asyncio.run(rodar())
+
+        # Backup deve aparecer antes do sleep
+        assert chamadas == ["backup", "sleep"]

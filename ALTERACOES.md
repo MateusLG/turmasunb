@@ -1,5 +1,8 @@
 # Histórico de Alterações
 
+## [2026-03-25] Backup imediato na inicialização
+O primeiro snapshot no Railway Volume agora ocorre imediatamente ao subir o servidor, antes do ciclo de espera. Anteriormente o primeiro backup só acontecia após 24h de uptime. Teste adicionado verificando a ordem `backup → sleep` no loop automático.
+
 ## [2026-03-25] Backup automático em Railway Volume
 Task assíncrona em background (FastAPI lifespan) que salva snapshots JSON dos links no Railway Volume a cada `BACKUP_INTERVAL_HOURS` horas (padrão 24h). Mantém apenas os últimos `BACKUP_MAX_FILES` arquivos (padrão 7). Usa somente stdlib — sem novas dependências. 5 testes adicionados cobrindo criação, conteúdo e rotação dos arquivos. CLAUDE.md atualizado com info do plano Hobby, infraestrutura, variáveis de ambiente e decisões arquiteturais corrigidas.
 Pendência: criar Volume no Railway dashboard, montar em `/data` e setar `BACKUP_PATH=/data/backups` nas env vars do serviço web.
