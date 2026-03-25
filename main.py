@@ -1,28 +1,81 @@
+import asyncio
 import json
 import os
 from collections import Counter
+from contextlib import asynccontextmanager
+from datetime import datetime, timezone
+from pathlib import Path
 
 from dotenv import load_dotenv
 load_dotenv()
 
 import psycopg2
 import psycopg2.extras
-from fastapi import FastAPI, Form, Request
+from fastapi import FastAPI, Form, HTTPException, Request
 from fastapi.responses import HTMLResponse, JSONResponse, Response
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from fastapi.templating import Jinja2Templates
 
-DATA_FILE    = os.getenv("DATA_FILE", "data.json")
-DATABASE_URL = os.getenv("DATABASE_URL")
-SEMESTER     = os.getenv("SEMESTER", "2026.1")
+DATA_FILE             = os.getenv("DATA_FILE", "data.json")
+DATABASE_URL          = os.getenv("DATABASE_URL")
+SEMESTER              = os.getenv("SEMESTER", "2026.1")
+BACKUP_TOKEN          = os.getenv("BACKUP_TOKEN")
+BACKUP_PATH           = os.getenv("BACKUP_PATH")           # caminho do Railway Volume montado
+BACKUP_INTERVAL_HOURS = int(os.getenv("BACKUP_INTERVAL_HOURS", "24"))
+BACKUP_MAX_FILES      = int(os.getenv("BACKUP_MAX_FILES", "7"))
 
 # Limite de tamanho do campo link (fix 5)
 LINK_MAX_LEN = 2048
 
+# --- Backup em volume ---
+
+def salvar_backup_volume() -> Path | None:
+    """Salva um snapshot dos links no Railway Volume. Retorna o caminho do arquivo criado,
+    ou None se BACKUP_PATH não estiver configurado ou o banco não estiver disponível."""
+    if not BACKUP_PATH or not DATABASE_URL:
+        return None
+
+    pasta = Path(BACKUP_PATH)
+    pasta.mkdir(parents=True, exist_ok=True)
+
+    dados = export_links_from_db()
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
+    arquivo = pasta / f"backup_links_{timestamp}.json"
+    arquivo.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # Remove arquivos antigos, mantendo apenas os últimos BACKUP_MAX_FILES
+    arquivos = sorted(pasta.glob("backup_links_*.json"))
+    for antigo in arquivos[:-BACKUP_MAX_FILES]:
+        antigo.unlink(missing_ok=True)
+
+    return arquivo
+
+
+async def _loop_backup_automatico() -> None:
+    """Task em background: executa backup periódico no Railway Volume."""
+    while True:
+        await asyncio.sleep(BACKUP_INTERVAL_HOURS * 3600)
+        try:
+            arquivo = salvar_backup_volume()
+            if arquivo:
+                print(f"[backup] Snapshot salvo em {arquivo}")
+        except Exception as e:
+            print(f"[backup] Erro ao salvar snapshot: {e}")
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Inicia a task de backup automático ao subir o servidor."""
+    if BACKUP_PATH and DATABASE_URL:
+        asyncio.create_task(_loop_backup_automatico())
+        print(f"[backup] Task de backup iniciada — intervalo: {BACKUP_INTERVAL_HOURS}h, destino: {BACKUP_PATH}")
+    yield
+
+
 limiter = Limiter(key_func=get_remote_address)
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
@@ -86,6 +139,25 @@ def save_link_to_db(materia: str, turma: str, link: str):
                 ON CONFLICT (materia, turma) DO UPDATE SET link = EXCLUDED.link
             """, (materia, turma, link))
         conn.commit()
+
+
+def export_links_from_db() -> list[dict]:
+    """Exporta todos os links do banco como lista de dicionários ordenada."""
+    with get_conn() as conn:
+        with conn.cursor() as cur:
+            cur.execute("SELECT materia, turma, link FROM links ORDER BY materia, turma")
+            return [{"materia": r[0], "turma": r[1], "link": r[2]} for r in cur.fetchall()]
+
+
+# --- Autenticação de backup ---
+
+def _verificar_token(request: Request) -> None:
+    """Valida o token Bearer do cabeçalho Authorization para os endpoints de backup."""
+    if not BACKUP_TOKEN:
+        raise HTTPException(status_code=503, detail="Backup não configurado: defina BACKUP_TOKEN")
+    auth = request.headers.get("Authorization", "")
+    if not auth.startswith("Bearer ") or auth[7:] != BACKUP_TOKEN:
+        raise HTTPException(status_code=401, detail="Token inválido")
 
 
 # --- Dados ---
@@ -213,3 +285,53 @@ async def favicon():
 @app.get("/json")
 async def get_json():
     return JSONResponse(content=items)
+
+
+# --- Rotas de backup ---
+
+@app.get("/backup/links.json")
+async def backup_export(request: Request):
+    """Exporta todos os links do banco como arquivo JSON para download."""
+    _verificar_token(request)
+    if not DATABASE_URL:
+        raise HTTPException(status_code=503, detail="Banco de dados não configurado")
+    dados = export_links_from_db()
+    conteudo = json.dumps(dados, ensure_ascii=False, indent=2)
+    return Response(
+        content=conteudo,
+        media_type="application/json",
+        headers={"Content-Disposition": "attachment; filename=links_backup.json"},
+    )
+
+
+@app.post("/backup/restore")
+async def backup_restore(request: Request):
+    """Restaura links a partir de um JSON de backup. Faz upsert de cada entrada."""
+    global items
+    _verificar_token(request)
+
+    # Valida o payload antes de acessar o banco
+    try:
+        dados: list = await request.json()
+    except Exception:
+        raise HTTPException(status_code=400, detail="JSON inválido")
+
+    if not isinstance(dados, list):
+        raise HTTPException(status_code=400, detail="Esperado array de objetos")
+
+    campos_obrigatorios = {"materia", "turma", "link"}
+    for i, entrada in enumerate(dados):
+        if not isinstance(entrada, dict) or not campos_obrigatorios.issubset(entrada):
+            raise HTTPException(status_code=400, detail=f"Entrada {i} inválida: campos obrigatórios: materia, turma, link")
+
+    if not DATABASE_URL:
+        raise HTTPException(status_code=503, detail="Banco de dados não configurado")
+
+    # Insere ou atualiza cada link no banco
+    for entrada in dados:
+        save_link_to_db(entrada["materia"], entrada["turma"], entrada["link"])
+
+    # Recarrega em memória para refletir os dados restaurados
+    items = load_items()
+
+    return JSONResponse(content={"ok": True, "restaurados": len(dados)})

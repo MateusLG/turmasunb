@@ -3,6 +3,8 @@ Testes do servidor FastAPI (main.py).
 Roda sem banco de dados — DATABASE_URL não definida usa data.json local.
 """
 
+import json
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -170,3 +172,185 @@ class TestPostLink:
             if t["materia"] == turma["materia"] and t["turma"] == turma["turma"]
         )
         assert correspondente["link"] == "https://example.com/teste"
+
+
+# ── Backup ────────────────────────────────────────────────────────────────────
+
+import main as _main  # noqa: E402
+
+
+class TestBackup:
+    """Testes dos endpoints /backup/links.json e /backup/restore.
+    Rodamos sem DATABASE_URL (conftest.py garante isso), então operações
+    que dependem do banco retornam 503 mesmo com token correto."""
+
+    def _set_token(self, valor):
+        """Auxiliar: altera BACKUP_TOKEN no módulo e retorna o valor original."""
+        original = _main.BACKUP_TOKEN
+        _main.BACKUP_TOKEN = valor
+        return original
+
+    # --- Sem BACKUP_TOKEN configurado ---
+
+    def test_export_sem_backup_token_retorna_503(self):
+        original = self._set_token(None)
+        try:
+            resp = client.get("/backup/links.json",
+                              headers={"Authorization": "Bearer qualquer"})
+            assert resp.status_code == 503
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_restore_sem_backup_token_retorna_503(self):
+        original = self._set_token(None)
+        try:
+            resp = client.post("/backup/restore",
+                               json=[],
+                               headers={"Authorization": "Bearer qualquer"})
+            assert resp.status_code == 503
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    # --- Com BACKUP_TOKEN configurado, autenticação errada ---
+
+    def test_export_sem_header_retorna_401(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.get("/backup/links.json")
+            assert resp.status_code == 401
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_export_token_errado_retorna_401(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.get("/backup/links.json",
+                              headers={"Authorization": "Bearer errado"})
+            assert resp.status_code == 401
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_restore_token_errado_retorna_401(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.post("/backup/restore",
+                               json=[],
+                               headers={"Authorization": "Bearer errado"})
+            assert resp.status_code == 401
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    # --- Com token correto, sem banco (DATABASE_URL ausente nos testes) ---
+
+    def test_export_token_correto_sem_db_retorna_503(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.get("/backup/links.json",
+                              headers={"Authorization": "Bearer token-secreto"})
+            assert resp.status_code == 503
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    # --- Restore: validação de payload ---
+
+    def test_restore_json_invalido_retorna_400(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.post("/backup/restore",
+                               content=b"isso nao eh json",
+                               headers={
+                                   "Authorization": "Bearer token-secreto",
+                                   "Content-Type": "application/json",
+                               })
+            assert resp.status_code == 400
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_restore_objeto_em_vez_de_lista_retorna_400(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.post("/backup/restore",
+                               json={"materia": "X", "turma": "1", "link": "https://x.com"},
+                               headers={"Authorization": "Bearer token-secreto"})
+            assert resp.status_code == 400
+        finally:
+            _main.BACKUP_TOKEN = original
+
+    def test_restore_entrada_sem_campos_obrigatorios_retorna_400(self):
+        original = self._set_token("token-secreto")
+        try:
+            resp = client.post("/backup/restore",
+                               json=[{"materia": "X"}],  # faltam turma e link
+                               headers={"Authorization": "Bearer token-secreto"})
+            assert resp.status_code == 400
+        finally:
+            _main.BACKUP_TOKEN = original
+
+
+# ── Backup em volume ──────────────────────────────────────────────────────────
+
+import tempfile
+
+
+class TestBackupVolume:
+    """Testes da função salvar_backup_volume() com filesystem temporário."""
+
+    def test_retorna_none_sem_backup_path(self):
+        # Sem BACKUP_PATH configurado, não faz nada
+        original = _main.BACKUP_PATH
+        _main.BACKUP_PATH = None
+        try:
+            assert _main.salvar_backup_volume() is None
+        finally:
+            _main.BACKUP_PATH = original
+
+    def test_retorna_none_sem_database_url(self):
+        # DATABASE_URL já é None nos testes (conftest.py)
+        with tempfile.TemporaryDirectory() as pasta:
+            original = _main.BACKUP_PATH
+            _main.BACKUP_PATH = pasta
+            try:
+                assert _main.salvar_backup_volume() is None
+            finally:
+                _main.BACKUP_PATH = original
+
+    def test_cria_arquivo_json_no_diretorio(self, monkeypatch, tmp_path):
+        # Mock de export_links_from_db para não precisar de banco
+        monkeypatch.setattr(_main, "export_links_from_db",
+                            lambda: [{"materia": "MAT", "turma": "01", "link": "https://x.com"}])
+        monkeypatch.setattr(_main, "DATABASE_URL", "mock://db")
+        monkeypatch.setattr(_main, "BACKUP_PATH", str(tmp_path))
+
+        arquivo = _main.salvar_backup_volume()
+
+        assert arquivo is not None
+        assert arquivo.exists()
+        assert arquivo.name.startswith("backup_links_")
+        assert arquivo.suffix == ".json"
+
+    def test_conteudo_do_arquivo_e_json_valido(self, monkeypatch, tmp_path):
+        dados_mock = [{"materia": "CALCULO 1", "turma": "02", "link": "https://t.me/abc"}]
+        monkeypatch.setattr(_main, "export_links_from_db", lambda: dados_mock)
+        monkeypatch.setattr(_main, "DATABASE_URL", "mock://db")
+        monkeypatch.setattr(_main, "BACKUP_PATH", str(tmp_path))
+
+        arquivo = _main.salvar_backup_volume()
+        conteudo = json.loads(arquivo.read_text(encoding="utf-8"))
+
+        assert conteudo == dados_mock
+
+    def test_remove_arquivos_antigos_alem_do_limite(self, monkeypatch, tmp_path):
+        monkeypatch.setattr(_main, "export_links_from_db", lambda: [])
+        monkeypatch.setattr(_main, "DATABASE_URL", "mock://db")
+        monkeypatch.setattr(_main, "BACKUP_PATH", str(tmp_path))
+        monkeypatch.setattr(_main, "BACKUP_MAX_FILES", 3)
+
+        # Pré-cria 4 arquivos antigos com nomes ordenados lexicograficamente
+        for i in range(4):
+            (tmp_path / f"backup_links_20260101_00000{i}_000000.json").write_text("[]")
+
+        # Cria mais um backup real — deve remover os mais antigos, sobrando 3
+        _main.salvar_backup_volume()
+
+        restantes = sorted(tmp_path.glob("backup_links_*.json"))
+        assert len(restantes) == 3
