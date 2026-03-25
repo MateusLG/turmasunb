@@ -1,5 +1,9 @@
 # Histórico de Alterações
 
+## [2026-03-25] Backup automático em Railway Volume
+Task assíncrona em background (FastAPI lifespan) que salva snapshots JSON dos links no Railway Volume a cada `BACKUP_INTERVAL_HOURS` horas (padrão 24h). Mantém apenas os últimos `BACKUP_MAX_FILES` arquivos (padrão 7). Usa somente stdlib — sem novas dependências. 5 testes adicionados cobrindo criação, conteúdo e rotação dos arquivos. CLAUDE.md atualizado com info do plano Hobby, infraestrutura, variáveis de ambiente e decisões arquiteturais corrigidas.
+Pendência: criar Volume no Railway dashboard, montar em `/data` e setar `BACKUP_PATH=/data/backups` nas env vars do serviço web.
+
 ## [2026-03-24] Sistema de backup dos links (PostgreSQL)
 Adicionados dois endpoints protegidos por token (`BACKUP_TOKEN` env var) para exportar e restaurar os links do banco PostgreSQL: `GET /backup/links.json` retorna todos os links como arquivo JSON para download; `POST /backup/restore` recebe esse mesmo JSON e faz upsert de cada entrada no banco, recarregando `items` em memória. Sem novas dependências. 9 testes adicionados cobrindo autenticação, ausência de banco e validação de payload.
 Pendência: definir `BACKUP_TOKEN` nas variáveis de ambiente do Railway.

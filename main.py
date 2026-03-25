@@ -1,6 +1,10 @@
+import asyncio
 import json
 import os
 from collections import Counter
+from contextlib import asynccontextmanager
+from datetime import datetime, timezone
+from pathlib import Path
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -14,16 +18,64 @@ from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 from fastapi.templating import Jinja2Templates
 
-DATA_FILE    = os.getenv("DATA_FILE", "data.json")
-DATABASE_URL = os.getenv("DATABASE_URL")
-SEMESTER     = os.getenv("SEMESTER", "2026.1")
-BACKUP_TOKEN = os.getenv("BACKUP_TOKEN")
+DATA_FILE             = os.getenv("DATA_FILE", "data.json")
+DATABASE_URL          = os.getenv("DATABASE_URL")
+SEMESTER              = os.getenv("SEMESTER", "2026.1")
+BACKUP_TOKEN          = os.getenv("BACKUP_TOKEN")
+BACKUP_PATH           = os.getenv("BACKUP_PATH")           # caminho do Railway Volume montado
+BACKUP_INTERVAL_HOURS = int(os.getenv("BACKUP_INTERVAL_HOURS", "24"))
+BACKUP_MAX_FILES      = int(os.getenv("BACKUP_MAX_FILES", "7"))
 
 # Limite de tamanho do campo link (fix 5)
 LINK_MAX_LEN = 2048
 
+# --- Backup em volume ---
+
+def salvar_backup_volume() -> Path | None:
+    """Salva um snapshot dos links no Railway Volume. Retorna o caminho do arquivo criado,
+    ou None se BACKUP_PATH não estiver configurado ou o banco não estiver disponível."""
+    if not BACKUP_PATH or not DATABASE_URL:
+        return None
+
+    pasta = Path(BACKUP_PATH)
+    pasta.mkdir(parents=True, exist_ok=True)
+
+    dados = export_links_from_db()
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")
+    arquivo = pasta / f"backup_links_{timestamp}.json"
+    arquivo.write_text(json.dumps(dados, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # Remove arquivos antigos, mantendo apenas os últimos BACKUP_MAX_FILES
+    arquivos = sorted(pasta.glob("backup_links_*.json"))
+    for antigo in arquivos[:-BACKUP_MAX_FILES]:
+        antigo.unlink(missing_ok=True)
+
+    return arquivo
+
+
+async def _loop_backup_automatico() -> None:
+    """Task em background: executa backup periódico no Railway Volume."""
+    while True:
+        await asyncio.sleep(BACKUP_INTERVAL_HOURS * 3600)
+        try:
+            arquivo = salvar_backup_volume()
+            if arquivo:
+                print(f"[backup] Snapshot salvo em {arquivo}")
+        except Exception as e:
+            print(f"[backup] Erro ao salvar snapshot: {e}")
+
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Inicia a task de backup automático ao subir o servidor."""
+    if BACKUP_PATH and DATABASE_URL:
+        asyncio.create_task(_loop_backup_automatico())
+        print(f"[backup] Task de backup iniciada — intervalo: {BACKUP_INTERVAL_HOURS}h, destino: {BACKUP_PATH}")
+    yield
+
+
 limiter = Limiter(key_func=get_remote_address)
-app = FastAPI()
+app = FastAPI(lifespan=lifespan)
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 

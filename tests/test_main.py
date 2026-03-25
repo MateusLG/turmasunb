@@ -3,6 +3,8 @@ Testes do servidor FastAPI (main.py).
 Roda sem banco de dados — DATABASE_URL não definida usa data.json local.
 """
 
+import json
+
 import pytest
 from fastapi.testclient import TestClient
 
@@ -283,3 +285,72 @@ class TestBackup:
             assert resp.status_code == 400
         finally:
             _main.BACKUP_TOKEN = original
+
+
+# ── Backup em volume ──────────────────────────────────────────────────────────
+
+import tempfile
+
+
+class TestBackupVolume:
+    """Testes da função salvar_backup_volume() com filesystem temporário."""
+
+    def test_retorna_none_sem_backup_path(self):
+        # Sem BACKUP_PATH configurado, não faz nada
+        original = _main.BACKUP_PATH
+        _main.BACKUP_PATH = None
+        try:
+            assert _main.salvar_backup_volume() is None
+        finally:
+            _main.BACKUP_PATH = original
+
+    def test_retorna_none_sem_database_url(self):
+        # DATABASE_URL já é None nos testes (conftest.py)
+        with tempfile.TemporaryDirectory() as pasta:
+            original = _main.BACKUP_PATH
+            _main.BACKUP_PATH = pasta
+            try:
+                assert _main.salvar_backup_volume() is None
+            finally:
+                _main.BACKUP_PATH = original
+
+    def test_cria_arquivo_json_no_diretorio(self, monkeypatch, tmp_path):
+        # Mock de export_links_from_db para não precisar de banco
+        monkeypatch.setattr(_main, "export_links_from_db",
+                            lambda: [{"materia": "MAT", "turma": "01", "link": "https://x.com"}])
+        monkeypatch.setattr(_main, "DATABASE_URL", "mock://db")
+        monkeypatch.setattr(_main, "BACKUP_PATH", str(tmp_path))
+
+        arquivo = _main.salvar_backup_volume()
+
+        assert arquivo is not None
+        assert arquivo.exists()
+        assert arquivo.name.startswith("backup_links_")
+        assert arquivo.suffix == ".json"
+
+    def test_conteudo_do_arquivo_e_json_valido(self, monkeypatch, tmp_path):
+        dados_mock = [{"materia": "CALCULO 1", "turma": "02", "link": "https://t.me/abc"}]
+        monkeypatch.setattr(_main, "export_links_from_db", lambda: dados_mock)
+        monkeypatch.setattr(_main, "DATABASE_URL", "mock://db")
+        monkeypatch.setattr(_main, "BACKUP_PATH", str(tmp_path))
+
+        arquivo = _main.salvar_backup_volume()
+        conteudo = json.loads(arquivo.read_text(encoding="utf-8"))
+
+        assert conteudo == dados_mock
+
+    def test_remove_arquivos_antigos_alem_do_limite(self, monkeypatch, tmp_path):
+        monkeypatch.setattr(_main, "export_links_from_db", lambda: [])
+        monkeypatch.setattr(_main, "DATABASE_URL", "mock://db")
+        monkeypatch.setattr(_main, "BACKUP_PATH", str(tmp_path))
+        monkeypatch.setattr(_main, "BACKUP_MAX_FILES", 3)
+
+        # Pré-cria 4 arquivos antigos com nomes ordenados lexicograficamente
+        for i in range(4):
+            (tmp_path / f"backup_links_20260101_00000{i}_000000.json").write_text("[]")
+
+        # Cria mais um backup real — deve remover os mais antigos, sobrando 3
+        _main.salvar_backup_volume()
+
+        restantes = sorted(tmp_path.glob("backup_links_*.json"))
+        assert len(restantes) == 3
